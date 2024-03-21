@@ -1,0 +1,92 @@
+.App-header {
+    background-color: #091428;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    padding: 10px;
+    border-bottom: 2px solid #C89B3C;
+    max-height: 100px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+.logo1 {
+    width: 100px;
+    margin-left: 15px;
+}
+.logo2 {
+    width: 80px;
+}
+
+.separator {
+    width: 2px;
+    height: 30px;
+    background-color: #C89B3C;
+    margin: 0 15px;
+}
+
+.title {
+    color: #C89B3C;
+    font-family: "BEAUFORT", sans-serif;
+    margin-left: 10px;
+}
+
+.menu-toggle {
+    display: none;
+    background-color: #C89B3C;
+}
+
+.menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #333;
+    width: 200px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+}
+
+.menu.show {
+    transform: translateX(0);
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    padding: 10px;
+    color: #C89B3C;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        background: none;
+        border: none;
+        outline: none;
+    }
+
+    .menu {
+        width: 100%;
+        background-color: #333;
+        padding-top: 50px;
+    }
+
+    .menu ul {
+        text-align: center;
+    }
+
+    .menu li {
+        padding: 15px;
+        border-bottom: 2px solid #555;
+    }
+}

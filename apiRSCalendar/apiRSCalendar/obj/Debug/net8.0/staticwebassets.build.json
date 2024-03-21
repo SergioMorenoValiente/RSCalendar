@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Rt8a29xxOws8HsjVeEeKEWILjtLrPms94SJZ4oIT3CE=",
+  "Source": "apiRSCalendar",
+  "BasePath": "_content/apiRSCalendar",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

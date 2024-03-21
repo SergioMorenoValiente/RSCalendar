@@ -1,0 +1,99 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.App {
+    height: 100%;
+}
+
+.calendar-container {
+    width: 100%;
+    max-width: 800%;
+    margin: 20px 0;
+    background-color: #0A323C;
+    background-image: linear-gradient(to right, #091428, #0A1428);
+    display: flex; /* Activar el modelo de caja flexible */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+}
+
+.fc-daygrid-divider {
+    border-color: #010A13;
+}
+
+.fc-daygrid-divider-vertical {
+    border-color: #010A13;
+}
+
+.fc-scrollgrid {
+    border-color: #010A13;
+}
+
+.fc-scrollgrid-section-header td {
+    border-color: #010A13;
+}
+
+.fc-daygrid-day-top {
+    border-color: #010A13;
+}
+
+.fc-daygrid-day-frame {
+    border-color: #010A13;
+}
+
+.fc-daygrid-day-events {
+    border-color: #010A13;
+}
+
+.fc-daygrid-day {
+    color: #091428;
+    font-size: 28px;
+}
+
+.fc-day-today {
+    background-color: #785A28;
+    color: #091428;
+}
+
+.fc-day-header {
+    color: #091428;
+}
+
+.fc-daygrid-event {
+    background-color: #C8AA6E;
+    border-color: #010A13;
+}
+
+.fc-daygrid-event-dot {
+    background-color: #C8AA6E;
+}
+
+.fc-daygrid-event-title {
+    color: #091428;
+}
+
+.fc-daygrid-event-title-container {
+    border-bottom: 2px solid #C8AA6E;
+}
+
+.fc-toolbar-title {
+    color: #C89B3C;
+    font-family: "BEAUFORT", sans-serif;
+}
+
+.fc-toolbar
+.fc-next-button {
+    margin-left: 30px;
+}
+
+.fc-toolbar 
+.fc-today-button {
+    background-color: #C89B3C;
+}
+
+.fc-bootstrap .fc-today-button {
+    background-color: #C89B3C;
+    color: black;
+}
