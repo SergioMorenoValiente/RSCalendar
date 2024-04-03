@@ -1,0 +1,165 @@
+.ajustes-container {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    background-color: rgba(10, 20, 40, 0.65);
+    min-height: 1130px !important;
+
+}
+
+.ajustes-container2 {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 850px;
+    overflow: hidden;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    margin: auto;
+}
+
+.h1 {
+    color: #C89B3C;
+    font-family: "BEAUFORT";
+    font-size: 2.7rem;
+}
+
+P {
+    color: #F0E6D2;
+    font-size: 1.45rem;
+    font-family: "SPRIEGEL" !important;
+    text-align: center !important;
+    text-transform: uppercase;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.ajustes-container2,
+.ajustes-container2 > div {
+    width: 90%;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.h1, p {
+    line-height: 1.5em;
+}
+
+
+/*Css slider*/
+
+.img-body img {
+    display: flex;
+    height: 100%;
+    object-fit: cover;
+    background-position: center;
+    width: 97%;
+    background-repeat: no-repeat;
+    border: 2px solid rgba(10, 20, 40, 0.75);
+    border-radius: 20px !important;
+    text-align: center;
+}
+
+.img-body {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1;
+    outline-color: red;
+    display: inline-block;
+    text-align: center;
+}
+
+.h2 {
+    font-size: 2.3rem;
+    font-family: "BEAUFORT";
+    color: #F0E6D2;
+    line-height: 1.5em;
+    margin: 0;
+    text-align: start !important;
+    padding-bottom: 30px;
+}
+
+.with-background {
+    background-position: center;
+    background-size: cover;
+    width: 80%;
+}
+
+.carrusel {
+    border: 2px solid #C89B3C;
+    align-items: center;
+    padding: 70px;
+    padding-bottom: 35px;
+    border-radius: 10px;
+    background-color: rgba(10, 20, 40, 0.75);
+    box-shadow: 0px 0px 50px 10px #010A13;
+}
+
+.next-slick-arrow,
+.prev-slick-arrow {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    cursor: pointer;
+}
+
+.next-slick-arrow img,
+.prev-slick-arrow img {
+    width: 100%;
+    height: auto;
+}
+
+.next-slick-arrow {
+    right: -15px;
+}
+
+.prev-slick-arrow {
+    left: -15px;
+}
+
+/***** Cobaya ****/
+.selected-champion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-direction: row;
+}
+
+    .selected-champion img {
+        width: 100px;
+        height: auto;
+        margin-top: 10px;
+    }
+
+.select-champion {
+    margin-top: 20px;
+}
+
+.slider-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+    .slider-container button {
+        margin-top: 20px;
+    }
+.carrusel {
+    border: 2px solid #C89B3C;
+    align-items: center;
+    padding: 70px;
+    padding-bottom: 35px;
+    border-radius: 10px;
+    background-color: rgba(10, 20, 40, 0.75);
+    box-shadow: 0px 0px 50px 10px #010A13;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 150px;
+}

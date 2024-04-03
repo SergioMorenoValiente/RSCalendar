@@ -1,0 +1,49 @@
+.footer {
+    background-color: #091428;
+    color: #C89B3C;
+    padding: 2% 15%;
+    border-top: 3px solid #C89B3C;
+    font-size: 1rem;
+    font-family: "SPRIEGEL";
+}
+
+.footer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-div {
+    flex: 1;
+}
+
+    .footer-div img {
+        max-width: 80%;
+        height: auto;
+    }
+
+    .footer-div p {
+        margin: 0;
+    }
+
+.footer-section:first-child .footer-div a {
+    text-decoration: none;
+}
+
+    .footer-section:first-child .footer-div a:hover {
+        text-decoration: underline;
+    }
+
+.logo3 {
+    width: 55%;
+}
+
+    .footer-div,
+    .footer-div p {
+        text-align: center;
+    }
+
+.footer-section:first-child .footer-div a,
+.footer-section:last-child .footer-div p {
+    color: #F0E6D2;
+}

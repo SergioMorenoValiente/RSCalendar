@@ -1,0 +1,226 @@
+.navbar {
+    justify-content: space-between;
+    background-color: transparent;
+    border-bottom: 3px solid #C89B3C;
+    max-height: 100px;
+}
+
+.logo1 {
+    margin-left: 15px;
+}
+
+.separator {
+    width: 2px;
+    height: 30px;
+    margin: 0 15px;
+}
+
+.title {
+    font-family: "BEAUFORT";
+    margin-left: 10px;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.menu {
+    right: 10px;
+    background-color: #333;
+    width: 200px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    width: 25%;
+    margin-top: 100px;
+    height: 1218px;
+    z-index: 999;
+}
+
+.profile-menu-dropdown {
+    width: 250px;
+    border: 3px solid #C89B3C;
+    border-top: 0px;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    margin-top: 73px !important;
+    margin-right: 30px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    z-index: 998;
+}
+
+.sidebar-content {
+    padding: 20px;
+    color: #FFF;
+}
+
+.icon1 {
+    max-width: 30px;
+    background: transparent;
+}
+
+.header-icons .menu-toggle span {
+    background-color: white;
+    height: 3px;
+    width: 25px;
+    display: block;
+}
+
+.icono1 {
+    width: 62px !important;
+    margin-bottom: 8px !important;
+}
+
+.icono2 {
+    width: 76px !important;
+    margin-top: 4px;
+    background-image: url('../../../public/images/Campeones/Gwen2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.icono3 {
+    width: 93px !important;
+}
+
+.nav-links {
+    margin-right: 20px;
+}
+
+.nav-link {
+    bottom: 20px;
+}
+
+.profile-menu-dropdown li:hover {
+    background-color: #555;
+    text-decoration: underline;
+}
+
+.logo1,
+.logo2 {
+    width: 100px;
+}
+
+.separator,
+.menu-toggle {
+    background-color: #C89B3C;
+}
+
+.menu,
+.profile-menu-dropdown {
+    position: absolute;
+    top: 50px;
+}
+
+.menu,
+.sidebar {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+}
+
+.sidebar,
+.profile-menu-dropdown {
+    right: 0;
+}
+
+.profile-menu-dropdown,
+.menu ul {
+    list-style: none;
+}
+
+.profile-menu-dropdown,
+.icon-container {
+    margin: 0;
+}
+
+.menu.show,
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.icono3,
+.profile-menu-dropdown li {
+    cursor: pointer;
+}
+
+.navbar,
+.logo-container,
+.nav-links {
+    align-items: center;
+}
+
+.navbar,
+.menu li,
+.profile-menu-dropdown li {
+    padding: 10px;
+}
+
+.title,
+.menu li,
+.profile-menu-dropdown li {
+    color: #C89B3C;
+}
+
+.title,
+.profile-menu-dropdown li,
+.profile-link {
+    text-decoration: none;
+}
+
+.profile-menu-dropdown,
+.menu ul,
+.icon-container {
+    padding: 0;
+}
+
+.icono1,
+.icono2,
+.icono3 {
+    height: auto;
+}
+
+.profile-menu-dropdown li,
+.profile-menu-dropdown li:visited,
+.profile-link {
+    color: #F0E6D2;
+}
+
+.App-header,
+.sidebar,
+.profile-menu-dropdown,
+.profile-menu-dropdown li:hover {
+    background-color: #091428;
+}
+
+.navbar,
+.logo-container,
+.nav-links,
+.profile-menu-dropdown {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        background: none;
+        border: none;
+        outline: none;
+    }
+
+    .menu ul {
+        text-align: center;
+    }
+
+    .menu li {
+        padding: 15px;
+        border-bottom: 2px solid #555;
+    }
+}

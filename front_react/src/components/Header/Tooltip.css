@@ -1,0 +1,13 @@
+.tooltip {
+    position: absolute;
+    background-color: #091428;
+    color: #F0E6D2;
+    padding: 12px;
+    border-radius: 5px;
+    z-index: 999;
+    align-content: center;
+    font-family: "SPRIEGEL" !important;
+    font-size: 1.2rem !important;
+    border: 2px solid #C89B3C;
+    top: 100px;
+}

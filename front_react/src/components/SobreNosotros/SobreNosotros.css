@@ -1,0 +1,135 @@
+.sobre-nosotros-container {
+    background-color: #0A1428;
+    background-image: url('../../../public/images/SobreNosotros/SobreNosotros1.jpg');
+    background-position: center;
+}
+
+.sobre-nosotros-container2 {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    background-color: rgba(10, 20, 40, 0.75);
+    padding-bottom: 80px;
+    padding-top: 50px;
+}
+
+.rukaya {
+    margin-left: 10%;
+    margin-right: 1%;
+}
+
+.rukaya li::before {
+    background-image: url('../../../public/images/Iconos/Icono1.png');
+}
+
+.sergio {
+    margin-right: 10%;
+    margin-left: 1%;
+}
+
+.sergio li::before {
+    background-image: url('../../../public/images/Iconos/Icono2.png');
+}
+
+.h1 {
+    font-size: 2.7rem;
+}
+
+h2 {
+    font-size: 2.3rem;
+}
+
+h4 {
+    font-size: 2rem;
+}
+
+strong {
+    font-size: 1.6rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-left: 18%;
+    padding-right: 12%;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.avatar {
+    border-radius: 50%;
+    border: 5px solid #C89B3C;
+    width: 468px;
+    height: 468px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.sobre-nosotros-container2,
+.sobre-nosotros-container2 > div {
+    width: 100%;
+    display: flex;
+}
+
+.rukaya,
+.sergio {
+    padding: 20px;
+    border: 2px solid #C89B3C;
+    background-color: rgba(10, 20, 40, 0.65);
+    box-shadow: 0px 0px 50px 10px #010A13;
+    margin-bottom: 50px;
+}
+
+.rukaya li::before,
+.sergio li::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -70px;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+}
+
+h2, p {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+h3, h5 {
+    font-size: 1.3rem;
+}
+
+
+
+p, ul {
+    font-size: 1.45rem;
+    font-family: "SPRIEGEL" !important;
+    text-align: start;
+}
+
+.sobre-nosotros-container,
+.rukaya li::before,
+.sergio li::before {
+    background-size: cover;
+}
+
+.h1, h4, strong {
+    color: #C89B3C;
+}
+
+.h1, h2, h3, h4, h5 {
+    font-family: "BEAUFORT";
+}
+
+h2, h3, h5, p, ul {
+    color: #F0E6D2;
+}
+
+.h1, h2, h3, h4, h5, p, ul {
+    line-height: 1.5em;
+}

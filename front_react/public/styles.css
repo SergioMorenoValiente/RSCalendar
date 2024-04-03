@@ -1,6 +1,18 @@
 body {
-    background-color: #0A323C;
-    margin: 0;
-    padding: 0;
-    background-image: linear-gradient(to right, #091428, #0A1428);
+    background-color: #0A1428;
+}
+
+.App1 {
+    background-image: url('/images/Region/Shurima/Shurima6.jpg');
+}
+
+.App2 {
+    background-image: url('/images/Login/Login2.jpg');
+}
+
+.App1, 
+.App2 {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
