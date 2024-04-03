@@ -1,12 +1,24 @@
-﻿import React from 'react';
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import esLocale from '@fullcalendar/core/locales/es';
 import './Calendar.css';
+import React, { useState, useEffect } from 'react';
+
 
 function CalendarApp({ isSidebarOpen }) {
+
+    //Para obtener lista calendarios
+    const [calendarios, setCalendarios] = useState([]);
+
+    useEffect(() => {
+        fetch('https://localhost:7143/api/calendarios')
+            .then(response => response.json())
+            .then(data => setCalendarios(data))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
+
     return (
         <div className="container">
             <div className="container2">
@@ -52,18 +64,12 @@ function CalendarApp({ isSidebarOpen }) {
                     <div className="calendars-container">
                         <h2 className="calendars-title">MIS CALENDARIOS</h2>
                         <ul className="calendars-list">
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="calendario1" />
-                                    Personal
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="calendario2" />
-                                    Mundial Esports
-                                </label>
-                            </li>
+                            {calendarios.map(calendario => (
+                                <li key={calendario.id}>
+                                    <input type="checkbox" name="calendario'{calendario.id}'"/>
+                                    {calendario.nombre}
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
