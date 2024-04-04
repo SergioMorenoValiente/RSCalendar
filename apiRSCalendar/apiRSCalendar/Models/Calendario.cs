@@ -1,4 +1,5 @@
-﻿namespace apiRSCalendar.Models
+﻿
+namespace apiRSCalendar.Models
 {
     public class Calendario
     {
@@ -7,5 +8,6 @@
         public string? Descripcion { get; set; }
         public string? Color { get; set; }
         public string? Visible { get; set; }
+
     }
 }

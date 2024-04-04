@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 
 function CalendarApp({ isSidebarOpen }) {
 
-    //Para obtener lista calendarios
+    {/*Para obtener lista calendarios */ }
     const [calendarios, setCalendarios] = useState([]);
 
     useEffect(() => {
@@ -18,6 +18,22 @@ function CalendarApp({ isSidebarOpen }) {
             .then(data => setCalendarios(data))
             .catch(error => console.error('Error fetching data:', error));
     }, []);
+
+    {/*Para obtener lista de eventos */ }
+    const [eventos, setEventos] = useState([]);
+    useEffect(() => {
+        fetch('https://localhost:7143/api/eventoes')
+            .then(response => response.json())
+            .then(data => setEventos(data))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
+
+    const eventosMostrar = eventos.map(evento => ({
+        title: evento.nombre,
+        start: evento.fechInicio,
+        end: evento.fechFin,
+        color: evento.color
+    }));
 
     return (
         <div className="container">
@@ -34,11 +50,7 @@ function CalendarApp({ isSidebarOpen }) {
                         plugins={[dayGridPlugin, timeGridPlugin]}
                         locale={esLocale}
                         initialView="dayGridMonth"
-                        events={[
-                            { title: 'EVENTO 1', date: '2024-04-01' },
-                            { title: 'EVENTO 2', date: '2024-04-09' },
-                            { title: 'EVENTO 3', date: '2024-04-09' }
-                        ]}
+                        events={eventosMostrar}
                         headerToolbar={{
                             left: 'prev,next today',
                             center: 'title',

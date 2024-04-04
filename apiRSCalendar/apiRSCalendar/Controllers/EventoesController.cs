@@ -78,6 +78,8 @@ namespace apiRSCalendar.Controllers
         [HttpPost]
         public async Task<ActionResult<Evento>> PostEvento(Evento evento)
         {
+            var calendario = await _context.Calendarios.FirstOrDefaultAsync(c=>c.Id==evento.CalendarioId);
+            evento.Calendario = calendario;
             _context.Eventos.Add(evento);
             await _context.SaveChangesAsync();
 
