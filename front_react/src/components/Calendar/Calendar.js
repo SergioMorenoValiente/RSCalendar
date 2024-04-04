@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 
 function CalendarApp({ isSidebarOpen }) {
 
-    //Para obtener lista calendarios
+    {/*Para obtener lista calendarios */ }
     const [calendarios, setCalendarios] = useState([]);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ function CalendarApp({ isSidebarOpen }) {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
-    {/* Prueba sergio */ }
+    {/*Para obtener lista de eventos */ }
     const [eventos, setEventos] = useState([]);
     useEffect(() => {
         fetch('https://localhost:7143/api/eventoes')
@@ -28,8 +28,7 @@ function CalendarApp({ isSidebarOpen }) {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
-    const eventosFiltrados = eventos.filter(evento => evento.calendario.visible === "1");
-    const eventosMostrar = eventosFiltrados.map(evento => ({
+    const eventosMostrar = eventos.map(evento => ({
         title: evento.nombre,
         start: evento.fechInicio,
         end: evento.fechFin,
@@ -51,7 +50,6 @@ function CalendarApp({ isSidebarOpen }) {
                         plugins={[dayGridPlugin, timeGridPlugin]}
                         locale={esLocale}
                         initialView="dayGridMonth"
-
                         events={eventosMostrar}
                         headerToolbar={{
                             left: 'prev,next today',
