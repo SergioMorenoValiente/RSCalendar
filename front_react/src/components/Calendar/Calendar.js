@@ -19,6 +19,23 @@ function CalendarApp({ isSidebarOpen }) {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
+    {/* Prueba sergio */ }
+    const [eventos, setEventos] = useState([]);
+    useEffect(() => {
+        fetch('https://localhost:7143/api/eventoes')
+            .then(response => response.json())
+            .then(data => setEventos(data))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
+
+    const eventosFiltrados = eventos.filter(evento => evento.calendario.visible === "1");
+    const eventosMostrar = eventosFiltrados.map(evento => ({
+        title: evento.nombre,
+        start: evento.fechInicio,
+        end: evento.fechFin,
+        color: evento.color
+    }));
+
     return (
         <div className="container">
             <div className="container2">
@@ -34,11 +51,8 @@ function CalendarApp({ isSidebarOpen }) {
                         plugins={[dayGridPlugin, timeGridPlugin]}
                         locale={esLocale}
                         initialView="dayGridMonth"
-                        events={[
-                            { title: 'EVENTO 1', date: '2024-04-01' },
-                            { title: 'EVENTO 2', date: '2024-04-09' },
-                            { title: 'EVENTO 3', date: '2024-04-09' }
-                        ]}
+
+                        events={eventosMostrar}
                         headerToolbar={{
                             left: 'prev,next today',
                             center: 'title',
