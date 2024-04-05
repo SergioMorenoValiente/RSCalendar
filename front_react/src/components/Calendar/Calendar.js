@@ -28,6 +28,7 @@ function CalendarApp({ isSidebarOpen }) {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
+    {/* Para encadenar lista de eventos */ }
     const eventosMostrar = eventos.map(evento => ({
         title: evento.nombre,
         start: evento.fechInicio,
