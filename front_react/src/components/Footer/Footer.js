@@ -3,6 +3,15 @@ import './Footer.css';
 import { Link } from 'react-router-dom';
 
 function Footer() {
+
+    //Función para realizar el desplazamiento suave
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+
     return (
         <footer className="footer">
 
@@ -10,9 +19,9 @@ function Footer() {
             {/* Sección de enlaces
             <div className="footer-section">
                 <div className="footer-div">
-                    <p><Link to="/SobreNosotros">
+                    <p><Link to="/SobreNosotros" onClick={scrollToTop}>
                         SOBRE NOSOTROS
-                    </Link> | <Link to="/DeclaracionDeAccesibilidad">
+                    </Link> | <Link to="/DeclaracionDeAccesibilidad" onClick={scrollToTop}>
                             DECLARACION DE ACCESIBILIDAD
                         </Link></p>
                 </div>
@@ -32,10 +41,10 @@ function Footer() {
                 </div>
             </div>
 
-            {/* Sección de información de derechos de autor */}
+            {/* Sección de información de derechos de autor y enlace página Sobre Nosotros*/}
             <div className="footer-section">
                 <div className="footer-div">
-                    <p><Link to="/SobreNosotros" >
+                    <p><Link to="/SobreNosotros" onClick={scrollToTop}>
                         SOBRE NOSOTROS
                     </Link> - LEAGUE OF LEGENDS® | RS CALENDAR - 2024</p>
                 </div>

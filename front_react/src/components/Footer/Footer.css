@@ -50,3 +50,8 @@
 .footer-section:last-child .footer-div a {
     color: #F0E6D2;
 }
+
+.footer-section:first-child .footer-div a,
+.footer-section:last-child .footer-div a {
+    cursor: pointer;
+}
