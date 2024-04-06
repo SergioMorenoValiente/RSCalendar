@@ -12,7 +12,7 @@ using apiRSCalendar.Context;
 namespace apiRSCalendar.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240403105659_InitialCreate")]
+    [Migration("20240406162118_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -194,13 +194,13 @@ namespace apiRSCalendar.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Apellido")
+                    b.Property<string>("Contrasena")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomInvocador")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
