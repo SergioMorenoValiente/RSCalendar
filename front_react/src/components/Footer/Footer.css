@@ -26,11 +26,13 @@
         margin: 0;
     }
 
-.footer-section:first-child .footer-div a {
+.footer-section:first-child .footer-div a,
+.footer-section:last-child .footer-div a{
     text-decoration: none;
 }
 
-    .footer-section:first-child .footer-div a:hover {
+    .footer-section:first-child .footer-div a:hover,
+    .footer-section:last-child .footer-div a:hover{
         text-decoration: underline;
     }
 
@@ -44,6 +46,7 @@
     }
 
 .footer-section:first-child .footer-div a,
-.footer-section:last-child .footer-div p {
+.footer-section:last-child .footer-div p,
+.footer-section:last-child .footer-div a {
     color: #F0E6D2;
 }

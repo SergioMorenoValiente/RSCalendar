@@ -6,7 +6,8 @@ function Footer() {
     return (
         <footer className="footer">
 
-            {/* Sección de enlaces */}
+            {/* Ocultado Primer Div para la Segunda Entrega*/}
+            {/* Sección de enlaces
             <div className="footer-section">
                 <div className="footer-div">
                     <p><Link to="/SobreNosotros">
@@ -15,7 +16,7 @@ function Footer() {
                             DECLARACION DE ACCESIBILIDAD
                         </Link></p>
                 </div>
-            </div>
+            </div>*/}
 
             {/* Sección de logos */}
             <div className="footer-section">
@@ -34,7 +35,9 @@ function Footer() {
             {/* Sección de información de derechos de autor */}
             <div className="footer-section">
                 <div className="footer-div">
-                    <p>LEAGUE OF LEGENDS® | RS CALENDAR - 2024</p>
+                    <p><Link to="/SobreNosotros" >
+                        SOBRE NOSOTROS
+                    </Link> - LEAGUE OF LEGENDS® | RS CALENDAR - 2024</p>
                 </div>
             </div>
         </footer>
