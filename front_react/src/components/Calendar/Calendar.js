@@ -10,47 +10,66 @@ import React, { useState, useEffect } from 'react';
 //Prueba rukaya
 import { sliceEvents, createPlugin } from '@fullcalendar/core';
 
-
 function CalendarApp({ isSidebarOpen }) {
-
     const [calendarios, setCalendarios] = useState([]);
+    const [calendariosGenerales, setCalendariosGenerales] = useState([]);
     const [eventos, setEventos] = useState([]);
     const [calendariosSeleccionados, setCalendariosSeleccionados] = useState({});
+    const [calendariosGeneralesSeleccionados, setCalendariosGeneralesSeleccionados] = useState({});
 
-    {/*Para obtener lista calendarios */ }
+    // Obtener lista de calendarios
     useEffect(() => {
         fetch('https://localhost:7143/api/calendarios')
             .then(response => response.json())
             .then(data => setCalendarios(data))
-            .catch(error => console.error('Error fetching data:', error));
+            .catch(error => console.error('Error fetching calendars:', error));
     }, []);
 
-    {/*Para obtener lista de eventos */ }
     useEffect(() => {
-        fetch('https://localhost:7143/api/eventoes')
+        fetch('https://localhost:7143/api/calendariogenerals')
             .then(response => response.json())
-            .then(data => setEventos(data))
-            .catch(error => console.error('Error fetching data:', error));
+            .then(data => setCalendariosGenerales(data))
+            .catch(error => console.error('Error fetching calendars:', error));
     }, []);
 
-    const handleCalendarioSeleccionado = (calendarioId, isChecked) => {
-        setCalendariosSeleccionados(prevState => ({
-            ...prevState,
-            [calendarioId]: isChecked
-        }));
+    // Obtener lista de eventos generales y específicos
+    useEffect(() => {
+        Promise.all([
+            fetch('https://localhost:7143/api/eventogenerals').then(response => response.json()),
+            fetch('https://localhost:7143/api/eventoes').then(response => response.json())
+        ])
+            .then(([eventosGenerales, eventosEspecificos]) => {
+                const eventosTotales = [...eventosGenerales, ...eventosEspecificos];
+                setEventos(eventosTotales);
+            })
+            .catch(error => console.error('Error fetching events:', error));
+    }, []);
+
+    const handleCalendarioSeleccionado = (calendarioId, isChecked, isGeneral) => {
+        if (isGeneral) {
+            setCalendariosGeneralesSeleccionados(prevState => ({
+                ...prevState,
+                [calendarioId]: isChecked
+            }));
+        } else {
+            setCalendariosSeleccionados(prevState => ({
+                ...prevState,
+                [calendarioId]: isChecked
+            }));
+        }
     };
 
-    {/* Para encadenar lista de eventos */ }
+    // Filtrar eventos según los calendarios seleccionados
     const eventosMostrar = eventos.filter(evento => {
-        return calendariosSeleccionados[evento.calendarioId];
+        const esCalendarioSeleccionado = calendariosSeleccionados[evento.calendarioId];
+        const esCalendarioGeneralSeleccionado = Object.values(calendariosGeneralesSeleccionados).some(seleccionado => seleccionado && seleccionado.id === evento.calendarioId);
+        return esCalendarioSeleccionado || esCalendarioGeneralSeleccionado;
     }).map(evento => ({
         title: evento.nombre,
         start: evento.fechInicio,
         end: evento.fechFin,
         color: evento.color
     }));
-
-
 
     //Prueba rukaya
     const handleDateClick = (arg) => {
@@ -126,20 +145,31 @@ function CalendarApp({ isSidebarOpen }) {
                         </Link>
                     </div>
 
-                    {/* Contenedor de calendarios */}
+                    // Contenedor de calendarios
                     <div className="calendars-container">
                         <h2 className="calendars-title">MIS CALENDARIOS</h2>
                         <ul className="calendars-list">
+                            {/* Calendarios específicos */}
                             {calendarios.map(calendario => (
                                 <li key={calendario.id}>
-                                    <input type="checkbox" name="calendario'{calendario.id}'"
-                                           checked={calendariosSeleccionados[calendario.id]}
-                                           onChange={e => handleCalendarioSeleccionado(calendario.id, e.target.checked)}/>
+                                    <input type="checkbox" name={`calendario${calendario.id}`}
+                                        checked={calendariosSeleccionados[calendario.id]}
+                                        onChange={e => handleCalendarioSeleccionado(calendario.id, e.target.checked, false)} /> {/* Especificar que no es general */}
+                                    {calendario.nombre}
+                                </li>
+                            ))}
+                            {/* Calendarios generales */}
+                            {calendariosGenerales.map(calendario => (
+                                <li key={calendario.id}>
+                                    <input type="checkbox" name={`calendarioGeneral${calendario.id}`}
+                                        checked={calendariosGeneralesSeleccionados[calendario.id]}
+                                        onChange={e => handleCalendarioSeleccionado(calendario.id, e.target.checked, true)} /> {/* Especificar que es general */}
                                     {calendario.nombre}
                                 </li>
                             ))}
                         </ul>
                     </div>
+
 
                 </div>
             )}

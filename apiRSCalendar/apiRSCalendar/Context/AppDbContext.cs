@@ -19,5 +19,6 @@ namespace apiRSCalendar.Context
         public DbSet<Region> Regiones { get; set; }
         public DbSet<Rol> Roles { get; set; }
         public DbSet<apiRSCalendar.Models.Calendariogeneral> Calendariogeneral { get; set; } = default!;
+        public DbSet<apiRSCalendar.Models.Eventogeneral> Eventogeneral { get; set; } = default!;
     }
 }
