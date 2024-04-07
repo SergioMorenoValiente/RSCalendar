@@ -178,58 +178,61 @@ function EventoForm() {
 }
 
 //TAREA
-function TareaForm({ setTab, startDate, setStartDate }) {
+function TareaForm() {
     //Para los campos del formulario
-    const [titulo, setTitulo] = useState('');
-    const [fecha, setFecha] = useState('');
-    const [hora, setHora] = useState('');
-    const [todoElDia, setTodoElDia] = useState(false);
-    const [calendario, setCalendario] = useState('');
-    const [descripcion, setDescripcion] = useState('');
+    const [nombre, setNombre] = useState('');
+    const [fechInicio, setFechInicio] = useState('');
+    const [calendarioId, setCalendarioId] = useState(0);
+    const [error, setError] = useState('');
 
     //Función para manejar el envío del formulario
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        try {
+            const response = await fetch('https://localhost:7143/api/Tareas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre: nombre,
+                    fechInicio: new Date(fechInicio),
+                    completado: null,
+                    calendarioId: parseInt(calendarioId)
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al crear la tarea');
+            }
+
+            // Limpiar los campos después de enviar el formulario
+            setNombre('');
+            setFechInicio('');
+            setCalendarioId(0);
+            setError('');
+        } catch (error) {
+            setError(error.message);
+        }
     };
 
     return (
         <form onSubmit={handleSubmit}>
+            {error && <p>{error}</p>}
             <div>
-                <label htmlFor="titulo">Título de la Tarea:</label>
-                <input type="text" id="titulo" value={titulo}
-                    onChange={(e) => setTitulo(e.target.value)} />
-            </div>
-
-            <div>
-                <label htmlFor="fechaInicio">Fecha:</label>
-                <div className="fecha-container">
-                    <input type="date" id="fecha" value={fecha}
-                        onChange={(e) => setFecha(e.target.value)} />
-                    <input type="time" id="hora" value={hora}
-                        onChange={(e) => setHora(e.target.value)} />
-                </div>
-            </div>
-            <div className="checkbox-container">
-                <input type="checkbox" id="todoElDia" checked={todoElDia}
-                    onChange={(e) => setTodoElDia(e.target.checked)} />
-                <label htmlFor="todoElDia">Todo el día</label>
+                <label htmlFor="nombre">Nombre:</label>
+                <input type="text" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
             </div>
             <div>
-                <label htmlFor="calendario">Calendario:</label>
-                <select id="calendario" value={calendario}
-                    onChange={(e) => setCalendario(e.target.value)}>
-                    <option value="0">Seleccionar calendario</option>
-                    <option value="1">Seleccionar calendario1</option>
-                    <option value="2">Seleccionar calendario2</option>
-                    <option value="3">Seleccionar calendario3</option>
-                </select>
+                <label htmlFor="fechInicio">Fecha de Inicio:</label>
+                <input type="datetime-local" id="fechInicio" value={fechInicio} onChange={(e) => setFechInicio(e.target.value)} required />
             </div>
             <div>
-                <label htmlFor="descripcion">Descripción:</label>
-                <textarea id="descripcion" value={descripcion}
-                    onChange={(e) => setDescripcion(e.target.value)} />
+                <label htmlFor="calendarioId">ID del Calendario:</label>
+                <input type="number" id="calendarioId" value={calendarioId} onChange={(e) => setCalendarioId(e.target.value)} required />
             </div>
-            <div className="button-container">
+            <div>
                 <button type="submit">Añadir Tarea</button>
                 <Link to="/" className="sidebar-link">
                     <span>Volver</span>
@@ -238,6 +241,7 @@ function TareaForm({ setTab, startDate, setStartDate }) {
         </form>
     );
 }
+
 
 
 export default CrearEventoTarea;
