@@ -60,7 +60,6 @@ function EventoForm() {
     const [nombre, setNombre] = useState('');
     const [fechInicio, setFechInicio] = useState('');
     const [fechFin, setFechFin] = useState('');
-    const [color, setColor] = useState('');
     const [calendarioId, setCalendarioId] = useState(0);
     const [error, setError] = useState('');
 
@@ -77,7 +76,6 @@ function EventoForm() {
                     nombre,
                     fechInicio,
                     fechFin,
-                    color,
                     calendarioId
                 })
             });
@@ -90,7 +88,6 @@ function EventoForm() {
             setNombre('');
             setFechInicio('');
             setFechFin('');
-            setColor('');
             setCalendarioId(0);
             setError('');
         } catch (error) {
@@ -113,10 +110,6 @@ function EventoForm() {
             <div>
                 <label htmlFor="fechFin">Fecha de Fin:</label>
                 <input type="datetime-local" id="fechFin" value={fechFin} onChange={(e) => setFechFin(e.target.value)} required />
-            </div>
-            <div>
-                <label htmlFor="color">Color:</label>
-                <input type="text" id="color" value={color} onChange={(e) => setColor(e.target.value)} required />
             </div>
             <div>
                 <label htmlFor="calendarioId">ID del Calendario:</label>

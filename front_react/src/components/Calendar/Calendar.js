@@ -9,9 +9,11 @@ import React, { useState, useEffect } from 'react';
 
 function CalendarApp({ isSidebarOpen }) {
 
-    {/*Para obtener lista calendarios */ }
     const [calendarios, setCalendarios] = useState([]);
+    const [eventos, setEventos] = useState([]);
+    const [calendariosSeleccionados, setCalendariosSeleccionados] = useState({});
 
+    {/*Para obtener lista calendarios */ }
     useEffect(() => {
         fetch('https://localhost:7143/api/calendarios')
             .then(response => response.json())
@@ -20,7 +22,6 @@ function CalendarApp({ isSidebarOpen }) {
     }, []);
 
     {/*Para obtener lista de eventos */ }
-    const [eventos, setEventos] = useState([]);
     useEffect(() => {
         fetch('https://localhost:7143/api/eventoes')
             .then(response => response.json())
@@ -28,13 +29,23 @@ function CalendarApp({ isSidebarOpen }) {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
+    const handleCalendarioSeleccionado = (calendarioId, isChecked) => {
+        setCalendariosSeleccionados(prevState => ({
+            ...prevState,
+            [calendarioId]: isChecked
+        }));
+    };
+
     {/* Para encadenar lista de eventos */ }
-    const eventosMostrar = eventos.map(evento => ({
+    const eventosMostrar = eventos.filter(evento => {
+        return calendariosSeleccionados[evento.calendarioId];
+    }).map(evento => ({
         title: evento.nombre,
         start: evento.fechInicio,
         end: evento.fechFin,
         color: evento.color
     }));
+
 
     return (
         <div className="container">
@@ -79,7 +90,9 @@ function CalendarApp({ isSidebarOpen }) {
                         <ul className="calendars-list">
                             {calendarios.map(calendario => (
                                 <li key={calendario.id}>
-                                    <input type="checkbox" name="calendario'{calendario.id}'"/>
+                                    <input type="checkbox" name="calendario'{calendario.id}'"
+                                           checked={calendariosSeleccionados[calendario.id]}
+                                           onChange={e => handleCalendarioSeleccionado(calendario.id, e.target.checked)}/>
                                     {calendario.nombre}
                                 </li>
                             ))}

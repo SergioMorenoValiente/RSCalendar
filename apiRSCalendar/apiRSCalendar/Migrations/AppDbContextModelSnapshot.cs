@@ -30,8 +30,24 @@ namespace apiRSCalendar.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Color")
+                    b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Calendario");
+                });
+
+            modelBuilder.Entity("apiRSCalendar.Models.Calendariogeneral", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
@@ -39,12 +55,9 @@ namespace apiRSCalendar.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Visible")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Calendarios");
+                    b.ToTable("Calendariogeneral");
                 });
 
             modelBuilder.Entity("apiRSCalendar.Models.Campeon", b =>
@@ -89,9 +102,6 @@ namespace apiRSCalendar.Migrations
 
                     b.Property<int>("CalendarioId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("FechFin")
                         .HasColumnType("datetime2");
@@ -164,9 +174,6 @@ namespace apiRSCalendar.Migrations
                     b.Property<int>("CalendarioId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Completado")
                         .HasColumnType("nvarchar(max)");
 
@@ -197,7 +204,7 @@ namespace apiRSCalendar.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NomInvocador")
+                    b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

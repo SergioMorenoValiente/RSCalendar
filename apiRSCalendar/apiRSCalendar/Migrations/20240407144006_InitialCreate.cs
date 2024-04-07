@@ -12,19 +12,31 @@ namespace apiRSCalendar.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Calendarios",
+                name: "Calendario",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Visible = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Calendarios", x => x.Id);
+                    table.PrimaryKey("PK_Calendario", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Calendariogeneral",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Calendariogeneral", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,7 +77,7 @@ namespace apiRSCalendar.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contrasena = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NomInvocador = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,16 +93,15 @@ namespace apiRSCalendar.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FechInicio = table.Column<DateTime>(type: "datetime2", nullable: true),
                     FechFin = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CalendarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Eventos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Eventos_Calendarios_CalendarioId",
+                        name: "FK_Eventos_Calendario_CalendarioId",
                         column: x => x.CalendarioId,
-                        principalTable: "Calendarios",
+                        principalTable: "Calendario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -104,16 +115,15 @@ namespace apiRSCalendar.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FechInicio = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Completado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CalendarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tareas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tareas_Calendarios_CalendarioId",
+                        name: "FK_Tareas_Calendario_CalendarioId",
                         column: x => x.CalendarioId,
-                        principalTable: "Calendarios",
+                        principalTable: "Calendario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -160,9 +170,9 @@ namespace apiRSCalendar.Migrations
                 {
                     table.PrimaryKey("PK_UsuarioCalendarios", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UsuarioCalendarios_Calendarios_CalendarioId",
+                        name: "FK_UsuarioCalendarios_Calendario_CalendarioId",
                         column: x => x.CalendarioId,
-                        principalTable: "Calendarios",
+                        principalTable: "Calendario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -208,6 +218,9 @@ namespace apiRSCalendar.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Calendariogeneral");
+
+            migrationBuilder.DropTable(
                 name: "Campeones");
 
             migrationBuilder.DropTable(
@@ -226,7 +239,7 @@ namespace apiRSCalendar.Migrations
                 name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "Calendarios");
+                name: "Calendario");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");
