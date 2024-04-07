@@ -59,45 +59,85 @@ function App() {
     return (
         <Router>
             <div>
-                {isLoggedIn ?
-                    <div className="App1">
+                <div className="App1">
 
-                        {/* Vista cuando la sesión está iniciada */}
-                        <Header onSidebarToggle={handleSidebarToggle}
-                            setIsSidebarOpen={setIsSidebarOpen}
-                            isProfileMenuOpen={isProfileMenuOpen}
-                            onLogout={handleLogout} />
+                    {/* Vista cuando la sesión está iniciada */}
+                    <Header onSidebarToggle={handleSidebarToggle}
+                        setIsSidebarOpen={setIsSidebarOpen}
+                        isProfileMenuOpen={isProfileMenuOpen}
+                        onLogout={handleLogout} />
 
-                        {/* Rutas para movernos entre los diferentes componentes */}
-                        <Routes>
-                            <Route path="/" element={
-                                <main>
+                    {/* Rutas para movernos entre los diferentes componentes */}
+                    <Routes>
+                        <Route path="/" element={
+                            <main>
 
-                                    {/* Componente principal: Calendario */}
-                                    <Calendar
-                                    isSidebarOpen={isSidebarOpen}
-                                    toggleSidebar={toggleSidebar} />
-                                </main>}
-                            />
-                            <Route path="/SobreNosotros" element={<SobreNosotros />} />
-                            <Route path="/DeclaracionDeAccesibilidad" element={<DeclaracionDeAccesibilidad />} />
-                            <Route path="/Ajustes" element={<Ajustes />} />
-                            <Route path="/Perfil" element={<Perfil />} />
-                            <Route path="/CrearEventoTarea" element={<CrearEventoTarea />} />
-                            <Route path="/EditarEvento" element={<EditarEvento />} />
-                            <Route path="/EditarTarea" element={<EditarTarea />} />
-                        </Routes>
-                        <Footer />
-                    </div> :
-                    < div className="App2">
+                                {/* Componente principal: Calendario */}
+                                <Calendar
+                                isSidebarOpen={isSidebarOpen}
+                                toggleSidebar={toggleSidebar} />
+                            </main>}
+                        />
+                        <Route path="/SobreNosotros" element={<SobreNosotros />} />
+                        <Route path="/DeclaracionDeAccesibilidad" element={<DeclaracionDeAccesibilidad />} />
+                        <Route path="/Ajustes" element={<Ajustes />} />
+                        <Route path="/Perfil" element={<Perfil />} />
+                        <Route path="/CrearEventoTarea" element={<CrearEventoTarea />} />
+                        <Route path="/EditarEvento" element={<EditarEvento />} />
+                        <Route path="/EditarTarea" element={<EditarTarea />} />
+                    </Routes>
+                    <Footer />
+                </div>
+                < div className="App2">
 
-                        {/* Vista cuando no hay una sesión iniciada */}
-                        <Login onLogin={handleLogin} />
-                    </div>
-                }
+                    {/* Vista cuando no hay una sesión iniciada */}
+                    <Login onLogin={handleLogin} />
+                </div>
             </div>
         </Router>
     );
 }
 
 export default App;
+
+
+//<Router>
+//    <div>
+//        {isLoggedIn ?
+//            <div className="App1">
+
+//                {/* Vista cuando la sesión está iniciada */}
+//                <Header onSidebarToggle={handleSidebarToggle}
+//                    setIsSidebarOpen={setIsSidebarOpen}
+//                    isProfileMenuOpen={isProfileMenuOpen}
+//                    onLogout={handleLogout} />
+
+//                {/* Rutas para movernos entre los diferentes componentes */}
+//                <Routes>
+//                    <Route path="/" element={
+//                        <main>
+
+//                            {/* Componente principal: Calendario */}
+//                            <Calendar
+//                                isSidebarOpen={isSidebarOpen}
+//                                toggleSidebar={toggleSidebar} />
+//                        </main>}
+//                    />
+//                    <Route path="/SobreNosotros" element={<SobreNosotros />} />
+//                    <Route path="/DeclaracionDeAccesibilidad" element={<DeclaracionDeAccesibilidad />} />
+//                    <Route path="/Ajustes" element={<Ajustes />} />
+//                    <Route path="/Perfil" element={<Perfil />} />
+//                    <Route path="/CrearEventoTarea" element={<CrearEventoTarea />} />
+//                    <Route path="/EditarEvento" element={<EditarEvento />} />
+//                    <Route path="/EditarTarea" element={<EditarTarea />} />
+//                </Routes>
+//                <Footer />
+//            </div> :
+//            < div className="App2">
+
+//                {/* Vista cuando no hay una sesión iniciada */}
+//                <Login onLogin={handleLogin} />
+//            </div>
+//        }
+//    </div>
+//</Router>
