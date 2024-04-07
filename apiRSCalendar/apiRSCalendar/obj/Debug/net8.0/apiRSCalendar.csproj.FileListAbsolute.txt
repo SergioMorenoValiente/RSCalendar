@@ -798,3 +798,14 @@ C:\Users\Alumnos MCSD Tarde\source\repos\Personal\RSCalendar\apiRSCalendar\apiRS
 C:\Users\Alumnos MCSD Tarde\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\apiRSCalendar.pdb
 C:\Users\Alumnos MCSD Tarde\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\apiRSCalendar.genruntimeconfig.cache
 C:\Users\Alumnos MCSD Tarde\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\ref\apiRSCalendar.dll
+C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\apiRSCalendar.staticwebassets.runtime.json
+C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\Microsoft.AspNetCore.Components.dll
+C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Forms.dll
+C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\Microsoft.AspNetCore.Components.QuickGrid.dll
+C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter.dll
+C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Web.dll
+C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\Microsoft.JSInterop.dll
+C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\apiRSCalendar.sourcelink.json
