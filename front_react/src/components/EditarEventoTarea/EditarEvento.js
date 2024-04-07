@@ -84,7 +84,8 @@ function EditarEvento() {
                         </select>
                     </div>
                     <div>
-                        <button type="submit">Añadir Evento</button>
+                        <button type="submit">Editar Evento</button>
+                        <button >Eliminar Evento</button>
                         <Link to="/" className="sidebar-link">
                             <span>Volver</span>
                         </Link>
