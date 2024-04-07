@@ -44,15 +44,15 @@ function Login({ onLogin }) {
             <div className="login-form">
                 <h2>INICIAR SESIÓN</h2>
                 <form>
-                    <div>
-                        <label htmlFor="username">Usuario:</label>
-                        <input
-                            type="text"
-                            id="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </div>
+                        <div>
+                            <label htmlFor="email">Correo Electrónico:</label>
+                            <input
+                                type="email"
+                                id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
                     <div>
                         <label htmlFor="password">Contraseña:</label>
                         <input
