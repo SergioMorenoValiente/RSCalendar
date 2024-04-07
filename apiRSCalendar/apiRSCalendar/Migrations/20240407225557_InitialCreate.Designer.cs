@@ -12,8 +12,8 @@ using apiRSCalendar.Context;
 namespace apiRSCalendar.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240407153610_Initial")]
-    partial class Initial
+    [Migration("20240407225557_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,6 +120,33 @@ namespace apiRSCalendar.Migrations
                     b.HasIndex("CalendarioId");
 
                     b.ToTable("Eventos");
+                });
+
+            modelBuilder.Entity("apiRSCalendar.Models.Eventogeneral", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CalendariogeneralId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("FechFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CalendariogeneralId");
+
+                    b.ToTable("Eventogeneral");
                 });
 
             modelBuilder.Entity("apiRSCalendar.Models.Region", b =>
@@ -266,6 +293,17 @@ namespace apiRSCalendar.Migrations
                         .IsRequired();
 
                     b.Navigation("Calendario");
+                });
+
+            modelBuilder.Entity("apiRSCalendar.Models.Eventogeneral", b =>
+                {
+                    b.HasOne("apiRSCalendar.Models.Calendariogeneral", "Calendariogeneral")
+                        .WithMany()
+                        .HasForeignKey("CalendariogeneralId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Calendariogeneral");
                 });
 
             modelBuilder.Entity("apiRSCalendar.Models.Tarea", b =>
