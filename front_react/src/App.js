@@ -88,11 +88,6 @@ function App() {
                     </Routes>
                     <Footer />
                 </div>
-                < div className="App2">
-
-                    {/* Vista cuando no hay una sesión iniciada */}
-                    <Login onLogin={handleLogin} />
-                </div>
             </div>
         </Router>
     );

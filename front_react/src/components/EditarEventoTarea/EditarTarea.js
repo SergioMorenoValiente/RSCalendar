@@ -65,7 +65,8 @@ function EditarTarea() {
                             onChange={(e) => setDescripcion(e.target.value)} />
                     </div>
                     <div className="button-container">
-                        <button type="submit">Añadir Tarea</button>
+                        <button type="submit">Editar Tarea</button>
+                        <button >Eliminar Tarea</button>
                         <Link to="/" className="sidebar-link">
                             <span>Volver</span>
                         </Link>
