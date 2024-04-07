@@ -82,7 +82,7 @@ function CalendarApp({ isSidebarOpen }) {
                         headerToolbar={{
                             start: '',
                             center: 'title',
-                            end: 'prev,next today'
+                            end: 'prev,next'
                         }}
                         //Pruebas rukaya
 
