@@ -229,7 +229,7 @@ input[type="checkbox"] {
 .modal {
     display: block;
     position: fixed;
-    z-index: 1;
+    z-index: 999;
     left: 0;
     top: 0;
     width: 100%;
@@ -259,3 +259,10 @@ input[type="checkbox"] {
         text-decoration: none;
         cursor: pointer;
     }
+
+    .popoverStyle {
+        z-index:99999 !important;
+    }
+a {
+    color: #F0E6D2
+}

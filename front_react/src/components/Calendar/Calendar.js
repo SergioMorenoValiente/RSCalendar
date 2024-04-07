@@ -2,9 +2,13 @@
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 import './Calendar.css';
 import React, { useState, useEffect } from 'react';
+
+//Prueba rukaya
+import { sliceEvents, createPlugin } from '@fullcalendar/core';
 
 
 function CalendarApp({ isSidebarOpen }) {
@@ -50,12 +54,14 @@ function CalendarApp({ isSidebarOpen }) {
 
     //Prueba rukaya
     const handleDateClick = (arg) => {
-        const eventosDelDia = eventos.filter(evento =>
-            new Date(evento.fechInicio).toDateString() === arg.date.toDateString()
-        );
-        alert(`Eventos del día ${arg.date.toLocaleDateString()}: ${eventosDelDia.map(evento => evento.nombre).join(', ')}`);
+        // Redireccionar a la página CrearEventoTarea.js pasando la fecha como parámetro
+        window.location.href = `/CrearEventoTarea?fecha=${arg.dateStr}`;
     };
 
+    const handleEventClick = (arg) => {
+        // Redireccionar a la página EditarEvento.js pasando el ID del evento como parámetro
+        window.location.href = `/EditarEvento?id=${arg.event.id}`;
+    };
 
     return (
         <div className="container">
@@ -69,18 +75,27 @@ function CalendarApp({ isSidebarOpen }) {
 
                     {/* Componente FullCalendar */}
                     <FullCalendar
-                        plugins={[dayGridPlugin, timeGridPlugin]}
+                        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                         locale={esLocale}
                         initialView="dayGridMonth"
                         events={eventosMostrar}
                         headerToolbar={{
-                            right: 'prev,next today',
+                            start: '',
                             center: 'title',
-                            left: ''
+                            end: 'prev,next today'
                         }}
+                        //Pruebas rukaya
 
-                        //prueba rukaya
+                        dayMaxEventRows={true}
+                        views={{
+                            timeGrid: {
+                                dayMaxEventRows: 3
+                            }
+                        }}
+                        //moreLinkClick="day"
                         dateClick={handleDateClick}
+                        //eventContent={renderEventContent }
+                        eventClick={handleEventClick}
                     />
                 </div>
             </div>
@@ -129,6 +144,31 @@ function CalendarApp({ isSidebarOpen }) {
                 </div>
             )}
         </div>
+    );
+}
+
+//Pruebas rukaya
+function renderEventContent(eventInfo) {
+    return (
+        <>
+            <b>{eventInfo.timeText}</b>
+            <i>{eventInfo.event.title}</i>
+        </>
+    )
+}
+
+function CustomView(props) {
+    let segs = sliceEvents(props, true); // allDay=true
+
+    return (
+        <>
+            <div className='view-title'>
+                {props.dateProfile.currentRange.start.toUTCString()}
+            </div>
+            <div className='view-events'>
+                {segs.length} events
+            </div>
+        </>
     );
 }
 
