@@ -90,6 +90,7 @@ function EventoForm() {
             setFechFin('');
             setCalendarioId(0);
             setError('');
+            window.location.href = "/";
         } catch (error) {
             setError(error.message);
         }
@@ -190,6 +191,7 @@ function TareaForm({ setTab, startDate, setStartDate }) {
     //Función para manejar el envío del formulario
     const handleSubmit = (e) => {
         e.preventDefault();
+        window.location.href = "/";
     };
 
     return (

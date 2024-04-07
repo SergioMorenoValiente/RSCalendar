@@ -12,6 +12,8 @@ import Ajustes from './components/Ajustes/Ajustes';
 import Perfil from './components/Perfil/Perfil';
 import CrearEventoTarea from './components/CrearEventoTarea/CrearEventoTarea';
 import DeclaracionDeAccesibilidad from './components/DeclaracionDeAccesibilidad/DeclaracionDeAccesibilidad';
+import EditarEvento from './components/EditarEventoTarea/EditarEvento';
+import EditarTarea from './components/EditarEventoTarea/EditarTarea';
 
 function App() {
 
@@ -82,6 +84,8 @@ function App() {
                             <Route path="/Ajustes" element={<Ajustes />} />
                             <Route path="/Perfil" element={<Perfil />} />
                             <Route path="/CrearEventoTarea" element={<CrearEventoTarea />} />
+                            <Route path="/EditarEvento" element={<EditarEvento />} />
+                            <Route path="/EditarTarea" element={<EditarTarea />} />
                         </Routes>
                         <Footer />
                     </div> :

@@ -55,10 +55,11 @@ function Ajustes() {
         <div className="ajustes-container">
             <div className="ajustes-container2">
                 <h1 className="h1">AJUSTES</h1>
-                <h2 className="h2">
+                {/*<h2 className="h2">
                     Selecciona tu campeón:
                 </h2>
-                {/* Carrusel de imágenes*/}
+
+                 Carrusel de imágenes
                 <Slider {...settings} className="carrusel">
                     {Campeones.map((item) => (
                         <div key={item.id} >
@@ -73,8 +74,8 @@ function Ajustes() {
                     ))}
                 </Slider>
 
-                {/* Cobaya */}
-                {/*{selectedChampion && (
+                Cobaya
+                {selectedChampion && (
                     <div className="selected-champion">
                         <p>Tu campeón seleccionado es {selectedChampion.title}</p>
                         <img src={selectedChampion.src} alt={selectedChampion.alt} />
@@ -103,6 +104,70 @@ function Ajustes() {
                         <button onClick={handleCancelChange}>Cancelar</button>
                     </div>
                 )}*/}
+
+                <h2 className="h2">
+                    Calendarios:
+                </h2>
+                <h3>Calendarios del usuario:</h3>
+
+                <button>Crear Calendario nuevo</button>
+
+
+                <br /><br />
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Personal</td>
+                            <td><button>Editar</button></td>
+                            <td><button>Borrar</button></td>
+                        </tr>
+                        <tr>
+                            <td>Trabajo</td>
+                            <td><button>Editar</button></td>
+                            <td><button>Borrar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br /><br />
+
+                <h4>Crear Calendario</h4>
+                <form>
+                    <div>
+                        <label htmlFor="nombre">Nombre calendario</label>
+                        <input type="text" id="nombre"></input>
+                    </div>
+                    <div>
+                        <label htmlFor="descripcion">Nombre calendario</label>
+                        <input type="text" id="descripcion"></input>
+                    </div>
+                    <button>Crear Calendario</button>
+                    <button>Volver</button>
+                </form>
+
+                <h4>Editar Calendario</h4>
+                <form>
+                    <div>
+                        <label htmlFor="nombre">Nombre calendario</label>
+                        <input type="text" id="nombre"></input>
+                    </div>
+                    <div>
+                        <label htmlFor="descripcion">Nombre calendario</label>
+                        <input type="text" id="descripcion"></input>
+                    </div>
+                    <button>Editar Calendario</button>
+                    <button>Volver</button>
+                </form>
+
+                <br /><br /><br /><br />
+
+
+                <h3>Calendarios de League of Legends:</h3>
+                <ul>
+                <li>Mundial</li>
+                <li>Liga</li>
+                </ul>
+
 
             </div>
         </div>

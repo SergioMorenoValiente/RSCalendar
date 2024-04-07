@@ -12,8 +12,8 @@ using apiRSCalendar.Context;
 namespace apiRSCalendar.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240407144006_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240407153610_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

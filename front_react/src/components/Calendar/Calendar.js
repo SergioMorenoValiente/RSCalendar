@@ -47,6 +47,16 @@ function CalendarApp({ isSidebarOpen }) {
     }));
 
 
+
+    //Prueba rukaya
+    const handleDateClick = (arg) => {
+        const eventosDelDia = eventos.filter(evento =>
+            new Date(evento.fechInicio).toDateString() === arg.date.toDateString()
+        );
+        alert(`Eventos del día ${arg.date.toLocaleDateString()}: ${eventosDelDia.map(evento => evento.nombre).join(', ')}`);
+    };
+
+
     return (
         <div className="container">
             <div className="container2">
@@ -64,10 +74,13 @@ function CalendarApp({ isSidebarOpen }) {
                         initialView="dayGridMonth"
                         events={eventosMostrar}
                         headerToolbar={{
-                            left: 'prev,next today',
+                            right: 'prev,next today',
                             center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                            left: ''
                         }}
+
+                        //prueba rukaya
+                        dateClick={handleDateClick}
                     />
                 </div>
             </div>
@@ -81,6 +94,20 @@ function CalendarApp({ isSidebarOpen }) {
                         <Link to="/CrearEventoTarea" className="sidebar-link">
                             <img src="images/Iconos/Icono7.png" className="icono1" />
                             <span>CREAR EVENTO/TAREA</span>
+                        </Link>
+                    </div>
+
+                    {/* Botón provisional para editar Evento */}
+                    <div className="button-container">
+                        <Link to="/EditarEvento" className="sidebar-link">
+                            <span>EDITAR EVENTO</span>
+                        </Link>
+                    </div>
+
+                    {/* Botón provisional para editar Tarea */}
+                    <div className="button-container">
+                        <Link to="/EditarTarea" className="sidebar-link">
+                            <span>EDITAR TAREA</span>
                         </Link>
                     </div>
 
