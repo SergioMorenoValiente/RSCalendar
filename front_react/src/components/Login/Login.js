@@ -25,8 +25,6 @@ function Login({ onLogin }) {
                 body: JSON.stringify({ email, contrasena: password })
             })
 
-            // INICIAR SESION
-            // Función para manejar el inicio de sesión
             if (response.ok) {
                 const data = await response.json();
                 const token = data.token;
