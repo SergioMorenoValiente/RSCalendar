@@ -11,7 +11,7 @@
 }
 
 .fc-daygrid-day {
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .fc-daygrid-event {
@@ -19,7 +19,7 @@
     border-color: #C89B3C;
     font-size: 1rem;
     display: block;
-    padding: 2px 0;
+    padding: 2px;
 }
 
 .fc-daygrid-event-dot {
@@ -28,7 +28,7 @@
 
 .fc-toolbar-title {
     font-family: "BEAUFORT";
-    font-size: 2.2rem !important;
+    font-size: 2rem !important;
     text-transform: uppercase;
     top: 165px;
     transform: translateX(-50%);

@@ -2,11 +2,11 @@
     justify-content: space-between;
     background-color: transparent;
     border-bottom: 3px solid #C89B3C;
-    max-height: 100px;
+    max-height: 90px;
 }
 
 .logo1 {
-    margin-left: 15px;
+    margin-left: 20px;
 }
 
 .separator {
@@ -40,17 +40,16 @@
 }
 
 .profile-menu-dropdown {
-    width: 250px;
+    width: 170px;
     border: 3px solid #C89B3C;
     border-top: 0px;
     padding-top: 15px !important;
     padding-bottom: 15px !important;
-    margin-top: 73px !important;
-    margin-right: 30px;
-    text-align: center;
+    margin-top: 57px !important;
+    text-align: center !important;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    align-items: start;
-    justify-content: start;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     z-index: 998;
 }
@@ -73,12 +72,12 @@
 }
 
 .icono1 {
-    width: 62px !important;
+    width: 60px !important;
     margin-bottom: 8px !important;
 }
 
 .icono2 {
-    width: 76px !important;
+    width: 55px !important;
     margin-top: 4px;
     background-image: url('../../../public/images/Campeones/Gwen2.jpg');
     background-size: cover;
@@ -87,7 +86,7 @@
 }
 
 .icono3 {
-    width: 93px !important;
+    width: 70px !important;
 }
 
 .nav-links {
@@ -105,7 +104,7 @@
 
 .logo1,
 .logo2 {
-    width: 100px;
+    width: 80px;
 }
 
 .separator,
@@ -153,7 +152,7 @@
 .navbar,
 .logo-container,
 .nav-links {
-    align-items: center;
+    align-items: center !important;
 }
 
 .navbar,
@@ -223,4 +222,8 @@
         padding: 15px;
         border-bottom: 2px solid #555;
     }
+}
+
+.nav-link {
+    align-items: center;
 }
