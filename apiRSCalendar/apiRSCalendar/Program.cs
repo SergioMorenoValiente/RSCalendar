@@ -4,6 +4,9 @@ using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using apiRSCalendar.Models;
+using apiRSCalendar.Helpers;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,5 +70,30 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Add the login route
+app.MapPost("/login", async (AppDbContext dbContext, Usuario usuario) =>
+{
+    var user = await dbContext.Usuarios.FirstOrDefaultAsync(u => u.Email == usuario.Email && u.Contrasena == usuario.Contrasena);
+
+    if (user != null)
+    {
+        var authHelper = new AuthHelper(builder.Configuration["ApplicationSettings:JWT_Secret"]);
+        var token = authHelper.GenerateJWTToken(user);
+
+        return Results.Ok(new { Token = token });
+    }
+    else
+    {
+        return Results.BadRequest("Credenciales inválidas");
+    }
+});
+
+app.MapPost("/checkauth", async (string token) =>
+{
+    var authHelper = new AuthHelper(builder.Configuration["ApplicationSettings:JWT_Secret"]);
+    var isvalid = authHelper.ValidateJWTToken(token);
+    return Results.Ok(isvalid);
+});
 
 app.Run();

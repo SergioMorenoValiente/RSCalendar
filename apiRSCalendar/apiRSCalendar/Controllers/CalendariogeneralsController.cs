@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using apiRSCalendar.Context;
 using apiRSCalendar.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace apiRSCalendar.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CalendariogeneralsController : ControllerBase
