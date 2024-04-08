@@ -11,7 +11,7 @@ import CrearEventoTarea from './components/CrearEventoTarea/CrearEventoTarea';
 import DeclaracionDeAccesibilidad from './components/DeclaracionDeAccesibilidad/DeclaracionDeAccesibilidad';
 import EditarEvento from './components/EditarEventoTarea/EditarEvento';
 import EditarTarea from './components/EditarEventoTarea/EditarTarea';
-import { isUserAuthenticated } from './components/Utils';
+import { isUserAuthenticated, getStoredUserJwt } from './components/Utils';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -19,7 +19,7 @@ function App() {
 
     useEffect(() => {
         const checkAuthStatus = async () => {
-            const token = await isUserAuthenticated();
+            const token = await isUserAuthenticated() || getStoredUserJwt(); 
             setIsLoggedIn(token);
             setIsLoading(false);
         };
@@ -35,7 +35,6 @@ function App() {
         <Router>
             <div>
                 <div className="App1">
-                    {/* Vista cuando la sesión está iniciada */}
                     {isLoggedIn ? <AuthenticatedRoutes setIsLoggedIn={setIsLoggedIn} /> : <Login onLogin={() => setIsLoggedIn(true)} />}
                 </div>
             </div>

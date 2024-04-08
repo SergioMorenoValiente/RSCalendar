@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace apiRSCalendar.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CalendariogeneralsController : ControllerBase
