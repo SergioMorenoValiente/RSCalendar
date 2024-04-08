@@ -1,10 +1,10 @@
 ﻿import React, { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import './Login.css';
-import { setUserJwt } from '../Utils'; // Ajusta la ruta de importación según la ubicación de Utils.js
+import { setUserJwt } from '../Utils';
 
 function Login({ onLogin }) {
-    // Para el formulario de inicio de sesión y el de registro
+    // Para el formulario de inicio de sesión y registro
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
@@ -13,6 +13,8 @@ function Login({ onLogin }) {
     const [showLogin, setShowLogin] = useState(true);
     const [redirectToHome, setRedirectToHome] = useState(false);
 
+
+    //Funcionalidad inicio de sesion
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -28,19 +30,46 @@ function Login({ onLogin }) {
             if (response.ok) {
                 const data = await response.json();
                 const token = data.token;
-                setUserJwt(token); // Guardar el token en localStorage
+                setUserJwt(token);
                 onLogin();
-            } else {
-                console.error('Error al iniciar sesión:', response.statusText);
             }
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
         }
     };
 
-    // Función para mostrar el formulario de inicio de sesión
+    //Funcionalidad registro de usuario
+    const handleRegister = async () => {
+        if (password !== confirmPassword) {
+            console.error('Las contraseñas no coinciden');
+            return;
+        } else {
+
+            try {
+                const response = await fetch('https://localhost:7143/api/Usuarios', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email,
+                        contrasena: password,
+                        nombre: username
+                    })
+                });
+                if (response.ok) {
+                    setShowLogin(true);
+                }
+            } catch (error) {
+                console.error('Error en el registro:', error);
+            }
+        }
+    };
+
+
+    // Función para mostrar el formulario de inicio de sesión o registro
     const handleLoginClick = () => {
-        setShowLogin(true);
+        setShowLogin(!showLogin);
     };
 
     // Redirecciona a la página principal si el inicio de sesión es correcto
@@ -48,10 +77,10 @@ function Login({ onLogin }) {
         return <Navigate to="/" />;
     }
 
-    // REGISTRAR
     // Función para mostrar el formulario de registro
     const handleRegisterClick = () => {
         setShowLogin(false);
+        handleRegister();
     };
 
     return (
@@ -96,7 +125,7 @@ function Login({ onLogin }) {
                         <button type="submit" className="login-form-button">Iniciar sesión</button>
                     </form>
                     <div className="remember-forgot">
-                        <Link to="#" onClick={() => console.log("Registrarse")}>¿No estás registrado?</Link>
+                        <a href="#" onClick={handleLoginClick}>¿No estás registrado?</a>
                     </div>
                 </div>
             ) : (
@@ -140,7 +169,7 @@ function Login({ onLogin }) {
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                             />
                         </div>
-                        <button type="button" onClick={handleLoginClick}>Registrarme</button>
+                            <button type="button" onClick={handleRegisterClick}>Registrarme</button>
                     </form>
                     <div className="remember-forgot">
                         <a href="#" onClick={handleLoginClick}>¿Ya estás registrado?</a>

@@ -1,3 +1,5 @@
+
+//Funciones para el token
 export const setUserJwt = (userJwt) => {
     try {
         localStorage.setItem('userJwt', userJwt);
@@ -54,3 +56,5 @@ const isValidToken = async (token) => {
         return false
     }
 };
+
+//Funciones para el id
