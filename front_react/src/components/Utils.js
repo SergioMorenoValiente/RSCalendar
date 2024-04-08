@@ -1,4 +1,3 @@
-
 //Funciones para el token
 export const setUserJwt = (userJwt) => {
     try {
@@ -14,8 +13,8 @@ export const getStoredUserJwt = () => {
         return userJwt || '';
     } catch (error) {
         console.error(error);
+        return '';
     }
-    return '';
 };
 
 export const removeStoredUserJwt = () => {
@@ -45,16 +44,35 @@ const isValidToken = async (token) => {
     try {
         const response = await fetch(`https://localhost:7143/api/checkauth`, {
             method: 'POST',
-            body: { 'token': `Bearer ${ token }`}
-});
+            body: { 'token': `Bearer ${token}` }
+        });
         if (!response.ok) {
-            return false
-        }console.log(response)
+            return false;
+        }
+        console.log(response);
         const data = await response.json();
-        return(data);
+        return data;
     } catch (error) {
-        return false
+        return false;
     }
 };
 
 //Funciones para el id
+
+export const setUserId = (userId) => {
+    try {
+        localStorage.setItem('userId', userId);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const getStoredUserId = () => {
+    try {
+        const userId = localStorage.getItem('userId');
+        return userId || '';
+    } catch (error) {
+        console.error(error);
+        return '';
+    }
+};

@@ -1,7 +1,7 @@
 ﻿import React, { useState } from 'react';
-import { Navigate, Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import './Login.css';
-import { setUserJwt } from '../Utils';
+import { setUserJwt, setUserId } from '../Utils';
 
 function Login({ onLogin }) {
     // Para el formulario de inicio de sesión y registro
@@ -12,7 +12,6 @@ function Login({ onLogin }) {
     const [rememberMe, setRememberMe] = useState(false);
     const [showLogin, setShowLogin] = useState(true);
     const [redirectToHome, setRedirectToHome] = useState(false);
-
 
     //Funcionalidad inicio de sesion
     const handleLogin = async (e) => {
@@ -32,6 +31,27 @@ function Login({ onLogin }) {
                 const token = data.token;
                 setUserJwt(token);
                 onLogin();
+
+                try {
+                    const response = await fetch('https://localhost:7143/api/Usuarios', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    });
+
+                    if (response.ok) {
+                        const allUsers = await response.json();
+                        const userWithEmail = allUsers.find(user => user.email === email);
+                        if (userWithEmail) {
+                            const userId = userWithEmail.id;
+                            setUserId(userId);
+                        }
+                    }
+                    setRedirectToHome(true);
+                } catch (error) {
+                    console.error('Error al obtener el ID de usuario:', error);
+                }
             }
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
@@ -44,7 +64,6 @@ function Login({ onLogin }) {
             console.error('Las contraseñas no coinciden');
             return;
         } else {
-
             try {
                 const response = await fetch('https://localhost:7143/api/Usuarios', {
                     method: 'POST',
