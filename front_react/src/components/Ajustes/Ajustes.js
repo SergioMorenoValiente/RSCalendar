@@ -4,8 +4,8 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Campeones from "./Campeones";
-
 function Ajustes() {
+
     const [calendarios, setCalendarios] = useState([]);
     const [nombreCalendario, setNombreCalendario] = useState("");
     const [descripcionCalendario, setDescripcionCalendario] = useState("");
@@ -212,6 +212,9 @@ function Ajustes() {
                     </div>
                 )}*/}
 
+                
+                        <h1 className="h1">AJUSTES</h1>
+                   
                 <h2 className="h2">
                     Calendarios:
                 </h2>

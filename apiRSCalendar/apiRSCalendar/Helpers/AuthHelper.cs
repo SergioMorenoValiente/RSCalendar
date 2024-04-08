@@ -1,10 +1,10 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using apiRSCalendar.Models;
+using System.Linq;
 
 namespace apiRSCalendar.Helpers
 {
@@ -19,9 +19,10 @@ namespace apiRSCalendar.Helpers
 
         public string GenerateJWTToken(Usuario user)
         {
-            var claims = new List<Claim> {
+            var claims = new Claim[] {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, $"{user.Id} {user.Contrasena}")
+                new Claim(ClaimTypes.Name, $"{user.Id} {user.Email}")
+                // Agrega más reclamaciones según sea necesario
             };
 
             var jwtToken = new JwtSecurityToken(
@@ -34,6 +35,30 @@ namespace apiRSCalendar.Helpers
                 );
 
             return new JwtSecurityTokenHandler().WriteToken(jwtToken);
+        }
+
+        public bool ValidateJWTToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(jwtSecret);
+
+            try
+            {
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                return true; // El token es válido
+            }
+            catch
+            {
+                return false; // El token no es válido
+            }
         }
     }
 }
