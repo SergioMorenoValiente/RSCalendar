@@ -1,5 +1,4 @@
-﻿import React from 'react';
-import { useState } from "react";
+﻿import React, { useState, useEffect } from 'react';
 import './Ajustes.css';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
@@ -7,6 +6,114 @@ import "slick-carousel/slick/slick-theme.css";
 import Campeones from "./Campeones";
 
 function Ajustes() {
+    const [calendarios, setCalendarios] = useState([]);
+    const [nombreCalendario, setNombreCalendario] = useState("");
+    const [descripcionCalendario, setDescripcionCalendario] = useState("");
+    const [error, setError] = useState('');
+    const [nombreCalendarioCrear, setNombreCalendarioCrear] = useState("");
+    const [descripcionCalendarioCrear, setDescripcionCalendarioCrear] = useState("");
+    const [nombreCalendarioEditado, setNombreCalendarioEditado] = useState("");
+    const [descripcionCalendarioEditado, setDescripcionCalendarioEditado] = useState("");
+    const [calendarioEditado, setCalendarioEditado] = useState(null);
+
+    useEffect(() => {
+        fetch('https://localhost:7143/api/calendarios')
+            .then(response => response.json())
+            .then(data => setCalendarios(data))
+            .catch(error => console.error('Error fetching calendars:', error));
+    }, []);
+
+    const handleNombreChangeCrear = (event) => {
+        setNombreCalendarioCrear(event.target.value);
+    };
+
+    const handleDescripcionChangeCrear = (event) => {
+        setDescripcionCalendarioCrear(event.target.value);
+    };
+
+    const handleNombreChange = (event) => {
+        setNombreCalendario(event.target.value);
+    };
+
+    const handleDescripcionChange = (event) => {
+        setDescripcionCalendario(event.target.value);
+    };
+
+    const llenarFormularioEditar = (calendario) => {
+    setCalendarioEditado(calendario);
+    setNombreCalendarioEditado(calendario.nombre);
+    setDescripcionCalendarioEditado(calendario.descripcion);
+};
+
+
+    const editarCalendario = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch(`https://localhost:7143/api/calendarios/${calendarioEditado.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre: nombreCalendarioEditado,
+                    descripcion: descripcionCalendarioEditado
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al editar el calendario');
+            }
+
+            // Limpiar los campos después de enviar el formulario
+            setNombreCalendario('');
+            setDescripcionCalendario('');
+            setError('');
+            setCalendarioEditado(null);
+
+            // Actualizar la lista de calendarios después de editar uno
+            fetch('https://localhost:7143/api/calendarios')
+                .then(response => response.json())
+                .then(data => setCalendarios(data))
+                .catch(error => console.error('Error fetching calendars:', error));
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+
+    const crearCalendario = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch('https://localhost:7143/api/calendarios', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre: nombreCalendarioCrear,
+                    descripcion: descripcionCalendarioCrear
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al crear el calendario');
+            }
+
+            // Limpiar los campos después de enviar el formulario
+            setNombreCalendario('');
+            setDescripcionCalendario('');
+            setError('');
+            // Actualizar la lista de calendarios después de crear uno nuevo
+            fetch('https://localhost:7143/api/calendarios')
+                .then(response => response.json())
+                .then(data => setCalendarios(data))
+                .catch(error => console.error('Error fetching calendars:', error));
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+
     const [selectedChampion, setSelectedChampion] = useState(null);
     const [showSlider, setShowSlider] = useState(false);
 
@@ -112,51 +219,48 @@ function Ajustes() {
 
                 <button>Crear Calendario nuevo</button>
 
-
                 <br /><br />
+
                 <table>
                     <tbody>
-                        <tr>
-                            <td>Personal</td>
-                            <td><button>Editar</button></td>
-                            <td><button>Borrar</button></td>
-                        </tr>
-                        <tr>
-                            <td>Trabajo</td>
-                            <td><button>Editar</button></td>
-                            <td><button>Borrar</button></td>
-                        </tr>
+                        {calendarios.map(calendario => (
+                            <tr key={calendario.id}>
+                                <td>{calendario.nombre}</td>
+                                <td><button onClick={() => llenarFormularioEditar(calendario)}>Editar</button></td>
+                                <td><button>Borrar</button></td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
 
                 <br /><br />
 
                 <h4>Crear Calendario</h4>
-                <form>
+                <form onSubmit={crearCalendario}>
+                    {error && <p>{error}</p>}
                     <div>
-                        <label htmlFor="nombre">Nombre calendario</label>
-                        <input type="text" id="nombre"></input>
+                        <label htmlFor="nombre">Nombre calendario:</label>
+                        <input type="text" id="nombre" value={nombreCalendarioCrear} onChange={handleNombreChangeCrear} required />
                     </div>
                     <div>
-                        <label htmlFor="descripcion">Nombre calendario</label>
-                        <input type="text" id="descripcion"></input>
+                        <label htmlFor="descripcion">Descripción calendario:</label>
+                        <input type="text" id="descripcion" value={descripcionCalendarioCrear} onChange={handleDescripcionChangeCrear} required />
                     </div>
-                    <button>Crear Calendario</button>
-                    <button>Volver</button>
+                    <button type="submit">Crear Calendario</button>
                 </form>
 
                 <h4>Editar Calendario</h4>
-                <form>
+                <form onSubmit={editarCalendario}>
                     <div>
                         <label htmlFor="nombre">Nombre calendario</label>
-                        <input type="text" id="nombre"></input>
+                        <input type="text" id="nombre" value={nombreCalendarioEditado} onChange={(event) => setNombreCalendarioEditado(event.target.value)} required />
                     </div>
                     <div>
-                        <label htmlFor="descripcion">Nombre calendario</label>
-                        <input type="text" id="descripcion"></input>
+                        <label htmlFor="descripcion">Descripción calendario</label>
+                        <input type="text" id="descripcion" value={descripcionCalendarioEditado} onChange={(event) => setDescripcionCalendarioEditado(event.target.value)} required />
                     </div>
-                    <button>Editar Calendario</button>
-                    <button>Volver</button>
+                    <button type="submit">Editar Calendario</button>
+                    <button onClick={() => setCalendarioEditado(null)}>Volver</button>
                 </form>
 
                 <br /><br /><br /><br />
