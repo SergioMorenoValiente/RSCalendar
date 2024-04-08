@@ -32,28 +32,28 @@
     background-image: url('../../../public/images/Iconos/Icono2.png');
 }
 
-.h1 {
-    font-size: 2.7rem;
-}
-
-h2 {
-    font-size: 2.3rem;
-}
-
-h4 {
+.h1nosotros {
     font-size: 2rem;
 }
 
-strong {
+.h2nosotros {
+    font-size: 1.8rem;
+}
+
+.h4nosotros {
     font-size: 1.6rem;
 }
 
-ul {
+.strongnosotros {
+    font-size: 1.1rem;
+}
+
+.ulnosotros {
     list-style: none;
     padding: 0;
 }
 
-li {
+.linosotros {
     margin-left: 18%;
     padding-right: 12%;
     position: relative;
@@ -63,8 +63,8 @@ li {
 .avatar {
     border-radius: 50%;
     border: 5px solid #C89B3C;
-    width: 468px;
-    height: 468px;
+    width: 325px;
+    height: 325px;
     margin-bottom: 10px;
     margin-top: 10px;
 }
@@ -95,19 +95,19 @@ li {
     height: 60px;
 }
 
-h2, p {
+.h2nosotros, .pnosotros {
     padding-left: 10%;
     padding-right: 10%;
 }
 
-h3, h5 {
-    font-size: 1.3rem;
+.h3nosotros, .h5nosotros {
+    font-size: 1.1rem;
 }
 
 
 
-p, ul {
-    font-size: 1.45rem;
+.pnosotros, .ulnosotros {
+    font-size: 1rem;
     font-family: "SPRIEGEL" !important;
     text-align: start;
 }
@@ -118,18 +118,18 @@ p, ul {
     background-size: cover;
 }
 
-.h1, h4, strong {
+.h1nosotros, .h4nosotros, .strongnosotros {
     color: #C89B3C;
 }
 
-.h1, h2, h3, h4, h5 {
+.h1nosotros, .h2nosotros, .h3nosotros, .h4nosotros, .h5nosotros {
     font-family: "BEAUFORT";
 }
 
-h2, h3, h5, p, ul {
+.h2nosotros, .h3nosotros, .h5nosotros, .pnosotros, .ulnosotros {
     color: #F0E6D2;
 }
 
-.h1, h2, h3, h4, h5, p, ul {
+.h1nosotros, .h2nosotros, .h3nosotros, .h4nosotros, .h5nosotros, .pnosotros, .ulnosotros {
     line-height: 1.5em;
 }

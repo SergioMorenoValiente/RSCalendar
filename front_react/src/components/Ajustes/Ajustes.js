@@ -68,7 +68,7 @@ function Ajustes() {
                                 <img src={item.src} alt={item.alt}/>
                             </div>
                             <div>
-                                <p>{item.title}</p>
+                                <p className="pajustes">{item.title}</p>
                             </div>
                         </div>
                     ))}
@@ -77,7 +77,7 @@ function Ajustes() {
                 Cobaya
                 {selectedChampion && (
                     <div className="selected-champion">
-                        <p>Tu campeón seleccionado es {selectedChampion.title}</p>
+                        <p className="pajustes">Tu campeón seleccionado es {selectedChampion.title}</p>
                         <img src={selectedChampion.src} alt={selectedChampion.alt} />
                     </div>
                 )}
@@ -96,7 +96,7 @@ function Ajustes() {
                                         <img src={item.src} alt={item.alt} />
                                     </div>
                                     <div>
-                                        <p>{item.title}</p>
+                                        <p className="pajustes">{item.title}</p>
                                     </div>
                                 </div>
                             ))}
