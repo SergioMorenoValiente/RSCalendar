@@ -6,23 +6,38 @@ import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 import './Calendar.css';
 import React, { useState, useEffect } from 'react';
-
-//Prueba rukaya
-import { sliceEvents, createPlugin } from '@fullcalendar/core';
+import { getStoredUserId } from '../Utils';
 
 function CalendarApp({ isSidebarOpen }) {
-    const [calendarios, setCalendarios] = useState([]);
+    const [calendariosUsuario, setCalendariosUsuario] = useState([]); 
     const [calendariosGenerales, setCalendariosGenerales] = useState([]);
     const [eventos, setEventos] = useState([]);
     const [calendariosSeleccionados, setCalendariosSeleccionados] = useState({});
     const [calendariosGeneralesSeleccionados, setCalendariosGeneralesSeleccionados] = useState({});
 
-    // Obtener lista de calendarios
     useEffect(() => {
-        fetch('https://localhost:7143/api/calendarios')
-            .then(response => response.json())
-            .then(data => setCalendarios(data))
-            .catch(error => console.error('Error fetching calendars:', error));
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://localhost:7143/api/usuariocalendarios', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+                if (response.ok) {
+                    const allusuariocalendarios = await response.json();
+                    const usuarioCalendarios = allusuariocalendarios.filter(calendar => calendar.usuarioId.toString() === getStoredUserId().toString());
+                    const calendarioIds = usuarioCalendarios.map(calendar => calendar.calendarioId);
+                    const responseCalendarios = await fetch('https://localhost:7143/api/calendarios');
+                    const data = await responseCalendarios.json();
+                    const calendariosDelUsuario = data.filter(calendario => calendarioIds.includes(calendario.id));
+                    setCalendariosUsuario(calendariosDelUsuario);
+                }
+            } catch (error) {
+                console.error('Error fetching calendars:', error);
+            }
+        };
+        fetchData();
     }, []);
 
     useEffect(() => {
@@ -32,7 +47,6 @@ function CalendarApp({ isSidebarOpen }) {
             .catch(error => console.error('Error fetching calendars:', error));
     }, []);
 
-    // Obtener lista de eventos generales y específicos
     useEffect(() => {
         Promise.all([
             fetch('https://localhost:7143/api/eventogenerals').then(response => response.json()),
@@ -149,26 +163,34 @@ function CalendarApp({ isSidebarOpen }) {
                     <div className="calendars-container">
                         <h2 className="calendars-title">MIS CALENDARIOS</h2>
                         <ul className="calendars-list">
-                            {/* Calendarios específicos */}
-                            {calendarios.map(calendario => (
+                            {/* Calendarios del usuario */}
+                            {calendariosUsuario.map(calendario => (
                                 <li key={calendario.id}>
-                                    <input type="checkbox" name={`calendario${calendario.id}`}
+                                    <input
+                                        type="checkbox"
+                                        name={`calendario${calendario.id}`}
                                         checked={calendariosSeleccionados[calendario.id]}
-                                        onChange={e => handleCalendarioSeleccionado(calendario.id, e.target.checked, false)} /> {/* Especificar que no es general */}
-                                    {calendario.nombre}
+                                        onChange={e => handleCalendarioSeleccionado(calendario.id, e.target.checked, false)}
+                                    />
+                                    <label>{calendario.nombre}</label>
                                 </li>
                             ))}
+
                             {/* Calendarios generales */}
                             {calendariosGenerales.map(calendario => (
                                 <li key={calendario.id}>
-                                    <input type="checkbox" name={`calendarioGeneral${calendario.id}`}
+                                    <input
+                                        type="checkbox"
+                                        name={`calendarioGeneral${calendario.id}`}
                                         checked={calendariosGeneralesSeleccionados[calendario.id]}
-                                        onChange={e => handleCalendarioSeleccionado(calendario.id, e.target.checked, true)} /> {/* Especificar que es general */}
-                                    {calendario.nombre}
+                                        onChange={e => handleCalendarioSeleccionado(calendario.id, e.target.checked, true)}
+                                    />
+                                    <label>{calendario.nombre}</label>
                                 </li>
                             ))}
                         </ul>
                     </div>
+
 
 
                 </div>
@@ -178,28 +200,28 @@ function CalendarApp({ isSidebarOpen }) {
 }
 
 //Pruebas rukaya
-function renderEventContent(eventInfo) {
-    return (
-        <>
-            <b>{eventInfo.timeText}</b>
-            <i>{eventInfo.event.title}</i>
-        </>
-    )
-}
+//function renderEventContent(eventInfo) {
+//    return (
+//        <>
+//            <b>{eventInfo.timeText}</b>
+//            <i>{eventInfo.event.title}</i>
+//        </>
+//    )
+//}
 
-function CustomView(props) {
-    let segs = sliceEvents(props, true); // allDay=true
+//function CustomView(props) {
+//    let segs = sliceEvents(props, true); // allDay=true
 
-    return (
-        <>
-            <div className='view-title'>
-                {props.dateProfile.currentRange.start.toUTCString()}
-            </div>
-            <div className='view-events'>
-                {segs.length} events
-            </div>
-        </>
-    );
-}
+//    return (
+//        <>
+//            <div className='view-title'>
+//                {props.dateProfile.currentRange.start.toUTCString()}
+//            </div>
+//            <div className='view-events'>
+//                {segs.length} events
+//            </div>
+//        </>
+//    );
+//}
 
 export default CalendarApp;
