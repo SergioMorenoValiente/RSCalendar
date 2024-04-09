@@ -1,13 +1,13 @@
 .calendar-container {
     height: 100%;
-    max-height: 1200px;
+    max-height: 759px;
     overflow: hidden;
     padding-top: 50px;
     background-color: rgba(10, 20, 40, 0.65);
 }
 
 .fc {
-    height: 1200px;
+    height: 790px;
 }
 
 .fc-daygrid-day {
@@ -30,7 +30,7 @@
     font-family: "BEAUFORT";
     font-size: 2rem !important;
     text-transform: uppercase;
-    top: 165px;
+    top: 163px;
     transform: translateX(-50%);
 }
 
@@ -47,11 +47,12 @@ input[type="checkbox"]:after {
 
 .calendars-title {
     font-size: 1.8rem;
+    font-family: "BEAUFORT";
     border-bottom: 2px solid #C89B3C;
 }
 
 .container3 {
-    width: 400px;
+    width: 300px;
     padding-top: 70px;
     justify-content: start;
     flex-direction: column;
@@ -104,9 +105,9 @@ span {
 }
 
 .icono1 {
-    width: 50px;
+    width: 40px !important;
     height: auto;
-    margin-right: 12px;
+    margin-right: 5px;
     margin-top: 10px;
 }
 
@@ -120,16 +121,15 @@ span {
     align-items: center !important;
     align-content: center;
     padding: 10px;
+    padding-top: 5px !important;
+    margin-left: 25px !important;
+    margin-right: 25px !important;
     padding-bottom: 12px;
-    padding-top: 5px;
-    padding-right: 15px;
-    margin-left: 35px !important;
     border-radius: 5px;
-    margin-right: 15px;
     color: #010A13;
     cursor: pointer;
-    font-size: 1.3rem;
-    border: 4px solid #C89B3C;
+    font-size: 1rem;
+    border: 2px solid #C89B3C;
     text-decoration: none;
 }
 
@@ -249,7 +249,7 @@ input[type="checkbox"] {
 .close {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 1rem;
     font-weight: bold;
 }
 
