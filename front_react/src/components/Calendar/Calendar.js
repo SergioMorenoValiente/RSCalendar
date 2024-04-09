@@ -187,25 +187,17 @@ function CalendarApp({ isSidebarOpen }) {
                     <div className="button-container">
                         <Link to="/CrearEventoTarea" className="sidebar-link">
                             <img src="images/Iconos/Icono7.png" className="icono1" />
-                            <span>CREAR EVENTO/TAREA</span>
+                            <span>Crear Evento/Tarea</span>
                         </Link>
                     </div>
 
-                    {/* Botón provisional para editar Evento */}
-                    <div className="button-container">
-                        <Link to="/EditarEvento" className="sidebar-link">
-                            <span>EDITAR EVENTO</span>
-                        </Link>
-                    </div>
-
-                    {/* Botón provisional para editar Tarea */}
+                    {/* Botón provisional para editar Tarea
                     <div className="button-container">
                         <Link to="/EditarTarea" className="sidebar-link">
                             <span>EDITAR TAREA</span>
                         </Link>
-                    </div>
+                    </div>*/}
 
-                    // Contenedor de calendarios
                     <div className="calendars-container">
                         <h2 className="calendars-title">MIS CALENDARIOS</h2>
                         <ul className="calendars-list">

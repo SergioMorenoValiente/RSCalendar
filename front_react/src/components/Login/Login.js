@@ -129,18 +129,18 @@ function Login({ onLogin }) {
                                 required
                             />
                         </div>
-                        <div className="remember-forgot">
-                            <input
-                                type="checkbox"
-                                id="remember"
-                                checked={rememberMe}
-                                onChange={(e) => setRememberMe(e.target.checked)}
-                            />
-                            <label htmlFor="remember">Recordarme</label>
-                        </div>
-                        <div className="remember-forgot">
-                            <a href="#">He olvidado mi contraseña</a>
-                        </div>
+                        {/*<div className="remember-forgot">*/}
+                        {/*    <input*/}
+                        {/*        type="checkbox"*/}
+                        {/*        id="remember"*/}
+                        {/*        checked={rememberMe}*/}
+                        {/*        onChange={(e) => setRememberMe(e.target.checked)}*/}
+                        {/*    />*/}
+                        {/*    <label htmlFor="remember">Recordarme</label>*/}
+                        {/*</div>*/}
+                        {/*<div className="remember-forgot">*/}
+                        {/*    <a href="#">He olvidado mi contraseña</a>*/}
+                        {/*</div>*/}
                         <button type="submit" className="login-form-button">Iniciar sesión</button>
                     </form>
                     <div className="remember-forgot">

@@ -1080,9 +1080,9 @@ C:\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\staticwebassets\msbui
 C:\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.apiRSCalendar.props
 C:\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\staticwebassets.pack.json
 C:\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\scopedcss\bundle\apiRSCalendar.styles.css
-C:\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\apiRSCalendar.csproj.CopyComplete
 C:\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\apiRSCalendar.dll
 C:\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\refint\apiRSCalendar.dll
 C:\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\apiRSCalendar.pdb
 C:\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\apiRSCalendar.genruntimeconfig.cache
 C:\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\ref\apiRSCalendar.dll
+C:\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\apiRSCal.FD3E1B03.Up2Date
