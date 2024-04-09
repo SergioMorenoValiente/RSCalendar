@@ -57,19 +57,64 @@ function CalendarApp({ isSidebarOpen }) {
         setCalendarioSeleccionado(calendariosSeleccionados);
     };
 
-    const handleCalendarioSeleccionado = (calendarioId, isChecked, isGeneral) => {
-        if (isGeneral) {
-            setCalendariosGeneralesSeleccionados(prevState => ({
-                ...prevState,
-                [calendarioId]: isChecked
-            }));
-        } else {
-            setCalendariosSeleccionados(prevState => ({
-                ...prevState,
-                [calendarioId]: isChecked
-            }));
+    const handleCalendarioSeleccionado = async (calendarioId, isChecked, isGeneral) => {
+        try {
+            // Actualizar el estado local
+            if (isGeneral) {
+                setCalendariosGeneralesSeleccionados(prevState => ({
+                    ...prevState,
+                    [calendarioId]: isChecked
+                }));
+            } else {
+                setCalendariosSeleccionados(prevState => ({
+                    ...prevState,
+                    [calendarioId]: isChecked
+                }));
+            }
+
+            // Obtener los datos actuales del calendario
+            const response = await fetch(`https://localhost:7143/api/calendarios/${calendarioId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al obtener los datos del calendario');
+            }
+
+            const calendarioData = await response.json();
+            const { nombre, descripcion } = calendarioData;
+
+            // Hacer la solicitud HTTP para actualizar la base de datos
+            const updateResponse = await fetch(`https://localhost:7143/api/calendarios/${calendarioId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: calendarioId,
+                    nombre: nombre,
+                    descripcion: descripcion,
+                    visible: isChecked ? 1 : 0
+                }),
+            });
+
+            if (!updateResponse.ok) {
+                throw new Error('Error al actualizar la base de datos');
+            }
+
+            // Aquí podrías manejar la respuesta si es necesario
+        } catch (error) {
+            console.error('Error:', error);
+            // Podrías mostrar un mensaje de error al usuario si la actualización falla
         }
     };
+
+
+
+
 
 
 
