@@ -2,49 +2,72 @@
     width: 100%;
     height: 100%;
     padding-bottom: 20px;
-    padding-top: 20px;
     background-color: rgba(10, 20, 40, 0.65);
-    min-height: 1130px !important;
-
+    display: flex;
+    justify-content: center;
+    min-height: 750px;
 }
 
 .ajustes-container2 {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    min-height: 850px;
     overflow: hidden;
     padding-bottom: 50px;
     padding-top: 50px;
-    margin: auto;
+    width: 80%;
 }
 
-.h1 {
+.h1ajustes {
+    color: #F0E6D2;
+    font-family: "BEAUFORT";
+    font-size: 2rem;
+    padding-bottom: 20px;
+}
+
+.h2ajustes {
     color: #C89B3C;
     font-family: "BEAUFORT";
-    font-size: 2.7rem;
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    margin-bottom: 20px; /* Agregamos un margen inferior para separarlo de los otros elementos */
+    width: 100%; /* Aseguramos que ocupe todo el ancho disponible */
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 30px !important;
 }
 
-.pajustes {
-    color: #F0E6D2;
-    font-size: 1.45rem;
-    font-family: "SPRIEGEL" !important;
-    text-align: center !important;
+.h3ajustes {
+    color: #C89B3C;
+    font-family: "BEAUFORT";
     text-transform: uppercase;
-    padding-left: 10%;
-    padding-right: 10%;
+    font-size: 1.6rem;
+}
+
+.h4ajustes {
+    color: #F0E6D2;
+    font-family: "BEAUFORT";
+    text-transform: uppercase;
+    font-size: 1.4rem;
+}
+
+.tdajustes {
+    color: #F0E6D2;
+    font-size: 1rem;
+    font-family: "SPRIEGEL" !important;
+    text-align: start !important;
 }
 
 .ajustes-container2,
 .ajustes-container2 > div {
-    width: 90%;
+    width: 60%;
     align-items: center;
     text-align: center;
     display: flex;
     align-items: center;
 }
 
-.h1, p {
+.h1ajustes, .tdajustes, .h2ajustes, .h3ajustes, .h4ajustes {
     line-height: 1.5em;
 }
 
@@ -72,14 +95,10 @@
     text-align: center;
 }
 
-.h2 {
-    font-size: 2.3rem;
-    font-family: "BEAUFORT";
-    color: #F0E6D2;
-    line-height: 1.5em;
+.h2ajustes {
     margin: 0;
-    text-align: start !important;
-    padding-bottom: 30px;
+    text-align: center !important;
+    padding-bottom: 20px;
 }
 
 .with-background {
@@ -163,3 +182,249 @@
     width: 100%;
     margin-top: 150px;
 }
+
+.liajustes::before {
+    background-image: url('../../../public/images/Iconos/Icono1.png');
+}
+
+.ulajustes {
+    list-style: none;
+    padding: 0;
+}
+
+.liajustes {
+    margin-left: 18%;
+    padding-right: 12%;
+    position: relative;
+    padding-bottom: 20px;
+    padding-top: 7px;
+}
+
+    .liajustes::before,
+    .liajustes::before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        left: -70px;
+        transform: translateY(-50%);
+        width: 60px;
+        height: 60px;
+    }
+
+.ulajustes {
+    font-size: 1.1rem;
+    font-family: "SPRIEGEL" !important;
+    text-align: start;
+}
+
+.liajustes::before,
+.liajustes::before {
+    background-size: cover;
+}
+
+.ulajustes {
+    color: #F0E6D2;
+}
+
+.ulajustes {
+    line-height: 1.5em;
+    padding-left: 100px;
+}
+
+.divajustes-container {
+    display: flex;
+}
+
+.half-screen-left {
+    flex: 1;
+    /*border-right: 2px solid #0AC8B9;*/
+}
+
+.half-screen-right {
+    flex: 1;
+}
+
+.divajustes-container-container {
+    border: 3px solid #C89B3C;
+    border-bottom: 0px;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: rgba(10, 20, 40, 0.65);
+    box-shadow: 0px -10px 20px -15px #010A13;
+}
+.divajustes-container {
+    border: 3px solid #C89B3C;
+    border-top: 0px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: rgba(10, 20, 40, 0.65);
+    box-shadow: 0px 10px 20px -15px #010A13;
+}
+table {
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+
+td {
+    padding: 5px;
+    padding-bottom: 10px;
+}
+
+.iconoajustes {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.buttonajustes {
+    align-items: center !important;
+    align-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    color: #010A13;
+    cursor: pointer;
+    font-size: 1rem;
+    border: 3px solid #C89B3C;
+    text-decoration: none;
+    background-color: #C89B3C;
+    font-family: "SPRIEGEL";
+    box-shadow: 0px 0px 50px 10px #010A13;
+    display: flex;
+    line-height: 1.5em;
+    margin-bottom: 10px;
+}
+
+    .buttonajustes:hover {
+        color: #F0E6D2;
+        background-color: #091428;
+    }
+
+.divajustes1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    padding-bottom:20px;
+}
+
+
+.button1ajustes {
+    align-items: center !important;
+    align-content: center;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    color: #F0E6D2;
+    cursor: pointer;
+    font-size: 1rem;
+    border: 2px solid #0AC8B9;
+    text-decoration: none;
+    background-color: #091428;
+    font-family: "SPRIEGEL";
+    display: flex;
+    line-height: 1.5em;
+}
+
+    .button1ajustes:hover {
+        color: #010A13;
+        background-color: #0AC8B9;
+    }
+
+.button2ajustes {
+    align-items: center !important;
+    align-content: center;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    color: #F0E6D2;
+    cursor: pointer;
+    font-size: 1rem;
+    border: 2px solid #C89B3C;
+    text-decoration: none;
+    background-color: #091428;
+    font-family: "SPRIEGEL";
+    display: flex;
+    line-height: 1.5em;
+}
+
+    .button2ajustes:hover {
+        color: #010A13;
+        background-color: #C89B3C;
+    }
+
+.divajustes4{
+    padding-left:20px;
+}
+
+.labelajustes {
+    display: block;
+    margin-bottom: 10px;
+    font-family: "SPRIEGEL";
+    color: #F0E6D2;
+    font-size: 1rem;
+    line-height: 1.5em;
+    text-align: start;
+    padding-left: 9%;
+}
+
+.inputajustes {
+    width: 80%;
+    padding: 10px;
+    background-color: #F0E6D2;
+    border: 1px solid #010A13;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #010A13;
+    font-size: 1rem !important;
+    line-height: 1.5em;
+}
+
+.input2ajustes {
+    width: 80%;
+    padding: 10px;
+    background-color: #F0E6D2;
+    border: 1px solid #010A13;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #010A13;
+    font-size: 1rem !important;
+    line-height: 1.5em;
+    margin-bottom: 30px;
+}
+
+.button3ajustes,
+.button4ajustes {
+    align-items: center !important;
+    align-content: center;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: none;
+    font-family: "SPRIEGEL";
+    line-height: 1.5em;
+    color: #010A13;
+    border: 2px solid #C89B3C;
+    background-color: #C89B3C;
+}
+.button3ajustes {
+    margin-right: 2%;
+}
+
+.button4ajustes {
+    margin-left: 2%;
+}
+
+    .button3ajustes:hover,
+    .button4ajustes:hover {
+        color: #F0E6D2;
+        background-color: #091428;
+    }

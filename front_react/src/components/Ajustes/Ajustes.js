@@ -15,6 +15,9 @@ function Ajustes() {
     const [nombreCalendarioEditado, setNombreCalendarioEditado] = useState("");
     const [descripcionCalendarioEditado, setDescripcionCalendarioEditado] = useState("");
     const [calendarioEditado, setCalendarioEditado] = useState(null);
+    const [showDiv1, setShowDiv1] = useState(true);
+    const [showDiv2, setShowDiv2] = useState(false);
+    const [showDiv3, setShowDiv3] = useState(false);
 
     useEffect(() => {
         fetch('https://localhost:7143/api/calendarios')
@@ -40,10 +43,12 @@ function Ajustes() {
     };
 
     const llenarFormularioEditar = (calendario) => {
-    setCalendarioEditado(calendario);
-    setNombreCalendarioEditado(calendario.nombre);
-    setDescripcionCalendarioEditado(calendario.descripcion);
-};
+        setCalendarioEditado(calendario);
+        setNombreCalendarioEditado(calendario.nombre);
+        setDescripcionCalendarioEditado(calendario.descripcion);
+        setShowDiv1(false);
+        setShowDiv3(true);
+    };
 
 
     const editarCalendario = async (event) => {
@@ -75,6 +80,8 @@ function Ajustes() {
                 .then(response => response.json())
                 .then(data => setCalendarios(data))
                 .catch(error => console.error('Error fetching calendars:', error));
+            setShowDiv1(true);
+            setShowDiv3(false);
         } catch (error) {
             setError(error.message);
         }
@@ -108,6 +115,8 @@ function Ajustes() {
                 .then(response => response.json())
                 .then(data => setCalendarios(data))
                 .catch(error => console.error('Error fetching calendars:', error));
+            setShowDiv1(true);
+            setShowDiv2(false);
         } catch (error) {
             setError(error.message);
         }
@@ -161,9 +170,131 @@ function Ajustes() {
     return (
         <div className="ajustes-container">
             <div className="ajustes-container2">
-                <h1 className="h1">AJUSTES</h1>
-                {/* Comentario de prueba*/}
-                {/*<h2 className="h2">
+                <h1 className="h1ajustes">AJUSTES</h1>
+                <div className="divajustes-container-container">
+                    {/*<h2 className="h2ajustes">*/}
+                    {/*    Calendarios*/}
+                    {/*</h2>*/}
+                </div>
+                <div className="divajustes-container"> 
+                    <div className="half-screen-left">
+                    {showDiv1 && (
+                    <div className="divajustes1">
+                        <h2 className="h2ajustes">Tus Calendarios</h2>
+
+                            
+                        <table>
+                            <tbody>
+                                {calendarios.map(calendario => (
+                                    <tr key={calendario.id}>
+                                        <td className="tdajustes">{calendario.nombre}</td>
+                                        <td>
+                                            <button className="button1ajustes"
+                                            onClick={() => llenarFormularioEditar(calendario)}>
+                                            Editar
+                                            </button>
+                                        </td>
+                                        <td>
+                                        <button className="button2ajustes">
+                                            Borrar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                                </table>
+                                <button className="buttonajustes"
+                                    onClick={() => {
+                                        setShowDiv1(false);
+                                        setShowDiv2(true);
+                                    }}>
+                                    <img src="images/Iconos/Icono7.png" className="iconoajustes" />
+                                    Crear calendario nuevo</button>
+                        </div>
+                    )}
+                    {showDiv2 && (
+                    <div className="divajustes2">
+                        <h2 className="h2ajustes">Crear Calendario</h2>
+                        <form onSubmit={crearCalendario}>
+                            {error && <p>{error}</p>}
+                            <div>
+                                <label className="labelajustes"
+                                    htmlFor="nombre">Nombre calendario:</label>
+                                <input className="inputajustes" type="text" id="nombre"
+                                    value={nombreCalendarioCrear}
+                                    onChange={handleNombreChangeCrear} required />
+                            </div>
+                            <div>
+                                <label className="labelajustes"
+                                    htmlFor="descripcion">Descripción calendario:</label>
+                                <input className="input2ajustes" type="text" id="descripcion"
+                                    value={descripcionCalendarioCrear}
+                                    onChange={handleDescripcionChangeCrear} required />
+                            </div>
+                                <button className="button3ajustes"
+                                    type="submit">Crear</button>
+                                <button className="button4ajustes"
+                                    onClick={() => {
+                                        setShowDiv1(true);
+                                        setShowDiv2(false);
+                                    }}>Volver</button>
+                        </form>
+                    </div>
+                    )}
+                    {showDiv3 && (
+                    <div className="divajustes3">
+                        <h2 className="h2ajustes">Editar Calendario</h2>
+                        <form onSubmit={editarCalendario}>
+                            <div>
+                                <label className="labelajustes"
+                                    htmlFor="nombre">Nombre calendario</label>
+                                <input className="inputajustes"
+                                    type="text" id="nombre" value={nombreCalendarioEditado}
+                                    onChange={(event) => setNombreCalendarioEditado(event.target.value)}
+                                    required />
+                            </div>
+                            <div>
+                                <label className="labelajustes"
+                                    htmlFor="descripcion">Descripción calendario</label>
+                                <input className="input2ajustes" type="text" id="descripcion"
+                                    value={descripcionCalendarioEditado}
+                                    onChange={(event) => setDescripcionCalendarioEditado(event.target.value)}
+                                    required />
+                            </div>
+                            <button className="button3ajustes" type="submit">Guardar</button>
+                                <button className="button4ajustes"
+                                    onClick={() => {
+                                        setCalendarioEditado(null);
+                                        setShowDiv1(true);
+                                        setShowDiv3(false);
+                                    }}>Volver</button>
+                        </form>
+                    </div>
+                        )}
+                    </div>
+                    {/*<div className="half-screen-right">*/}
+                    {/*<div className="divajustes4">*/}
+                    {/*    <h3 className="h3ajustes">Calendarios de League of Legends</h3>*/}
+                    {/*    <ul className="ulajustes">*/}
+                    {/*        <li className="liajustes">Mundial</li>*/}
+                    {/*        <li className="liajustes">Mundial</li>*/}
+                    {/*        <li className="liajustes">Mundial</li>*/}
+                    {/*        <li className="liajustes">Mundial</li>*/}
+                    {/*    </ul>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Ajustes;
+
+
+
+{/* Comentario de prueba*/ }
+{/*<h2 className="h2">
                     Selecciona tu campeón:
                 </h2>
 
@@ -212,74 +343,3 @@ function Ajustes() {
                         <button onClick={handleCancelChange}>Cancelar</button>
                     </div>
                 )}*/}
-
-                
-                        <h1 className="h1">AJUSTES</h1>
-                   
-                <h2 className="h2">
-                    Calendarios:
-                </h2>
-                <h3>Calendarios del usuario:</h3>
-
-                <button>Crear Calendario nuevo</button>
-
-                <br /><br />
-
-                <table>
-                    <tbody>
-                        {calendarios.map(calendario => (
-                            <tr key={calendario.id}>
-                                <td>{calendario.nombre}</td>
-                                <td><button onClick={() => llenarFormularioEditar(calendario)}>Editar</button></td>
-                                <td><button>Borrar</button></td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-
-                <br /><br />
-
-                <h4>Crear Calendario</h4>
-                <form onSubmit={crearCalendario}>
-                    {error && <p>{error}</p>}
-                    <div>
-                        <label htmlFor="nombre">Nombre calendario:</label>
-                        <input type="text" id="nombre" value={nombreCalendarioCrear} onChange={handleNombreChangeCrear} required />
-                    </div>
-                    <div>
-                        <label htmlFor="descripcion">Descripción calendario:</label>
-                        <input type="text" id="descripcion" value={descripcionCalendarioCrear} onChange={handleDescripcionChangeCrear} required />
-                    </div>
-                    <button type="submit">Crear Calendario</button>
-                </form>
-
-                <h4>Editar Calendario</h4>
-                <form onSubmit={editarCalendario}>
-                    <div>
-                        <label htmlFor="nombre">Nombre calendario</label>
-                        <input type="text" id="nombre" value={nombreCalendarioEditado} onChange={(event) => setNombreCalendarioEditado(event.target.value)} required />
-                    </div>
-                    <div>
-                        <label htmlFor="descripcion">Descripción calendario</label>
-                        <input type="text" id="descripcion" value={descripcionCalendarioEditado} onChange={(event) => setDescripcionCalendarioEditado(event.target.value)} required />
-                    </div>
-                    <button type="submit">Editar Calendario</button>
-                    <button onClick={() => setCalendarioEditado(null)}>Volver</button>
-                </form>
-
-                <br /><br /><br /><br />
-
-
-                <h3>Calendarios de League of Legends:</h3>
-                <ul>
-                <li>Mundial</li>
-                <li>Liga</li>
-                </ul>
-
-
-            </div>
-        </div>
-    );
-}
-
-export default Ajustes;

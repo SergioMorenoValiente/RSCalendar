@@ -34,7 +34,7 @@ function App() {
     return (
         <Router>
             <div>
-                <div className="App1">
+                <div className="App2">
                     {isLoggedIn ? <AuthenticatedRoutes setIsLoggedIn={setIsLoggedIn} /> : <Login onLogin={() => setIsLoggedIn(true)} />}
                 </div>
             </div>
