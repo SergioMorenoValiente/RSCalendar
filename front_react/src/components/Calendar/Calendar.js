@@ -6,7 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 import './Calendar.css';
 import React, { useState, useEffect } from 'react';
-import { getStoredUserId } from '../Utils';
+import { fetchData } from '../Services/Peticiones';
 
 function CalendarApp({ isSidebarOpen }) {
     const [calendariosUsuario, setCalendariosUsuario] = useState([]); 
@@ -16,28 +16,16 @@ function CalendarApp({ isSidebarOpen }) {
     const [calendariosGeneralesSeleccionados, setCalendariosGeneralesSeleccionados] = useState({});
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchDataAndSetState = async () => {
             try {
-                const response = await fetch('https://localhost:7143/api/usuariocalendarios', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                });
-                if (response.ok) {
-                    const allusuariocalendarios = await response.json();
-                    const usuarioCalendarios = allusuariocalendarios.filter(calendar => calendar.usuarioId.toString() === getStoredUserId().toString());
-                    const calendarioIds = usuarioCalendarios.map(calendar => calendar.calendarioId);
-                    const responseCalendarios = await fetch('https://localhost:7143/api/calendarios');
-                    const data = await responseCalendarios.json();
-                    const calendariosDelUsuario = data.filter(calendario => calendarioIds.includes(calendario.id));
-                    setCalendariosUsuario(calendariosDelUsuario);
-                }
+                const calendariosDelUsuario = await fetchData();
+                setCalendariosUsuario(calendariosDelUsuario);
+                checkCalendarios(calendariosDelUsuario, setCalendariosSeleccionados, false);
             } catch (error) {
-                console.error('Error fetching calendars:', error);
             }
         };
-        fetchData();
+
+        fetchDataAndSetState();
     }, []);
 
     useEffect(() => {
@@ -59,6 +47,16 @@ function CalendarApp({ isSidebarOpen }) {
             .catch(error => console.error('Error fetching events:', error));
     }, []);
 
+    const checkCalendarios = (calendarios, setCalendarioSeleccionado, isGeneral) => {
+        const calendariosSeleccionados = {};
+        calendarios.forEach(calendario => {
+            // Comprueba si el calendario es visible o no y asigna el valor correspondiente
+            calendariosSeleccionados[calendario.id] = calendario.visible === 1;
+        });
+        // Establece el estado con los calendarios seleccionados
+        setCalendarioSeleccionado(calendariosSeleccionados);
+    };
+
     const handleCalendarioSeleccionado = (calendarioId, isChecked, isGeneral) => {
         if (isGeneral) {
             setCalendariosGeneralesSeleccionados(prevState => ({
@@ -73,6 +71,8 @@ function CalendarApp({ isSidebarOpen }) {
         }
     };
 
+
+
     // Filtrar eventos según los calendarios seleccionados
     const eventosMostrar = eventos.filter(evento => {
         const esCalendarioSeleccionado = calendariosSeleccionados[evento.calendarioId];
@@ -84,6 +84,7 @@ function CalendarApp({ isSidebarOpen }) {
         end: evento.fechFin,
         color: evento.color
     }));
+
 
     //Prueba rukaya
     const handleDateClick = (arg) => {
@@ -190,8 +191,6 @@ function CalendarApp({ isSidebarOpen }) {
                             ))}
                         </ul>
                     </div>
-
-
 
                 </div>
             )}
