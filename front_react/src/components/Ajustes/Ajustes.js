@@ -162,6 +162,7 @@ function Ajustes() {
         <div className="ajustes-container">
             <div className="ajustes-container2">
                 <h1 className="h1">AJUSTES</h1>
+                {/* Comentario de prueba*/}
                 {/*<h2 className="h2">
                     Selecciona tu campeón:
                 </h2>
