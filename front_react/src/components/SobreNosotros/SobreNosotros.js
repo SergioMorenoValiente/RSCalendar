@@ -6,11 +6,11 @@ function SobreNosotros() {
     return (
         <div className="sobre-nosotros-container">
             <div className="sobre-nosotros-container2">
-                <h1 className="h1">SOBRE NOSOTROS</h1>
+                <h1 className="h1nosotros">SOBRE NOSOTROS</h1>
 
                 {/* Introducción */}
-                <h2>LA ALIANZA DE LOS DRAGONES: LA BATALLA DE LAS APLICACIONES</h2>
-                <p>
+                <h2 className="h2nosotros">LA ALIANZA DE LOS DRAGONES: LA BATALLA DE LAS APLICACIONES</h2>
+                <p className="pnosotros">
                     En los reinos digitales donde la innovación y la competencia
                     se entrelazan en una danza sin fin, surgió una batalla épica
                     que resonaría a lo largo y ancho de la red. En este colosal
@@ -23,7 +23,7 @@ function SobreNosotros() {
                     con el poder del dragón azul y el fuego helado de la precisión,
                     emergía como un maestro del Back End y las APIs.
                 </p>
-                <p>
+                <p className="pnosotros">
                     En medio de la contienda, mientras las aplicaciones rivales se alzaban
                     con ferocidad, un destello de reconocimiento mutuo brilló entre Rukaya
                     y Sergio. Comprendieron que sus habilidades únicas, complementarias
@@ -40,9 +40,9 @@ function SobreNosotros() {
                     <div className="rukaya" >
                         <img src="images/SobreNosotros/Rukaya.jpg"
                             alt="Dibujo de Rukaya Masmoudi" className="avatar" />
-                        <h3>EL FUEGO DEL DRAGÓN ROJO</h3>
-                        <h4>RUKAYA MASMOUDI MESSAOUD</h4>
-                        <p>
+                        <h3 className="h3nosotros">EL FUEGO DEL DRAGÓN ROJO</h3>
+                        <h4 className="h4nosotros">RUKAYA MASMOUDI MESSAOUD</h4>
+                        <p className="pnosotros">
                             Rukaya, portadora del poder del dragón rojo,
                             irradia una pasión inquebrantable por la accesibilidad web.
                             Su visión va más allá de la mera funcionalidad;
@@ -54,21 +54,21 @@ function SobreNosotros() {
                             disposición de elementos, cada detalle es cuidadosamente
                             diseñado para garantizar la inclusión y la accesibilidad.
                          </p>
-                        <h5>HABILIDADES:</h5>
-                        <ul>
-                            <li>
-                                <strong>Llamarada de la Intuitividad: </strong>
+                        <h5 className="h5nosotros">HABILIDADES:</h5>
+                        <ul className="ulnosotros">
+                            <li className="linosotros">
+                                <strong className="strongnosotros">Llamarada de la Intuitividad: </strong>
                                 Rukaya infunde sus diseños con una claridad asombrosa,
                                 guiando a los usuarios a través de caminos sin obstáculos.
                             </li>
-                            <li>
-                                <strong>Ember de la Adaptabilidad: </strong>
+                            <li className="linosotros">
+                                <strong className="strongnosotros">Ember de la Adaptabilidad: </strong>
                                 Sus interfaces son flexibles como el fuego, ajustándose
                                 a una variedad de dispositivos y necesidades de los
                                 usuarios.
                             </li>
-                            <li>
-                                <strong>Inferno de la Innovación: </strong>
+                            <li className="linosotros">
+                                <strong className="strongnosotros">Inferno de la Innovación: </strong>
                                 Constantemente busca nuevas formas de mejorar
                                 la experiencia del usuario, desafiando los límites de
                                 lo que es posible en el Front End.
@@ -79,9 +79,9 @@ function SobreNosotros() {
                     {/* Sección de Sergio */}
                     <div className="sergio">
                             <img src="images/SobreNosotros/Sergio.jpg" alt="Dibujo de Sergio Moreno" className="avatar" />
-                        <h3>EL HIELO DEL DRAGÓN AZUL</h3>
-                        <h4>SERGIO MORENO VALIENTE</h4>
-                        <p>
+                        <h3 className="h3nosotros">EL HIELO DEL DRAGÓN AZUL</h3>
+                        <h4 className="h4nosotros">SERGIO MORENO VALIENTE</h4>
+                        <p className="pnosotros">
                             Sergio, con el poder del dragón azul fluir a través de sus
                             venas, es un maestro en el arte del Back End y las APIs.
                             Su enfoque metódico y preciso es como una ráfaga de viento
@@ -93,21 +93,21 @@ function SobreNosotros() {
                             funcione con la fluidez y la eficacia de un glaciar en
                             movimiento.
                         </p>
-                        <h5>HABILIDADES:</h5>
-                        <ul>
-                            <li>
-                                <strong>Ventisca de la Eficiencia: </strong>
+                        <h5 className="h5nosotros">HABILIDADES:</h5>
+                        <ul className="ulnosotros">
+                            <li className="linosotros">
+                                <strong className="strongnosotros">Ventisca de la Eficiencia: </strong>
                                 Sergio optimiza cada aspecto del Back End, garantizando
                                 tiempos de carga rápidos y un rendimiento excepcional.
                             </li>
-                            <li>
-                                <strong>Glaciar de la Estabilidad: </strong>
+                            <li className="linosotros">
+                                <strong className="strongnosotros">Glaciar de la Estabilidad: </strong>
                                 Sus sistemas son sólidos como el hielo, resistiendo
                                 cualquier tormenta digital con una tranquilidad
                                 imperturbable.
                             </li>
-                            <li>
-                                <strong>Avalancha de la Escalabilidad: </strong>
+                            <li className="linosotros">
+                                <strong className="strongnosotros">Avalancha de la Escalabilidad: </strong>
                                 Con una arquitectura cuidadosamente diseñada,
                                 Sergio asegura que la aplicación pueda crecer y
                                 adaptarse a cualquier demanda sin comprometer su
@@ -117,8 +117,8 @@ function SobreNosotros() {
                 </div>
 
                 {/* Conclusión */}
-                <h2>EL LEGADO DE LOS DRAGONES Y EL TRIUNFO DE LA ALIANZA</h2>
-                <p>
+                <h2 className="h2nosotros">EL LEGADO DE LOS DRAGONES Y EL TRIUNFO DE LA ALIANZA</h2>
+                <p className="pnosotros">
                     En el campo de batalla de las aplicaciones, donde cada línea de
                     código es una espada y cada función es un hechizo, la alianza
                     entre Rukaya y Sergio se alza como un faro de esperanza y excelencia.
@@ -126,7 +126,7 @@ function SobreNosotros() {
                     de su colaboración, es una obra maestra que supera todas las
                     expectativas.
                 </p>
-                <p>
+                <p className="pnosotros">
                     En esta contienda, donde la victoria parecía un sueño lejano,
                     Rukaya y Sergio emergen como campeones indiscutibles. Su alianza,
                     forjada en la fragua del ingenio y la cooperación, ha demostrado
@@ -134,7 +134,7 @@ function SobreNosotros() {
                     reinos digitales, inspirando a otros a unirse en la búsqueda de la
                     excelencia y la inclusión.
                 </p>
-                <p>
+                <p className="pnosotros">
                     A ti, querido lector, que has seguido esta epopeya hasta el final,
                     te extendemos nuestro más sincero agradecimiento. Que esta historia
                     sirva como un recordatorio de que incluso en los momentos más

@@ -3,7 +3,6 @@
     color: #C89B3C;
     padding: 2% 15%;
     border-top: 3px solid #C89B3C;
-    font-size: 1rem;
     font-family: "SPRIEGEL";
 }
 
@@ -22,7 +21,7 @@
         height: auto;
     }
 
-    .footer-div p {
+    .footer-div .pfooter {
         margin: 0;
     }
 
@@ -37,16 +36,16 @@
     }
 
 .logo3 {
-    width: 55%;
+    width: 50%;
 }
 
-    .footer-div,
-    .footer-div p {
-        text-align: center;
-    }
+.footer-div,
+.footer-div .pfooter {
+    text-align: center;
+}
 
 .footer-section:first-child .footer-div a,
-.footer-section:last-child .footer-div p,
+.footer-section:last-child .footer-div .pfooter,
 .footer-section:last-child .footer-div a {
     color: #F0E6D2;
 }
@@ -54,4 +53,12 @@
 .footer-section:first-child .footer-div a,
 .footer-section:last-child .footer-div a {
     cursor: pointer;
+}
+
+.pfooter {
+    font-size: 1rem !important;
+}
+
+.logos {
+    max-height: 175px;
 }

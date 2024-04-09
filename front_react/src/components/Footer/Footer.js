@@ -30,21 +30,23 @@ function Footer() {
             {/* Sección de logos */}
             <div className="footer-section">
                 <div className="footer-div">
+                    <img src="images/Logos/logo3.png" alt="Logo de Riot Games"
+                        className="logos" />
+                </div>
+                <div className="footer-div">
                     <img src="images/Logos/logo5.png" alt="Logo de League of Legends"
-                        className="logo3" />
+                        className="logo3 logos"/>
                 </div>
                 <div className="footer-div">
-                    <img src="images/Logos/logo3.png" alt="Logo de Riot Games" />
-                </div>
-                <div className="footer-div">
-                    <img src="images/Logos/logo4.png" alt="Logo de la Calificación" />
+                    <img src="images/Logos/logo4.png" alt="Logo de la Calificación"
+                        className="logos"/>
                 </div>
             </div>
 
             {/* Sección de información de derechos de autor y enlace página Sobre Nosotros*/}
             <div className="footer-section">
                 <div className="footer-div">
-                    <p><Link to="/SobreNosotros" onClick={scrollToTop}>
+                    <p className="pfooter"><Link to="/SobreNosotros" onClick={scrollToTop}>
                         SOBRE NOSOTROS
                     </Link> - LEAGUE OF LEGENDS® | RS CALENDAR - 2024</p>
                 </div>
