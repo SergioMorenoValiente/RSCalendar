@@ -34,9 +34,14 @@ function App() {
     return (
         <Router>
             <div>
-                <div className="App2">
-                    {isLoggedIn ? <AuthenticatedRoutes setIsLoggedIn={setIsLoggedIn} /> : <Login onLogin={() => setIsLoggedIn(true)} />}
-                </div>
+                {isLoggedIn ?
+                    <div className="App1">
+                        <AuthenticatedRoutes setIsLoggedIn={setIsLoggedIn} />
+                    </div> :
+                    < div className="App2">
+                        <Login onLogin={() => setIsLoggedIn(true)} />
+                    </div>
+                }
             </div>
         </Router>
     );
