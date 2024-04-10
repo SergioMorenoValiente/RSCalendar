@@ -7,10 +7,13 @@ import Login from './components/Login/Login';
 import SobreNosotros from './components/SobreNosotros/SobreNosotros';
 import Ajustes from './components/Ajustes/Ajustes';
 import Perfil from './components/Perfil/Perfil';
+import Novedades from './components/Novedades/Novedades';
+import Tareas from './components/Tareas/Tareas';
 import CrearEventoTarea from './components/CrearEventoTarea/CrearEventoTarea';
 import DeclaracionDeAccesibilidad from './components/DeclaracionDeAccesibilidad/DeclaracionDeAccesibilidad';
-import EditarEvento from './components/EditarEventoTarea/EditarEvento';
-import EditarTarea from './components/EditarEventoTarea/EditarTarea';
+import EditarEvento from './components/Eventos/EditarEvento';
+import CrearTarea from './components/Tareas/CrearTarea';
+import EditarTarea from './components/Tareas/EditarTarea';
 import { isUserAuthenticated, getStoredUserJwt, getStoredUserId } from './components/Utils';
 
 function App() {
@@ -77,8 +80,13 @@ function AuthenticatedRoutes({ setIsLoggedIn }) {
                 <Route path="/DeclaracionDeAccesibilidad" element={<DeclaracionDeAccesibilidad />} />
                 <Route path="/Ajustes" element={<Ajustes />} />
                 <Route path="/Perfil" element={<Perfil />} />
+                <Route path="/Novedades" element={<Novedades />} />
+                <Route path="/Tareas" element={<Tareas />} />
+                {/*Eventos*/}
                 <Route path="/CrearEventoTarea" element={<CrearEventoTarea />} />
                 <Route path="/EditarEvento" element={<EditarEvento />} />
+                {/*Tareas*/}
+                <Route path="/CrearTarea" element={<CrearTarea />} />
                 <Route path="/EditarTarea" element={<EditarTarea />} />
             </Routes>
             <Footer />

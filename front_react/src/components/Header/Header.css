@@ -71,22 +71,9 @@
     display: block;
 }
 
-.icono1 {
-    width: 60px !important;
-    margin-bottom: 8px !important;
-}
-
-.icono2 {
-    width: 55px !important;
-    margin-top: 4px;
-    background-image: url('../../../public/images/Campeones/Gwen2.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
 .icono3 {
-    width: 70px !important;
+    width: 73px !important;
+    margin-top: 3px;
 }
 
 .nav-links {
@@ -179,8 +166,6 @@
     padding: 0;
 }
 
-.icono1,
-.icono2,
 .icono3 {
     height: auto;
 }
@@ -226,4 +211,40 @@
 
 .nav-link {
     align-items: center;
+}
+
+.icono6 {
+    width: 48px !important;
+    height: auto;
+    margin-right: 7px;
+    margin-top: 2px;
+}
+
+.icono2 {
+    width: 57px !important;
+    margin-top: 3px;
+    background-image: url('../../../public/images/Campeones/Ahri2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: auto;
+}
+
+.icono4 {
+    width: 57px !important;
+    height: auto;
+    margin-right: 7px;
+}
+
+.icono5 {
+    width: 50px !important;
+    height: auto;
+    margin-right: 10px;
+}
+
+.icono7 {
+    width: 55px !important;
+    height: auto;
+    margin-right: 7px;
+    margin-top: 5px;
 }
