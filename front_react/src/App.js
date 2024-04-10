@@ -11,7 +11,7 @@ import Novedades from './components/Novedades/Novedades';
 import Tareas from './components/Tareas/Tareas';
 import CrearEventoTarea from './components/CrearEventoTarea/CrearEventoTarea';
 import DeclaracionDeAccesibilidad from './components/DeclaracionDeAccesibilidad/DeclaracionDeAccesibilidad';
-import EditarEvento from './components/Eventos/EditarEvento';
+import EditarEvento from './components/EditarEventoTarea/EditarEvento';
 import CrearTarea from './components/Tareas/CrearTarea';
 import EditarTarea from './components/Tareas/EditarTarea';
 import { isUserAuthenticated, getStoredUserJwt, getStoredUserId } from './components/Utils';
