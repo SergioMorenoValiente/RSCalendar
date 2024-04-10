@@ -7,6 +7,7 @@ import Campeones from "./Campeones";
 import { getStoredUserId } from '../Utils';
 function Ajustes() {
 
+    //Constantes
     const [calendarios, setCalendarios] = useState([]);
     const [nombreCalendario, setNombreCalendario] = useState("");
     const [descripcionCalendario, setDescripcionCalendario] = useState("");
@@ -19,13 +20,6 @@ function Ajustes() {
     const [showDiv1, setShowDiv1] = useState(true);
     const [showDiv2, setShowDiv2] = useState(false);
     const [showDiv3, setShowDiv3] = useState(false);
-
-    useEffect(() => {
-        fetch('https://localhost:7143/api/calendarios')
-            .then(response => response.json())
-            .then(data => setCalendarios(data))
-            .catch(error => console.error('Error fetching calendars:', error));
-    }, []);
 
     const handleNombreChangeCrear = (event) => {
         setNombreCalendarioCrear(event.target.value);
@@ -43,6 +37,23 @@ function Ajustes() {
         setDescripcionCalendario(event.target.value);
     };
 
+    //Cargar calendarios
+    const cargarCalendarios = async () => {
+        try {
+            const response = await fetch('https://localhost:7143/api/calendarios');
+            const data = await response.json();
+            setCalendarios(data);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    useEffect(() => {
+        cargarCalendarios();
+    }, []);
+
+
+    //Rellenar los campos del formulario con los del calendario a editar
     const llenarFormularioEditar = (calendario) => {
         setCalendarioEditado(calendario);
         setNombreCalendarioEditado(calendario.nombre);
@@ -51,7 +62,17 @@ function Ajustes() {
         setShowDiv3(true);
     };
 
+    //Vaciar campos del formulario
+    const vaciarCampos = () => {
+        setNombreCalendarioCrear("");
+        setDescripcionCalendarioCrear("");
+        setNombreCalendario('');
+        setDescripcionCalendario('');
+        setError('');
+        setCalendarioEditado(null);
+    };
 
+    //Editar calendario
     const editarCalendario = async (event) => {
         event.preventDefault();
         try {
@@ -71,18 +92,8 @@ function Ajustes() {
             if (!response.ok) {
                 throw new Error('Error al editar el calendario');
             }
-
-            // Limpiar los campos después de enviar el formulario
-            setNombreCalendario('');
-            setDescripcionCalendario('');
-            setError('');
-            setCalendarioEditado(null);
-
-            // Actualizar la lista de calendarios después de editar uno
-            fetch('https://localhost:7143/api/calendarios')
-                .then(response => response.json())
-                .then(data => setCalendarios(data))
-                .catch(error => console.error('Error fetching calendars:', error));
+            vaciarCampos()
+            cargarCalendarios();
             setShowDiv1(true);
             setShowDiv3(false);
         } catch (error) {
@@ -90,6 +101,7 @@ function Ajustes() {
         }
     };
 
+    //Borrar calendario
     const borrarCalendario = async (calendario) => {
         try {
             const response = await fetch(`https://localhost:7143/api/calendarios/${calendario.id}`, {
@@ -102,11 +114,7 @@ function Ajustes() {
             if (!response.ok) {
                 throw new Error('Error al borrar el calendario');
             }
-            // Actualizar la lista de calendarios después de borrar
-            fetch('https://localhost:7143/api/calendarios')
-                .then(response => response.json())
-                .then(data => setCalendarios(data))
-                .catch(error => console.error('Error fetching calendars:', error));
+            cargarCalendarios();
             setShowDiv1(true);
             setShowDiv2(false);
         } catch (error) {
@@ -115,11 +123,10 @@ function Ajustes() {
     };
 
 
-
+    //Crear calendario
     const crearCalendario = async (event) => {
         event.preventDefault();
         try {
-            // Hacer la solicitud para crear el calendario
             const response = await fetch('https://localhost:7143/api/calendarios', {
                 method: 'POST',
                 headers: {
@@ -135,12 +142,9 @@ function Ajustes() {
             if (!response.ok) {
                 throw new Error('Error al crear el calendario');
             }
-
-            // Obtener el ID del calendario creado
             const nuevoCalendario = await response.json();
-            const calendarioId = nuevoCalendario.id; // Suponiendo que el ID se llama 'id'
+            const calendarioId = nuevoCalendario.id;
 
-            // Hacer la solicitud para agregar una entrada en UsuarioCalendarios
             const usuarioCalendariosResponse = await fetch('https://localhost:7143/api/UsuarioCalendarios', {
                 method: 'POST',
                 headers: {
@@ -148,7 +152,7 @@ function Ajustes() {
                 },
                 body: JSON.stringify({
                     calendarioId: calendarioId,
-                    usuarioId: getStoredUserId() // Suponiendo que esta función devuelve el usuarioId
+                    usuarioId: getStoredUserId()
                 })
             });
 
@@ -156,15 +160,8 @@ function Ajustes() {
                 throw new Error('Error al agregar entrada en UsuarioCalendarios');
             }
 
-            // Limpiar los campos después de enviar el formulario
-            setNombreCalendario('');
-            setDescripcionCalendario('');
-            setError('');
-            // Actualizar la lista de calendarios después de crear uno nuevo
-            fetch('https://localhost:7143/api/calendarios')
-                .then(response => response.json())
-                .then(data => setCalendarios(data))
-                .catch(error => console.error('Error fetching calendars:', error));
+            vaciarCampos()
+            cargarCalendarios();
             setShowDiv1(true);
             setShowDiv2(false);
         } catch (error) {
@@ -174,6 +171,7 @@ function Ajustes() {
 
 
 
+//-----------------------------Esta seccion del codigo es para RSCalendar 2.0 :)---------------------------------------------------------------------------------------------------
     const [selectedChampion, setSelectedChampion] = useState(null);
     const [showSlider, setShowSlider] = useState(false);
 
@@ -216,7 +214,7 @@ function Ajustes() {
         ),
     };
 
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     return (
         <div className="ajustes-container">
@@ -289,6 +287,7 @@ function Ajustes() {
                                     onClick={() => {
                                         setShowDiv1(true);
                                         setShowDiv2(false);
+                                        vaciarCampos();
                                     }}>Volver</button>
                         </form>
                     </div>
@@ -315,7 +314,8 @@ function Ajustes() {
                             </div>
                             <button className="button3ajustes" type="submit">Guardar</button>
                                 <button className="button4ajustes"
-                                    onClick={() => {
+                                        onClick={() => {
+                                        vaciarCampos();
                                         setCalendarioEditado(null);
                                         setShowDiv1(true);
                                         setShowDiv3(false);
