@@ -61,6 +61,7 @@ function Ajustes() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    id: calendarioEditado.id,
                     nombre: nombreCalendarioEditado,
                     descripcion: descripcionCalendarioEditado,
                     visible: 1
@@ -89,6 +90,31 @@ function Ajustes() {
         }
     };
 
+    const borrarCalendario = async (calendario) => {
+        try {
+            const response = await fetch(`https://localhost:7143/api/calendarios/${calendario.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al borrar el calendario');
+            }
+            // Actualizar la lista de calendarios después de borrar
+            fetch('https://localhost:7143/api/calendarios')
+                .then(response => response.json())
+                .then(data => setCalendarios(data))
+                .catch(error => console.error('Error fetching calendars:', error));
+            setShowDiv1(true);
+            setShowDiv2(false);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+
 
     const crearCalendario = async (event) => {
         event.preventDefault();
@@ -101,7 +127,8 @@ function Ajustes() {
                 },
                 body: JSON.stringify({
                     nombre: nombreCalendarioCrear,
-                    descripcion: descripcionCalendarioCrear
+                    descripcion: descripcionCalendarioCrear,
+                    visible: 1
                 })
             });
 
@@ -219,9 +246,10 @@ function Ajustes() {
                                             </button>
                                         </td>
                                         <td>
-                                        <button className="button2ajustes">
-                                            Borrar
+                                            <button className="button2ajustes" onClick={() => borrarCalendario(calendario)}>
+                                                Borrar
                                             </button>
+
                                         </td>
                                     </tr>
                                 ))}
