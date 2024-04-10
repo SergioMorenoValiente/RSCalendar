@@ -1,5 +1,4 @@
-﻿import React from 'react';
-import { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { Link } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,21 +6,50 @@ import './EditarEvento.css';
 
 function EditarEvento() {
 
-    //Para la fecha de inicio del evento
     const [startDate, setStartDate] = useState(new Date());
-
     const [nombre, setNombre] = useState('');
     const [fechInicio, setFechInicio] = useState('');
     const [fechFin, setFechFin] = useState('');
     const [calendarioId, setCalendarioId] = useState(0);
     const [error, setError] = useState('');
+    const [eventoId, setEventoId] = useState(null);
+
+    useEffect(() => {
+        // Obtener el ID del evento de la URL
+        const searchParams = new URLSearchParams(window.location.search);
+        const id = searchParams.get('id');
+        if (!id) {
+            setError('ID del evento no proporcionado en la URL');
+            return;
+        }
+        setEventoId(id);
+
+        // Cargar los datos del evento
+        fetchEventData(id);
+    }, []);
+
+    async function fetchEventData(eventId) {
+        try {
+            const response = await fetch(`https://localhost:7143/api/Eventoes/${eventId}`);
+            if (!response.ok) {
+                throw new Error('Error al cargar los datos del evento');
+            }
+            const eventData = await response.json();
+            setNombre(eventData.nombre);
+            setFechInicio(eventData.fechInicio);
+            setFechFin(eventData.fechFin);
+            setCalendarioId(eventData.calendarioId);
+        } catch (error) {
+            setError(error.message);
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await fetch('https://localhost:7143/api/Eventoes', {
-                method: 'POST',
+            const response = await fetch(`https://localhost:7143/api/Eventoes/${eventoId}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -34,7 +62,7 @@ function EditarEvento() {
             });
 
             if (!response.ok) {
-                throw new Error('Error al crear el evento');
+                throw new Error('Error al editar el evento');
             }
 
             // Limpiar los campos después de enviar el formulario
@@ -73,15 +101,6 @@ function EditarEvento() {
                     <div>
                         <label htmlFor="calendarioId">ID del Calendario:</label>
                         <input type="number" id="calendarioId" value={calendarioId} onChange={(e) => setCalendarioId(e.target.value)} required />
-                    </div>
-                    <div>
-                        <label htmlFor="calendario">Calendario:</label>
-                        <select id="calendario">
-                            <option value="0">Seleccionar calendario</option>
-                            <option value="1">Seleccionar calendario1</option>
-                            <option value="2">Seleccionar calendario2</option>
-                            <option value="3">Seleccionar calendario3</option>
-                        </select>
                     </div>
                     <div>
                         <button type="submit">Editar Evento</button>
