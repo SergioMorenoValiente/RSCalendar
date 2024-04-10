@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Campeones from "./Campeones";
+import { getStoredUserId } from '../Utils';
 function Ajustes() {
 
     const [calendarios, setCalendarios] = useState([]);
@@ -61,7 +62,8 @@ function Ajustes() {
                 },
                 body: JSON.stringify({
                     nombre: nombreCalendarioEditado,
-                    descripcion: descripcionCalendarioEditado
+                    descripcion: descripcionCalendarioEditado,
+                    visible: 1
                 })
             });
 
@@ -91,6 +93,7 @@ function Ajustes() {
     const crearCalendario = async (event) => {
         event.preventDefault();
         try {
+            // Hacer la solicitud para crear el calendario
             const response = await fetch('https://localhost:7143/api/calendarios', {
                 method: 'POST',
                 headers: {
@@ -104,6 +107,26 @@ function Ajustes() {
 
             if (!response.ok) {
                 throw new Error('Error al crear el calendario');
+            }
+
+            // Obtener el ID del calendario creado
+            const nuevoCalendario = await response.json();
+            const calendarioId = nuevoCalendario.id; // Suponiendo que el ID se llama 'id'
+
+            // Hacer la solicitud para agregar una entrada en UsuarioCalendarios
+            const usuarioCalendariosResponse = await fetch('https://localhost:7143/api/UsuarioCalendarios', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    calendarioId: calendarioId,
+                    usuarioId: getStoredUserId() // Suponiendo que esta función devuelve el usuarioId
+                })
+            });
+
+            if (!usuarioCalendariosResponse.ok) {
+                throw new Error('Error al agregar entrada en UsuarioCalendarios');
             }
 
             // Limpiar los campos después de enviar el formulario
@@ -121,6 +144,7 @@ function Ajustes() {
             setError(error.message);
         }
     };
+
 
 
     const [selectedChampion, setSelectedChampion] = useState(null);
