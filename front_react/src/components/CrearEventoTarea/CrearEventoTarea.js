@@ -1,16 +1,14 @@
-﻿import React from 'react';
-import { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker'; 
 import { Link } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import './CrearEventoTarea.css';
+import { fetchData } from '../Services/Peticiones';
 
 function CrearEventoTarea() {
 
-    //Para gestionar la pestaña activa (Evento o Tarea)
+    //Constantes
     const [tab, setTab] = useState("Evento");
-
-    //Para la fecha de inicio del evento
     const [startDate, setStartDate] = useState(new Date());
 
     return (
@@ -55,13 +53,27 @@ function CrearEventoTarea() {
 
 
 //EVENTO
-{/*Prueba sergio*/ }
 function EventoForm() {
     const [nombre, setNombre] = useState('');
     const [fechInicio, setFechInicio] = useState('');
     const [fechFin, setFechFin] = useState('');
     const [calendarioId, setCalendarioId] = useState(0);
+    const [calendarios, setCalendarios] = useState([]);
     const [error, setError] = useState('');
+
+
+    useEffect(() => {
+        async function fetchCalendarios() {
+            try {
+                const calendariosDelUsuario = await fetchData();
+                setCalendarios(calendariosDelUsuario);
+            } catch (error) {
+                setError('Error al cargar los calendarios del usuario');
+            }
+        }
+        fetchCalendarios();
+    }, []);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -83,8 +95,6 @@ function EventoForm() {
             if (!response.ok) {
                 throw new Error('Error al crear el evento');
             }
-
-            // Limpiar los campos después de enviar el formulario
             setNombre('');
             setFechInicio('');
             setFechFin('');
@@ -113,8 +123,13 @@ function EventoForm() {
                 <input type="datetime-local" id="fechFin" value={fechFin} onChange={(e) => setFechFin(e.target.value)} required />
             </div>
             <div>
-                <label htmlFor="calendarioId">ID del Calendario:</label>
-                <input type="number" id="calendarioId" value={calendarioId} onChange={(e) => setCalendarioId(e.target.value)} required />
+                <label htmlFor="calendario">Calendario:</label>
+                <select id="calendario" value={calendarioId} onChange={(e) => setCalendarioId(e.target.value)} required>
+                    <option value="">Seleccionar calendario</option>
+                    {calendarios.map(calendario => (
+                        <option key={calendario.id} value={calendario.id}>{calendario.nombre}</option>
+                    ))}
+                </select>
             </div>
             <div>
                 <button type="submit">Añadir Evento</button>
