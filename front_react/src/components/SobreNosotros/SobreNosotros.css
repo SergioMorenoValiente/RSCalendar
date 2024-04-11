@@ -118,7 +118,7 @@
     background-size: cover;
 }
 
-.h1nosotros, .h4nosotros, .strongnosotros {
+.h2nosotros, .h4nosotros, .strongnosotros {
     color: #C89B3C;
 }
 
@@ -126,7 +126,7 @@
     font-family: "BEAUFORT";
 }
 
-.h2nosotros, .h3nosotros, .h5nosotros, .pnosotros, .ulnosotros {
+.h1nosotros, .h3nosotros, .h5nosotros, .pnosotros, .ulnosotros {
     color: #F0E6D2;
 }
 
