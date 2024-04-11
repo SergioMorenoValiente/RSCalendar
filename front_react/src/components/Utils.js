@@ -49,7 +49,6 @@ const isValidToken = async (token) => {
         if (!response.ok) {
             return false;
         }
-        console.log(response);
         const data = await response.json();
         return data;
     } catch (error) {

@@ -3,19 +3,31 @@ import DatePicker from 'react-datepicker';
 import { Link } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import './EditarEvento.css';
+import { fetchData } from '../Services/Peticiones';
 
 function EditarEvento() {
 
-    const [startDate, setStartDate] = useState(new Date());
+    //Constantes
     const [nombre, setNombre] = useState('');
     const [fechInicio, setFechInicio] = useState('');
     const [fechFin, setFechFin] = useState('');
     const [calendarioId, setCalendarioId] = useState(0);
+    const [calendarios, setCalendarios] = useState([]);
     const [error, setError] = useState('');
     const [eventoId, setEventoId] = useState(null);
 
+    //Cargar calendarios y recuperar id del evento de la URL
     useEffect(() => {
-        // Obtener el ID del evento de la URL
+        async function fetchCalendarios() {
+            try {
+                const calendariosDelUsuario = await fetchData();
+                setCalendarios(calendariosDelUsuario);
+            } catch (error) {
+                setError('Error al cargar los calendarios del usuario');
+            }
+        }
+        fetchCalendarios();
+
         const searchParams = new URLSearchParams(window.location.search);
         const id = Number(searchParams.get('id'));
 
@@ -25,10 +37,10 @@ function EditarEvento() {
         }
         setEventoId(id);
 
-        // Cargar los datos del evento
         fetchEventData(id);
     }, []);
 
+    //Cargar datos del evento
     async function fetchEventData(eventId) {
         try {
             const response = await fetch(`https://localhost:7143/api/Eventoes/${eventId}`);
@@ -45,6 +57,7 @@ function EditarEvento() {
         }
     }
 
+    //Editar evento
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -78,6 +91,24 @@ function EditarEvento() {
         }
     };
 
+    //Borrar evento
+    const borrarEvento = async () => {
+        try {
+            const response = await fetch(`https://localhost:7143/api/eventoes/${eventoId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al borrar el evento');
+            }
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
 
 
     return (
@@ -101,12 +132,17 @@ function EditarEvento() {
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="calendarioId">ID del Calendario:</label>
-                        <input type="number" id="calendarioId" value={calendarioId} onChange={(e) => setCalendarioId(e.target.value)} required />
+                        <label htmlFor="calendario">Calendario:</label>
+                        <select id="calendario" value={calendarioId} onChange={(e) => setCalendarioId(e.target.value)} required>
+                            <option value="">Seleccionar calendario</option>
+                            {calendarios.map(calendario => (
+                                <option key={calendario.id} value={calendario.id}>{calendario.nombre}</option>
+                            ))}
+                        </select>
                     </div>
                     <div>
                         <button type="submit">Editar Evento</button>
-                        <button >Eliminar Evento</button>
+                        <button onClick={() => borrarEvento()}>Eliminar Evento</button>
                         <Link to="/" className="sidebar-link">
                             <span>Volver</span>
                         </Link>
