@@ -124,10 +124,10 @@ function CalendarApp({ isSidebarOpen }) {
         const esCalendarioGeneralSeleccionado = Object.values(calendariosGeneralesSeleccionados).some(seleccionado => seleccionado && seleccionado.id === evento.calendarioId);
         return esCalendarioSeleccionado || esCalendarioGeneralSeleccionado;
     }).map(evento => ({
+        id: evento.id,
         title: evento.nombre,
         start: evento.fechInicio,
-        end: evento.fechFin,
-        color: evento.color
+        end: evento.fechFin
     }));
 
 

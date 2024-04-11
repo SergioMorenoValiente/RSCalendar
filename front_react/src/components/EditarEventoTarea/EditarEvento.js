@@ -17,7 +17,8 @@ function EditarEvento() {
     useEffect(() => {
         // Obtener el ID del evento de la URL
         const searchParams = new URLSearchParams(window.location.search);
-        const id = searchParams.get('id');
+        const id = Number(searchParams.get('id'));
+
         if (!id) {
             setError('ID del evento no proporcionado en la URL');
             return;
@@ -54,6 +55,7 @@ function EditarEvento() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    id: eventoId,
                     nombre,
                     fechInicio,
                     fechFin,
@@ -64,8 +66,6 @@ function EditarEvento() {
             if (!response.ok) {
                 throw new Error('Error al editar el evento');
             }
-
-            // Limpiar los campos después de enviar el formulario
             setNombre('');
             setFechInicio('');
             setFechFin('');
@@ -77,6 +77,8 @@ function EditarEvento() {
             setError(error.message);
         }
     };
+
+
 
     return (
         <div className="creareventotarea-container">
