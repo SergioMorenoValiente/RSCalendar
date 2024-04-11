@@ -73,7 +73,7 @@ function Header({ setIsSidebarOpen, isSidebarOpen, onLogout }) {
                         <Link to="/" className="nav-link tooltip1"
                             onMouseEnter={() => setShowCalendarTooltip(true)}
                             onMouseLeave={() => setShowCalendarTooltip(false)}>
-                            <img src="images/Iconos/Icono17.png" className="icono5" />
+                            <img src="images/Iconos/Icono20.png" className="icono5" />
                             {showCalendarTooltip && <Tooltip text="Calendario" />}
                         </Link>
                     )}
