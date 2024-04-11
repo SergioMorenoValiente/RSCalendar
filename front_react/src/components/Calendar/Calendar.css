@@ -1,13 +1,13 @@
 .calendar-container {
-    height: 100%;
-    max-height: 759px;
+    height: 100vh;
+    max-height: 82.5vh;
     overflow: hidden;
     padding-top: 50px;
     background-color: rgba(10, 20, 40, 0.65);
 }
 
 .fc {
-    height: 790px;
+    height: 100vh;
 }
 
 .fc-daygrid-day {
@@ -30,7 +30,7 @@
     font-family: "BEAUFORT";
     font-size: 2rem !important;
     text-transform: uppercase;
-    top: 163px;
+    top: 156px;
     transform: translateX(-50%);
 }
 
@@ -46,14 +46,14 @@ input[type="checkbox"]:after {
 }
 
 .calendars-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-family: "BEAUFORT";
     border-bottom: 2px solid #C89B3C;
 }
 
 .container3 {
     width: 300px;
-    padding-top: 70px;
+    padding-top: 50px;
     justify-content: start;
     flex-direction: column;
     box-shadow: 0px 0px 30px 0px #010A13;
@@ -95,7 +95,7 @@ input[type="checkbox"]:after {
     background-color: rgba(10, 20, 40, 0.75);
 }
 
-span {
+.spanbutton {
     padding-top: 13px;
 }
 
@@ -157,7 +157,6 @@ input[type="checkbox"] {
     font-family: "SPRIEGEL";
 }
 
-.fc-day-header,
 .fc-daygrid-event-title {
     color: #091428;
 }
@@ -264,5 +263,58 @@ input[type="checkbox"] {
         z-index:99999 !important;
     }
 a {
-    color: #F0E6D2
+    color: #F0E6D2;
+}
+
+.fc-prev-button,
+.fc-next-button {
+    background-color: rgba(10, 20, 40, 0.8) !important;
+    color: #F0E6D2 !important;
+
+    border-color: #091428 !important;
+}
+
+    .fc-prev-button:hover,
+    .fc-next-button:hover {
+        background-color: #0397AB !important;
+        color: #091428 !important;
+        border-color: #0397AB !important;
+    }
+
+.fc-col-header-cell-cushion {
+    color: rgba(10, 20, 40, 0.8) !important;
+    font-size: 1rem;
+    font-family: "SPRIEGEL";
+    text-transform: capitalize;
+}
+
+.pevento,
+.pevento2{
+    font-size: 1rem !important;
+    font-family: "SPRIEGEL";
+    font-weight: 100;
+}
+
+.pevento {
+    font-size: 1rem !important;
+    color: #F0E6D2;
+    font-weight: 100;
+}
+
+.pevento2 {
+    color: #C89B3C;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+}
+
+.icono-evento {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 30px;
+    height: 30px;
+}
+
+.custom-event {
+    padding: 2px;
 }

@@ -131,7 +131,6 @@ function CalendarApp({ isSidebarOpen }) {
     }));
 
 
-    //Prueba rukaya
     const handleDateClick = (arg) => {
         // Redireccionar a la página CrearEventoTarea.js pasando la fecha como parámetro
         window.location.href = `/CrearEventoTarea?fecha=${arg.dateStr}`;
@@ -141,6 +140,24 @@ function CalendarApp({ isSidebarOpen }) {
         // Redireccionar a la página EditarEvento.js pasando el ID del evento como parámetro
         window.location.href = `/EditarEvento?id=${arg.event.id}`;
     };
+
+    // Prueba rukaya
+    const renderEventContent = (eventInfo) => {
+        const startTime = eventInfo.event.start.getHours() + ':' + eventInfo.event.start.getMinutes();
+        const endTime = eventInfo.event.end.getHours() + ':' + eventInfo.event.end.getMinutes();
+        return (
+            <div className="custom-event">
+                <img src="/images/Roles/Mago.png" alt="Icono" className="icono-evento" />
+                <div className="customheader">
+                    <b className="pevento">{startTime} - {endTime} </b>
+                </div>
+                <div className="customtitle">
+                    <b className="pevento2">{eventInfo.event.title}</b>
+                </div>
+            </div>
+        );
+    };
+
 
     return (
         <div className="container">
@@ -163,8 +180,6 @@ function CalendarApp({ isSidebarOpen }) {
                             center: 'title',
                             end: 'prev,next'
                         }}
-                        //Pruebas rukaya
-
                         dayMaxEventRows={true}
                         views={{
                             timeGrid: {
@@ -175,6 +190,8 @@ function CalendarApp({ isSidebarOpen }) {
                         dateClick={handleDateClick}
                         //eventContent={renderEventContent }
                         eventClick={handleEventClick}
+
+                        eventContent={renderEventContent}
                     />
                 </div>
             </div>
@@ -187,7 +204,7 @@ function CalendarApp({ isSidebarOpen }) {
                     <div className="button-container">
                         <Link to="/CrearEventoTarea" className="sidebar-link">
                             <img src="images/Iconos/Icono7.png" className="icono1" />
-                            <span>Crear Evento/Tarea</span>
+                            <span className="spanbutton">Crear Evento/Tarea</span>
                         </Link>
                     </div>
 
@@ -227,6 +244,10 @@ function CalendarApp({ isSidebarOpen }) {
                                 </li>
                             ))}
                         </ul>
+                    </div>
+
+                    <div className="calendars-container">
+                        <h2 className="calendars-title">MIS TAREAS</h2>
                     </div>
 
                 </div>
