@@ -133,7 +133,7 @@
             background-color: #C89B3C;
         }
 
-        .login-form input[type="email"],
+        .login-form input[type="text"],
         .login-form input[type="password"],
         .register-form input[type="email"],
         .register-form input[type="text"],
@@ -162,7 +162,7 @@
                 color: #F0E6D2;
             }
 
-        .login-form input[type="email"],
+        .login-form input[type="text"],
         .login-form button,
         .register-form input[type="email"],
         .register-form input[type="text"],
@@ -171,7 +171,7 @@
             margin-bottom: 20px;
         }
 
-        .login-form input[type="email"],
+        .login-form input[type="text"],
         .login-form input[type="password"],
         .login-form button,
         .login-form-button,
@@ -184,7 +184,7 @@
         }
 
         .login-form label,
-        .login-form input[type="email"],
+        .login-form input[type="text"],
         .login-form input[type="password"],
         .login-form button,
         .login-form-button,
@@ -199,7 +199,7 @@
 
         .login-form h2,
         .login-form label,
-        .login-form input[type="email"],
+        .login-form input[type="text"],
         .login-form input[type="password"],
         .login-form button,
         .login-form-button,
