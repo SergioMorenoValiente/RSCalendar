@@ -49,15 +49,15 @@ function Login({ onLogin }) {
         let hasError = false;
 
         if (!email) {
-            setEmailError('Rellena el campo');
+            setEmailError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
             hasError = true;
         } else if (!validateEmail(email)) {
-            setEmailError('Cara guapa, ingresa un correo electrónico válido.');
+            setEmailError('¡Despliega tus alas! Necesitamos un correo electrónico válido para llevar tu cuenta a nuevas alturas.');
             hasError = true;
         }
 
         if (!password) {
-            setPasswordError('Rellena el campo');
+            setPasswordError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
             hasError = true;
         }
 
@@ -98,18 +98,18 @@ function Login({ onLogin }) {
                             setRedirectToHome(true);
                             window.location.reload();
                         } else {
-                            setloginError('Este usuario no existe');
+                            setloginError('¡Un eco en la Grieta! Este invocador no se encuentra en nuestros registros.');
                         }
                     }
                 } catch (error) {
-                    console.error('Error al obtener el ID de usuario:', error);
+                    console.error('¡Un velo oscuro cubre el ID de usuario! Algo ha fallado en la obtención. Intenta de nuevo y despeja las sombras:', error);
                 }
             } else {
-                setloginError('Este usuario no existe');
+                setloginError('¡Este invocador es una sombra en la Grieta! Busca otro nombre para emprender tu viaje.');
             }
         } catch (error) {
-            console.error('Error al iniciar sesión:', error);
-            setloginError('Error al iniciar sesión. Por favor, inténtalo de nuevo.');
+            console.error('¡Un contratiempo en la entrada! Algo ha ido mal en la Grieta:', error);
+            setloginError('¡Un contratiempo en la entrada! Algo ha ido mal en la Grieta. Intenta nuevamente desplegando tus habilidades.');
         }
     };
 
@@ -123,29 +123,29 @@ function Login({ onLogin }) {
         let hasError = false;
 
         if (!email) {
-            setEmailError('Rellena el campo');
+            setEmailError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
             hasError = true;
         } else if (!validateEmail(email)) {
-            setEmailError('Ingresa un correo electrónico válido.');
+            setEmailError('¡Despliega tus alas! Necesitamos un correo electrónico válido para llevar tu cuenta a nuevas alturas.');
             hasError = true;
         }
         if (!username) {
-            setUsernameError('Rellena el campo');
+            setUsernameError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
             hasError = true;
         }
 
         if (!password) {
-            setPasswordError('Rellena el campo');
+            setPasswordError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
             hasError = true;
         } else if (!validatePassword(password)) {
-            setPasswordError('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.');
+            setPasswordError('¡Tu escudo está agrietado! Refuerza tu contraseña con más poder. Que tenga al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo para proteger tu cuenta.');
             hasError = true;
         }
         if (!confirmPassword) {
-            setConfirmPasswordError('Rellena el campo');
+            setConfirmPasswordError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
             hasError = true;
         }else if (password !== confirmPassword) {
-            setConfirmPasswordError('Las contraseñas no coinciden.');
+            setConfirmPasswordError('¡Un desacuerdo en las contraseñas! Sincronízalas para desbloquear tu camino hacia la Grieta.');
             hasError = true;
         }
 
@@ -169,7 +169,7 @@ function Login({ onLogin }) {
                 setShowLogin(true);
             }
         } catch (error) {
-            console.error('Error en el registro:', error);
+            console.error('¡Un obstáculo en el camino! Algo salió mal en el registro. ¡Revisa tus acciones e inténtalo nuevamente!:', error);
         }
     };
 
@@ -205,7 +205,7 @@ function Login({ onLogin }) {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
-                            <p>{emailError}</p>
+                            <p className="validacionlogin">{emailError}</p>
                         </div>
                         <div>
                             <label htmlFor="password">Contraseña:</label>
@@ -215,7 +215,7 @@ function Login({ onLogin }) {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                            <p>{passwordError}</p>
+                            <p className="validacionlogin">{passwordError}</p>
                         </div>
                         {/*<div className="remember-forgot">*/}
                         {/*    <input*/}
@@ -230,7 +230,7 @@ function Login({ onLogin }) {
                         {/*    <a href="#">He olvidado mi contraseña</a>*/}
                         {/*</div>*/}
 
-                        <p>{loginError}</p>
+                        <p className="validacionlogin">{loginError}</p>
                         <button type="submit" className="login-form-button">Iniciar sesión</button>
                     </form>
                     <div className="remember-forgot">
@@ -250,7 +250,7 @@ function Login({ onLogin }) {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 />
-                                <p>{emailError}</p>
+                                <p className="validacionlogin">{emailError}</p>
                         </div>
                         <div>
                             <label htmlFor="username">Usuario:</label>
@@ -260,7 +260,7 @@ function Login({ onLogin }) {
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 />
-                                <p>{usernameError}</p>
+                                <p className="validacionlogin">{usernameError}</p>
                         </div>
                         <div>
                             <label htmlFor="password">Contraseña:</label>
@@ -270,7 +270,7 @@ function Login({ onLogin }) {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 />
-                                <p>{passwordError}</p>
+                                <p className="validacionlogin">{passwordError}</p>
                         </div>
                         <div>
                             <label htmlFor="confirmPassword">Confirmar Contraseña:</label>
@@ -280,7 +280,7 @@ function Login({ onLogin }) {
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 />
-                                <p>{confirmPasswordError}</p>
+                                <p className="validacionlogin">{confirmPasswordError}</p>
                         </div>
                             <button type="button" onClick={handleRegisterClick}>Registrarme</button>
                     </form>
