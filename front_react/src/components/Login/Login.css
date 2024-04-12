@@ -7,22 +7,24 @@
 
 .login-form {
     width: 32%;
-    margin: 150px auto;
+    margin: 15vh auto;
 }
 
     .login-form button {
         margin: 0 auto;
+        margin-top: 10px;
     }
 
 .login-form-button {
     width: 100%;
     margin-bottom: 28px;
     display: inline-block;
+    margin-top: 10px;
 }
 
 .register-form {
     width: 32%;
-    margin: 60px auto;
+    margin: 7vh auto;
 }
 
     .register-form button {
@@ -61,9 +63,19 @@
         text-decoration: underline;
     }
 
-.login-form,
-.register-form {
+.login-form{
     padding: 70px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: rgba(10, 20, 40, 0.75);
+    box-shadow: 0px 0px 50px 10px #010A13;
+}
+
+.register-form {
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     background-color: rgba(10, 20, 40, 0.75);
@@ -81,13 +93,16 @@
     .login-form label,
     .register-form label {
         display: block;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 
-    .login-form input[type="password"],
     #confirmPassword {
-        margin-bottom: 40px;
+        margin-bottom: 30px;
     }
+
+.login-form input[type="password"] {
+    margin-bottom: 10px;
+}
 
 .login-form-button,
 .remember-forgot a {
@@ -168,7 +183,7 @@
         .register-form input[type="text"],
         .register-form input[type="password"],
         .register-form button {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .login-form input[type="text"],
@@ -223,5 +238,13 @@
     font-family: "SPRIEGEL";
     text-align: start;
     margin-top: 0px;
-    padding-top: 0;
+    padding-top: 0px;
+    display: flex;
+    margin-left: 10px
+}
+
+.icono10 {
+    width: 35px !important;
+    height: auto;
+    margin-right: 7px;
 }

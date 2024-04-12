@@ -205,7 +205,7 @@ function Login({ onLogin }) {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
-                            <p className="validacionlogin">{emailError}</p>
+                            <div className="validacionlogin"><img src="images/Iconos/Icono21.png" className="icono10" />{emailError}</div>
                         </div>
                         <div>
                             <label htmlFor="password">Contraseña:</label>
