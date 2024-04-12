@@ -38,7 +38,22 @@ function Ajustes() {
         setDescripcionCalendario(event.target.value);
     };
 
-    //Cargar calendarios
+
+    useEffect(() => {
+        cargarCalendariosUsuarios();
+        cargarCalendarios();
+    }, []);
+
+    //Cagar calendarios del susuario
+    const cargarCalendariosUsuarios = async () => {
+        try {
+            const calendariosDelUsuario = await fetchData();
+            setCalendarios(calendariosDelUsuario);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
     const cargarCalendarios = async () => {
         try {
             const response = await fetch('https://localhost:7143/api/calendarios');
@@ -49,18 +64,6 @@ function Ajustes() {
         }
     };
 
-    useEffect(() => {
-        const cargarCalendarios = async () => {
-            try {
-                const calendariosDelUsuario = await fetchData();
-                setCalendarios(calendariosDelUsuario);
-            } catch (error) {
-                setError(error.message);
-            }
-        };
-
-        cargarCalendarios(); 
-    }, []);
 
 
     //Rellenar los campos del formulario con los del calendario a editar
@@ -103,7 +106,7 @@ function Ajustes() {
                 throw new Error('Error al editar el calendario');
             }
             vaciarCampos()
-            cargarCalendarios();
+            cargarCalendariosUsuarios();
             setShowDiv1(true);
             setShowDiv3(false);
         } catch (error) {
@@ -124,7 +127,7 @@ function Ajustes() {
             if (!response.ok) {
                 throw new Error('Error al borrar el calendario');
             }
-            cargarCalendarios();
+            cargarCalendariosUsuarios();
             setShowDiv1(true);
             setShowDiv2(false);
         } catch (error) {
@@ -171,7 +174,7 @@ function Ajustes() {
             }
 
             vaciarCampos()
-            cargarCalendarios();
+            cargarCalendariosUsuarios();
             setShowDiv1(true);
             setShowDiv2(false);
         } catch (error) {

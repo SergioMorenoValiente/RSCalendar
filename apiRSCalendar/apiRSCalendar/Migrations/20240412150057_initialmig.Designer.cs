@@ -12,8 +12,8 @@ using apiRSCalendar.Context;
 namespace apiRSCalendar.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240409002357_inicial2")]
-    partial class inicial2
+    [Migration("20240412150057_initialmig")]
+    partial class initialmig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace apiRSCalendar.Migrations
 
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Visible")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -254,9 +257,6 @@ namespace apiRSCalendar.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Visible")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
