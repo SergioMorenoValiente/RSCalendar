@@ -63,6 +63,7 @@ function Tareas() {
                     <p>Estaría bien meter paginación a los 5 calendarios en ajustes</p>
                     <p>Meter en sidebar un link que lleve a tareas.js "ver más" (se activa si hay más de dos tareas) y sólo se muestren las primeras 2 tareas</p>
                     <p>Meter en sidebar paginacion para cheks en calendarios cuando haya más de 5 calendarios activos</p>
+                    <p>Encuadrar todas las páginas</p>
                 </div>
             </div>
         </div>
