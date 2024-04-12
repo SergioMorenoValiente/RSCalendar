@@ -289,7 +289,7 @@ function Ajustes() {
                                     htmlFor="descripcion">Descripción calendario:</label>
                                 <input className="input2ajustes" type="text" id="descripcion"
                                     value={descripcionCalendarioCrear}
-                                    onChange={handleDescripcionChangeCrear} required />
+                                    onChange={handleDescripcionChangeCrear} />
                             </div>
                                 <button className="button3ajustes"
                                     type="submit">Crear</button>
@@ -319,8 +319,7 @@ function Ajustes() {
                                     htmlFor="descripcion">Descripción calendario</label>
                                 <input className="input2ajustes" type="text" id="descripcion"
                                     value={descripcionCalendarioEditado}
-                                    onChange={(event) => setDescripcionCalendarioEditado(event.target.value)}
-                                    required />
+                                    onChange={(event) => setDescripcionCalendarioEditado(event.target.value)}/>
                             </div>
                             <button className="button3ajustes" type="submit">Guardar</button>
                                 <button className="button4ajustes"
