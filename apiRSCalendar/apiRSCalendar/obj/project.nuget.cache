@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lA+HJv0xF/S7Ps1au2UjuP1lawJIIIOPGSknHDkkmilYjFIshgVyB5zI9Zhf1Yr7ifChEt9UbVYmdeAU0meShw==",
+  "dgSpecHash": "pcuu6YuxsOB+kxDlT254OVZEma1rY8xueeM+rY5lPmCzYMxrhdh60SgHw+bA35dotNRWduSQp53TWhWKgC17Yg==",
   "success": true,
-  "projectFilePath": "C:\\RSCalendar\\apiRSCalendar\\apiRSCalendar\\apiRSCalendar.csproj",
+  "projectFilePath": "C:\\Users\\Alumnos MCSD Tarde\\source\\repos\\Personal\\RSCalendar\\apiRSCalendar\\apiRSCalendar\\apiRSCalendar.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alumnos MCSD Tarde\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Alumnos MCSD Tarde\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

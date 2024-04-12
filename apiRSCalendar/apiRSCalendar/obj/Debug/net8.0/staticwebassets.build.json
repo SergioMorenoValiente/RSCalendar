@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "aZY0WiD2/xT7qL52WWEbgzANnJpKmkrLi6xgMNZM1Xg=",
+  "Hash": "WbrxoUtn1wmuGztIRSc5tohkFyEATUm4ypaEsNp82AE=",
   "Source": "apiRSCalendar",
   "BasePath": "_content/apiRSCalendar",
   "Mode": "Default",
@@ -8,25 +8,6 @@
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
   "Assets": [
-    {
-      "Identity": "C:\\RSCalendar\\apiRSCalendar\\apiRSCalendar\\obj\\Debug\\net8.0\\scopedcss\\bundle\\apiRSCalendar.styles.css",
-      "SourceId": "apiRSCalendar",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\RSCalendar\\apiRSCalendar\\apiRSCalendar\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
-      "BasePath": "_content/apiRSCalendar",
-      "RelativePath": "apiRSCalendar.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\RSCalendar\\apiRSCalendar\\apiRSCalendar\\obj\\Debug\\net8.0\\scopedcss\\bundle\\apiRSCalendar.styles.css"
-    },
     {
       "Identity": "C:\\Users\\Alumnos MCSD Tarde\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.3\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
       "SourceId": "Microsoft.AspNetCore.Components.QuickGrid",
@@ -64,6 +45,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Alumnos MCSD Tarde\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.3\\staticwebassets\\QuickGrid.razor.js"
+    },
+    {
+      "Identity": "C:\\Users\\Alumnos MCSD Tarde\\source\\repos\\Personal\\RSCalendar\\apiRSCalendar\\apiRSCalendar\\obj\\Debug\\net8.0\\scopedcss\\bundle\\apiRSCalendar.styles.css",
+      "SourceId": "apiRSCalendar",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\Alumnos MCSD Tarde\\source\\repos\\Personal\\RSCalendar\\apiRSCalendar\\apiRSCalendar\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "BasePath": "_content/apiRSCalendar",
+      "RelativePath": "apiRSCalendar.styles.css",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ApplicationBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\Alumnos MCSD Tarde\\source\\repos\\Personal\\RSCalendar\\apiRSCalendar\\apiRSCalendar\\obj\\Debug\\net8.0\\scopedcss\\bundle\\apiRSCalendar.styles.css"
     }
   ]
 }
