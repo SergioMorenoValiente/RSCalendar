@@ -4,6 +4,7 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Tooltip from './Tooltip';
+import { removeStoredUserId, removeStoredUserJwt } from '../Utils';
 
 function Header({ setIsSidebarOpen, isSidebarOpen, onLogout }) {
 
@@ -37,6 +38,13 @@ function Header({ setIsSidebarOpen, isSidebarOpen, onLogout }) {
     const handleToggleSidebar = () => {
         setIsProfileMenuOpen(false);
         setIsSidebarOpen(prevState => !prevState);
+    };
+
+    //Cerrar sesion
+    const handleLogout = () => {
+        removeStoredUserId();
+        removeStoredUserJwt();
+        window.location.reload();
     };
 
     return (
@@ -120,8 +128,9 @@ function Header({ setIsSidebarOpen, isSidebarOpen, onLogout }) {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/Login" className="nav-link profile-link"
-                                    onClick={onLogout}>Cerrar Sesión</Link>
+                                    <Link to="/" className="nav-link profile-link" onClick={handleLogout}>
+                                        Cerrar Sesión
+                                    </Link>
                                 </li>
                             </ul>
                         )}

@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Campeones from "./Campeones";
 import { getStoredUserId } from '../Utils';
+import { fetchData } from '../Services/Peticiones';
 function Ajustes() {
 
     //Constantes
@@ -49,7 +50,16 @@ function Ajustes() {
     };
 
     useEffect(() => {
-        cargarCalendarios();
+        const cargarCalendarios = async () => {
+            try {
+                const calendariosDelUsuario = await fetchData();
+                setCalendarios(calendariosDelUsuario);
+            } catch (error) {
+                setError(error.message);
+            }
+        };
+
+        cargarCalendarios(); 
     }, []);
 
 

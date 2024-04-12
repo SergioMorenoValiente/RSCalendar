@@ -75,3 +75,11 @@ export const getStoredUserId = () => {
         return '';
     }
 };
+
+export const removeStoredUserId = () => {
+    try {
+        localStorage.removeItem('userId');
+    } catch (error) {
+        console.error(error);
+    }
+};
