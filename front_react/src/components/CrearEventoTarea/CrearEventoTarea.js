@@ -54,12 +54,17 @@ function CrearEventoTarea() {
 
 //EVENTO
 function EventoForm() {
+
     const [nombre, setNombre] = useState('');
     const [fechInicio, setFechInicio] = useState('');
     const [fechFin, setFechFin] = useState('');
     const [calendarioId, setCalendarioId] = useState(0);
     const [calendarios, setCalendarios] = useState([]);
     const [error, setError] = useState('');
+    const [nombreError, setNombreError] = useState('');
+    const [fechInicioError, setFechInicioError] = useState('');
+    const [fechFinError, setFechFinError] = useState('');
+    const [calendariosError, setCalendariosError] = useState('');
 
 
     useEffect(() => {
@@ -78,6 +83,43 @@ function EventoForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setNombreError('');
+        setFechInicioError('');
+        setFechFinError('');
+        setCalendariosError('');
+
+        let hasError = false;
+
+        if (!nombre) {
+            setNombreError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            hasError = true;
+        }
+        if (!fechInicio) {
+            setFechInicioError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            hasError = true;
+        } else if (fechInicio == undefined) {
+            setFechInicioError('¡Melon pon bien la fecha!');
+            hasError = true;
+        }
+        if (!fechFin) {
+            setFechFinError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            hasError = true;
+        } else if (fechFin == undefined) {
+            setFechFinError('¡Melon pon bien la fecha!');
+            hasError = true;
+        } else if (new Date(fechFin) <= new Date(fechInicio)) {
+        setFechFinError('La fecha de fin debe ser posterior a la fecha de inicio.');
+        hasError = true;
+    }
+        if (!calendarioId) {
+            setCalendariosError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            hasError = true;
+        }
+
+        if (hasError) {
+            return;
+        }
+
         try {
             const response = await fetch('https://localhost:7143/api/Eventoes', {
                 method: 'POST',
@@ -95,6 +137,7 @@ function EventoForm() {
             if (!response.ok) {
                 throw new Error('Error al crear el evento');
             }
+
             setNombre('');
             setFechInicio('');
             setFechFin('');
@@ -112,25 +155,29 @@ function EventoForm() {
             {error && <p>{error}</p>}
             <div>
                 <label htmlFor="nombre">Nombre:</label>
-                <input type="text" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+                <input type="text" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
             </div>
+            <p>{nombreError }</p>
             <div>
                 <label htmlFor="fechInicio">Fecha de Inicio:</label>
-                <input type="datetime-local" id="fechInicio" value={fechInicio} onChange={(e) => setFechInicio(e.target.value)} required />
+                <input type="datetime-local" id="fechInicio" value={fechInicio} onChange={(e) => setFechInicio(e.target.value)} />
             </div>
+            <p>{fechInicioError}</p>
             <div>
                 <label htmlFor="fechFin">Fecha de Fin:</label>
-                <input type="datetime-local" id="fechFin" value={fechFin} onChange={(e) => setFechFin(e.target.value)} required />
+                <input type="datetime-local" id="fechFin" value={fechFin} onChange={(e) => setFechFin(e.target.value)} />
             </div>
+            <p>{fechFinError}</p>
             <div>
                 <label htmlFor="calendario">Calendario:</label>
-                <select id="calendario" value={calendarioId} onChange={(e) => setCalendarioId(e.target.value)} required>
+                <select id="calendario" value={calendarioId} onChange={(e) => setCalendarioId(e.target.value)}>
                     <option value="">Seleccionar calendario</option>
                     {calendarios.map(calendario => (
                         <option key={calendario.id} value={calendario.id}>{calendario.nombre}</option>
                     ))}
                 </select>
             </div>
+            <p>{calendariosError}</p>
             <div>
                 <button type="submit">Añadir Evento</button>
                 <Link to="/" className="sidebar-link">
