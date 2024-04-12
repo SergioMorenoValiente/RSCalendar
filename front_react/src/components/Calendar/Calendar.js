@@ -143,6 +143,12 @@ function CalendarApp({ isSidebarOpen }) {
 
     // Prueba rukaya
     const renderEventContent = (eventInfo) => {
+        // Verificar si eventInfo.event.start o eventInfo.event.end son null
+        if (!eventInfo.event.start || !eventInfo.event.end) {
+            return null; // Retorna null si cualquiera de los valores es null
+        }
+
+        // Si ninguno es null, continúa con el renderizado del evento
         const startTime = eventInfo.event.start.getHours() + ':' + eventInfo.event.start.getMinutes();
         const endTime = eventInfo.event.end.getHours() + ':' + eventInfo.event.end.getMinutes();
         return (

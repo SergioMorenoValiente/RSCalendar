@@ -96,6 +96,7 @@ function Login({ onLogin }) {
                             const userId = userWithEmail.id;
                             setUserId(userId);
                             setRedirectToHome(true);
+                            window.location.reload();
                         } else {
                             setloginError('Este usuario no existe');
                         }
@@ -140,8 +141,10 @@ function Login({ onLogin }) {
             setPasswordError('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.');
             hasError = true;
         }
-
-        if (password !== confirmPassword) {
+        if (!confirmPassword) {
+            setConfirmPasswordError('Rellena el campo');
+            hasError = true;
+        }else if (password !== confirmPassword) {
             setConfirmPasswordError('Las contraseñas no coinciden.');
             hasError = true;
         }
