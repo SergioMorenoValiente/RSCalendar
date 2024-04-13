@@ -156,6 +156,9 @@ function Login({ onLogin }) {
             setEmailrError('¡Despliega tus alas! Escribe un correo válido para elevar tu cuenta.');
             setEmailrErrorVisible(true);
             hasError = true;
+        } else {
+            setEmailrError('');
+            setEmailrErrorVisible(false);
         }
 
         if (!username) {
@@ -184,6 +187,8 @@ function Login({ onLogin }) {
             setConfirmPasswordError('¡Un desacuerdo en las contraseñas bloquea tu camino hacia la Grieta.');
             setConfirmPasswordErrorVisible(true);
             hasError = true;
+        } else {
+            setConfirmPasswordErrorVisible(false);
         }
 
         if (hasError) {

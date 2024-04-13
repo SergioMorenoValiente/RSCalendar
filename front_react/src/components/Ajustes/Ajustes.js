@@ -23,6 +23,8 @@ function Ajustes() {
     const [showDiv3, setShowDiv3] = useState(false);
     const [nombreCalendarioError, setNombreCalendarioError] = useState('');
     const [descripcionCalendarioError, setDescripcionCalendarioError] = useState('');
+    const [nombreErrorVisible, setNombreErrorVisible] = useState(false);
+    const [nombreeErrorVisible, setNombreeErrorVisible] = useState(false);
 
     const handleNombreChangeCrear = (event) => {
         setNombreCalendarioCrear(event.target.value);
@@ -40,13 +42,12 @@ function Ajustes() {
         setDescripcionCalendario(event.target.value);
     };
 
-
     useEffect(() => {
         cargarCalendariosUsuarios();
         cargarCalendarios();
     }, []);
 
-    //Cagar calendarios del susuario
+    //Cargar calendarios del susuario
     const cargarCalendariosUsuarios = async () => {
         try {
             const calendariosDelUsuario = await fetchData();
@@ -65,8 +66,6 @@ function Ajustes() {
             setError(error.message);
         }
     };
-
-
 
     //Rellenar los campos del formulario con los del calendario a editar
     const llenarFormularioEditar = (calendario) => {
@@ -93,11 +92,14 @@ function Ajustes() {
         event.preventDefault();
 
         setNombreCalendarioError('');
+        setNombreErrorVisible(false);
+        setNombreeErrorVisible(false);
 
         let hasError = false;
 
         if (!nombreCalendarioEditado) {
             setNombreCalendarioError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setNombreeErrorVisible(true);
             hasError = true;
         }
 
@@ -151,17 +153,19 @@ function Ajustes() {
         }
     };
 
-
     //Crear calendario
     const crearCalendario = async (event) => {
         event.preventDefault();
 
         setNombreCalendarioError('');
+        setNombreErrorVisible(false);
+        setNombreeErrorVisible(false);
 
         let hasError = false;
 
-        if (!nombreCalendarioEditado) {
+        if (!nombreCalendarioCrear) {
             setNombreCalendarioError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setNombreErrorVisible(true);
             hasError = true;
         }
 
@@ -210,8 +214,6 @@ function Ajustes() {
             setError(error.message);
         }
     };
-
-
 
 //-----------------------------Esta seccion del codigo es para RSCalendar 2.0 :)---------------------------------------------------------------------------------------------------
     const [selectedChampion, setSelectedChampion] = useState(null);
@@ -311,15 +313,26 @@ function Ajustes() {
                             {error && <p>{error}</p>}
                             <div>
                                 <label className="labelajustes"
-                                    htmlFor="nombre">Nombre calendario:</label>
-                                <input className="inputajustes" type="text" id="nombre"
+                                    htmlFor="nombre">Nombre del calendario</label>
+                                <input type="text" id="nombre"
                                     value={nombreCalendarioCrear}
-                                            onChange={handleNombreChangeCrear} />
-                                        <p>{nombreCalendarioError}</p>
+                                            onChange={handleNombreChangeCrear}
+                                            onClick={() => {
+                                                setNombreCalendarioError('');
+                                                setNombreErrorVisible(false);
+                                            }}
+                                            className={nombreErrorVisible ? 'inputajustes error' : 'inputajustes'}
+                                        />
+                                        {nombreErrorVisible && (
+                                            <div className="validacionajustes">
+                                                <img src="images/Iconos/Icono21.png" className="icono10" />
+                                                <p className="pajustes">{nombreCalendarioError}</p>
+                                            </div>
+                                        )}
                             </div>
                             <div>
                                 <label className="labelajustes"
-                                    htmlFor="descripcion">Descripción calendario:</label>
+                                    htmlFor="descripcion">Descripción del calendario</label>
                                 <input className="input2ajustes" type="text" id="descripcion"
                                     value={descripcionCalendarioCrear}
                                     onChange={handleDescripcionChangeCrear} />
@@ -331,6 +344,8 @@ function Ajustes() {
                                         setShowDiv1(true);
                                         setShowDiv2(false);
                                         vaciarCampos();
+                                        setNombreErrorVisible(false);
+                                        setNombreeErrorVisible(false);
                                     }}>Volver</button>
                         </form>
                     </div>
@@ -344,9 +359,20 @@ function Ajustes() {
                                     htmlFor="nombre">Nombre calendario</label>
                                 <input className="inputajustes"
                                     type="text" id="nombre" value={nombreCalendarioEditado}
-                                    onChange={(event) => setNombreCalendarioEditado(event.target.value)} />
+                                            onChange={(event) => setNombreCalendarioEditado(event.target.value)}
+                                            onClick={() => {
+                                                setNombreCalendarioError('');
+                                                setNombreeErrorVisible(false);
+                                            }}
+                                            className={nombreeErrorVisible ? 'inputajustes error' : 'inputajustes'}
+                                        />
                                     </div>
-                                    <p>{ nombreCalendarioError}</p>
+                                    {nombreeErrorVisible && (
+                                        <div className="validacionajustes">
+                                            <img src="images/Iconos/Icono21.png" className="icono10" />
+                                            <p className="pajustes">{nombreCalendarioError}</p>
+                                        </div>
+                                    )}
                             <div>
                                 <label className="labelajustes"
                                     htmlFor="descripcion">Descripción calendario</label>
@@ -360,7 +386,9 @@ function Ajustes() {
                                         vaciarCampos();
                                         setCalendarioEditado(null);
                                         setShowDiv1(true);
-                                        setShowDiv3(false);
+                                            setShowDiv3(false);
+                                            setNombreErrorVisible(false);
+                                            setNombreeErrorVisible(false);
                                     }}>Volver</button>
                         </form>
                     </div>
