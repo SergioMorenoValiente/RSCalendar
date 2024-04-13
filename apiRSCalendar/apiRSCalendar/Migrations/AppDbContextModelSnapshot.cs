@@ -201,9 +201,6 @@ namespace apiRSCalendar.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CalendarioId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Completado")
                         .HasColumnType("nvarchar(max)");
 
@@ -213,9 +210,12 @@ namespace apiRSCalendar.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CalendarioId");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Tareas");
                 });
@@ -308,13 +308,13 @@ namespace apiRSCalendar.Migrations
 
             modelBuilder.Entity("apiRSCalendar.Models.Tarea", b =>
                 {
-                    b.HasOne("apiRSCalendar.Models.Calendario", "Calendario")
+                    b.HasOne("apiRSCalendar.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("CalendarioId")
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Calendario");
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("apiRSCalendar.Models.UsuarioCalendario", b =>

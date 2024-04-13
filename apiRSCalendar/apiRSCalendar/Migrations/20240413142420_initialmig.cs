@@ -108,28 +108,6 @@ namespace apiRSCalendar.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tareas",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FechInicio = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Completado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CalendarioId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tareas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Tareas_Calendario_CalendarioId",
-                        column: x => x.CalendarioId,
-                        principalTable: "Calendario",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Eventogeneral",
                 columns: table => new
                 {
@@ -181,6 +159,28 @@ namespace apiRSCalendar.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tareas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FechInicio = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Completado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tareas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tareas_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UsuarioCalendarios",
                 columns: table => new
                 {
@@ -227,9 +227,9 @@ namespace apiRSCalendar.Migrations
                 column: "CalendarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tareas_CalendarioId",
+                name: "IX_Tareas_UsuarioId",
                 table: "Tareas",
-                column: "CalendarioId");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsuarioCalendarios_CalendarioId",
