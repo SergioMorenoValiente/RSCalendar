@@ -1,9 +1,10 @@
 ﻿import React, { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker'; 
+import DatePicker from 'react-datepicker';
 import { Link } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import './CrearEventoTarea.css';
 import { fetchData } from '../Services/Peticiones';
+import { getStoredUserId } from '../Utils';
 
 function CrearEventoTarea() {
 
@@ -108,9 +109,9 @@ function EventoForm() {
             setFechFinError('¡Melon pon bien la fecha!');
             hasError = true;
         } else if (new Date(fechFin) <= new Date(fechInicio)) {
-        setFechFinError('La fecha de fin debe ser posterior a la fecha de inicio.');
-        hasError = true;
-    }
+            setFechFinError('La fecha de fin debe ser posterior a la fecha de inicio.');
+            hasError = true;
+        }
         if (!calendarioId) {
             setCalendariosError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
             hasError = true;
@@ -157,7 +158,7 @@ function EventoForm() {
                 <label htmlFor="nombre">Nombre:</label>
                 <input type="text" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
             </div>
-            <p>{nombreError }</p>
+            <p>{nombreError}</p>
             <div>
                 <label htmlFor="fechInicio">Fecha de Inicio:</label>
                 <input type="datetime-local" id="fechInicio" value={fechInicio} onChange={(e) => setFechInicio(e.target.value)} />
@@ -191,7 +192,7 @@ function EventoForm() {
         //        <label htmlFor="titulo">Título del Evento:</label>
         //        <input type="text" id="titulo" value={titulo} onChange={(e) => setTitulo(e.target.value)} required />
         //    </div>
-            
+
         //    <div>
         //        <label htmlFor="fechaInicio">Fecha de Inicio:</label>
         //        <div className="fecha-container">
@@ -245,54 +246,87 @@ function TareaForm({ setTab, startDate, setStartDate }) {
     //Para los campos del formulario
     const [titulo, setTitulo] = useState('');
     const [fecha, setFecha] = useState('');
-    const [hora, setHora] = useState('');
-    const [todoElDia, setTodoElDia] = useState(false);
-    const [calendario, setCalendario] = useState('');
-    const [descripcion, setDescripcion] = useState('');
+    const [tareasDelUsuario, setTareasDelUsuario] = useState('');
+    const [tituloError, setTituloError] = useState('');
+    const [fechaError, setFechaError] = useState('');
+    const [userId, setUserId] = useState('');
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const storedUserId = getStoredUserId();
+        setUserId(storedUserId ? storedUserId.toString() : ''); // Ensure userId is a string
+        async function fetchTareas() {
+            try {
+                const response = await fetch(`https://localhost:7143/api/calendarios/${storedUserId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+                const data = await response.json();
+                setTareasDelUsuario(data);
+            } catch (error) {
+                throw error;
+            }
+        }
+        if (storedUserId) {
+            fetchTareas();
+        }
+    }, []);
 
     //Función para manejar el envío del formulario
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        window.location.href = "/";
+
+        setTituloError('');
+
+        let hasError = false;
+
+        if (!titulo) {
+            setTituloError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            hasError = true;
+        }
+
+        if (hasError) {
+            return;
+        }
+
+        try {
+            const fechaActual = new Date();
+            const fechaFormateada = fechaActual.toISOString();
+
+            const response = await fetch('https://localhost:7143/api/Tareas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre: titulo,
+                    fechInicio: fechaFormateada,
+                    completado: "0",
+                    usuarioId: userId
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al crear el evento');
+            }
+
+            setTitulo('');
+            setFecha('');
+            window.location.href = "/";
+        } catch (error) {
+            setError(error.message);
+        }
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="titulo">Título de la Tarea:</label>
-                <input type="text" id="titulo" value={titulo}
-                    onChange={(e) => setTitulo(e.target.value)} />
+                <input type="text" id="titulo" value={titulo} onChange={(e) => setTitulo(e.target.value)} />
             </div>
-
-            <div>
-                <label htmlFor="fechaInicio">Fecha:</label>
-                <div className="fecha-container">
-                    <input type="date" id="fecha" value={fecha}
-                        onChange={(e) => setFecha(e.target.value)} />
-                    <input type="time" id="hora" value={hora}
-                        onChange={(e) => setHora(e.target.value)} />
-                </div>
-            </div>
-            <div className="checkbox-container">
-                <input type="checkbox" id="todoElDia" checked={todoElDia}
-                    onChange={(e) => setTodoElDia(e.target.checked)} />
-                <label htmlFor="todoElDia">Todo el día</label>
-            </div>
-            <div>
-                <label htmlFor="calendario">Calendario:</label>
-                <select id="calendario" value={calendario}
-                    onChange={(e) => setCalendario(e.target.value)}>
-                    <option value="0">Seleccionar calendario</option>
-                    <option value="1">Seleccionar calendario1</option>
-                    <option value="2">Seleccionar calendario2</option>
-                    <option value="3">Seleccionar calendario3</option>
-                </select>
-            </div>
-            <div>
-                <label htmlFor="descripcion">Descripción:</label>
-                <textarea id="descripcion" value={descripcion}
-                    onChange={(e) => setDescripcion(e.target.value)} />
-            </div>
+            <p>{ tituloError}</p>
             <div className="button-container">
                 <button type="submit">Añadir Tarea</button>
                 <Link to="/" className="sidebar-link">

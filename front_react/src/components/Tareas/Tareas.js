@@ -1,11 +1,28 @@
-﻿import React from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import './Tareas.css';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
 function Tareas() {
 
     const [tab, setTab] = useState("TareasPendientes");
+    const [tareas, setTareas] = useState([]);
+
+    useEffect(() => {
+        const fetchTareas = async () => {
+            try {
+                const response = await fetch('https://localhost:7143/api/Tareas');
+                if (!response.ok) {
+                    throw new Error('Error al obtener las tareas');
+                }
+                const data = await response.json();
+                setTareas(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchTareas();
+    }, []);
 
     return (
         <div className="tareas-container">
@@ -24,7 +41,9 @@ function Tareas() {
                                     onClick={() => setTab("TareasCompletadas")}>COMPLETADAS</h2>
                             </div>
 
-                            <TareasPendientes />
+                            <TareasPendientes tareas={tareas} setTareas={setTareas} />
+
+
 
                         </React.Fragment>
                     )}
@@ -38,7 +57,8 @@ function Tareas() {
                                     onClick={() => setTab("TareasCompletadas")}>COMPLETADAS</h2>
                             </div>
 
-                            <TareasCompletadas />
+                            <TareasCompletadas tareas={tareas} setTareas={setTareas} />
+
 
                         </React.Fragment>
                     )}
@@ -48,44 +68,99 @@ function Tareas() {
     );
 }
 
-function TareasPendientes() {
+function TareasPendientes({ tareas, setTareas }) {
+
     const [edicionHabilitada, setEdicionHabilitada] = useState(false);
+    const [error, setError] = useState('');
 
     const toggleEdicion = () => {
         setEdicionHabilitada(!edicionHabilitada);
     };
+    const tareasPendientes = tareas.filter(tarea => tarea.completado === "0");
+
+    const handleTareaCompletada = async (id, tarea) => {
+        try {
+            const updatedTarea = { id:id, nombre:tarea.nombre,fechInicio:tarea.fechInicio, completado: '1', usuarioId: tarea.usuarioId }
+            const response = await fetch(`https://localhost:7143/api/Tareas/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedTarea)
+            });
+            if (!response.ok) {
+                throw new Error('Error al marcar la tarea como completada');
+            }
+            const updatedTareas = tareas.map(t => {
+                if (t.id === id) {
+                    return updatedTarea;
+                }
+                return t;
+            });
+            setTareas(updatedTareas);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleEditar = (tarea) => {
+        // Redireccionar a la página EditarEvento.js pasando el ID del evento como parámetro
+        window.location.href = `/EditarTarea?id=${tarea.id}`;
+    };
+
+    //Borar tarea
+    const borrarTarea = async (tareaId) => {
+        try {
+            const response = await fetch(`https://localhost:7143/api/tareas/${tareaId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al borrar el evento');
+            }
+            window.location.href = "/Tareas";
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
 
     return (
         <div className="div-container-tareas">
             <table>
                 <tbody>
+                    {tareasPendientes.map((tarea, index) => (
                     <tr>
                         <td className="tdajustes">
                             <ul className="calendars-list">
-                                <li>
-                                    <input type="checkbox" />
-                                    <label>Nombre de la tarea</label>
-                                </li>
+                                    <li key={index}>
+                                        <input type="checkbox" onChange={() => handleTareaCompletada(tarea.id, tarea)} />
+                                        <label>{tarea.nombre}</label>
+                                    </li>
                             </ul>
                         </td>
                         {edicionHabilitada && (
-                            <> {/* Fragment para envolver las columnas que deben aparecer solo cuando la edición está habilitada */}
+                            <>
                                 <td>
-                                    <button className="button1ajustes">
-                                        Editar
-                                    </button>
+                                        <button className="button1ajustes" onClick={() => handleEditar(tarea)}>
+                                            Editar
+                                        </button>
+
                                 </td>
                                 <td>
-                                    <button className="button2ajustes">
+                                        <button className="button2ajustes" onClick={() => borrarTarea(tarea.id)}>
                                         Borrar
                                     </button>
                                 </td>
                             </>
                         )}
-                    </tr>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
-            {/* Botón para crear evento/tarea */}
             <div className="button-container">
                 <Link to="/CrearEventoTarea" className="sidebar-link">
                     <img src="images/Iconos/Icono7.png" className="icono1" />
@@ -99,41 +174,96 @@ function TareasPendientes() {
         </div>
     );
 }
-function TareasCompletadas() {
+
+function TareasCompletadas({ tareas, setTareas }) {
+
     const [edicionHabilitada, setEdicionHabilitada] = useState(false);
+    const [error, setError] = useState('');
 
     const toggleEdicion = () => {
         setEdicionHabilitada(!edicionHabilitada);
+    };
+    const tareasCompletadas = tareas.filter(tarea => tarea.completado === "1");
+
+    const handleTareaSinCompletar = async (id, tarea) => {
+        try {
+            const updatedTarea = { id: id, nombre: tarea.nombre, fechInicio: tarea.fechInicio, completado: '0', usuarioId: tarea.usuarioId }
+            const response = await fetch(`https://localhost:7143/api/Tareas/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedTarea) // Pasamos la tarea actualizada al servidor
+            });
+            if (!response.ok) {
+                throw new Error('Error al marcar la tarea como completada');
+            }
+            const updatedTareas = tareas.map(t => {
+                if (t.id === id) {
+                    return updatedTarea; // Si es la tarea actualizada, la retornamos
+                }
+                return t;
+            });
+            setTareas(updatedTareas);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const handleEditar = (tarea) => {
+        // Redireccionar a la página EditarEvento.js pasando el ID del evento como parámetro
+        window.location.href = `/EditarTarea?id=${tarea.id}`;
+    };
+
+    //Borar tarea
+    const borrarTarea = async (tareaId) => {
+        try {
+            const response = await fetch(`https://localhost:7143/api/tareas/${tareaId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al borrar el evento');
+            }
+            window.location.href = "/Tareas";
+        } catch (error) {
+            setError(error.message);
+        }
     };
 
     return (
         <div className="div-container-tareas">
             <table>
                 <tbody>
+                    {tareasCompletadas.map((tarea, index) => (
                     <tr>
                         <td className="tdajustes">
                             <ul className="calendars-list">
-                                <li>
-                                    <input type="checkbox" />
-                                    <label>Nombre de la tarea</label>
-                                </li>
+                                    <li key={index}>
+                                        <input type="checkbox" checked onChange={() => handleTareaSinCompletar(tarea.id, tarea)} />
+                                        <label>{tarea.nombre}</label>
+                                    </li>
                             </ul>
                         </td>
                         {edicionHabilitada && (
                             <> {/* Fragment para envolver las columnas que deben aparecer solo cuando la edición está habilitada */}
                                 <td>
-                                    <button className="button1ajustes">
-                                        Editar
-                                    </button>
+                                        <button className="button1ajustes" onClick={() => handleEditar(tarea)}>
+                                            Editar
+                                        </button>
+
                                 </td>
                                 <td>
-                                    <button className="button2ajustes">
+                                        <button className="button2ajustes" onClick={() => borrarTarea(tarea.id)}>
                                         Borrar
                                     </button>
                                 </td>
                             </>
                         )}
-                    </tr>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
             <div className="button-container">
