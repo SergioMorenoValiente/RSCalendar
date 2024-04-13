@@ -384,7 +384,7 @@ td {
     padding: 10px;
     background-color: #F0E6D2;
     border: 1px solid #010A13;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     border-radius: 5px;
     color: #010A13;
     font-size: 1rem !important;
@@ -434,3 +434,38 @@ td {
         color: #F0E6D2;
         background-color: #091428;
     }
+
+.validacionajustes {
+    text-align: start;
+    margin-top: 0px;
+    padding-top: 0px;
+    display: flex;
+    margin-left: 10%;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.pajustes {
+    color: #CDFAFA;
+    text-shadow: 0px 0px 20px #005A82;
+    font-weight: 1000;
+    font-size: 1rem;
+    font-family: "SPRIEGEL";
+    text-align: start !important;
+    margin: 0px;
+    padding-top: 7px;
+    display: flex;
+    align-self: flex-start;
+    padding-left: 0px;
+}
+
+.icono11 {
+    width: 40px !important;
+    height: 40px;
+    margin-right: 7px;
+}
+
+.error {
+    border: 2px solid #0397AB !important;
+    box-shadow: 5px 5px 50px 0 #0397AB;
+}
