@@ -96,7 +96,7 @@ function Login({ onLogin }) {
                             const userId = userWithEmail.id;
                             setUserId(userId);
                             setRedirectToHome(true);
-                            window.location.reload();
+                            window.location.href = `/`;
                         } else {
                             setloginError('¡Un eco en la Grieta! Este invocador no se encuentra en nuestros registros.');
                         }

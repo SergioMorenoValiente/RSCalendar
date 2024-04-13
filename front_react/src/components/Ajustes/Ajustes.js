@@ -21,6 +21,8 @@ function Ajustes() {
     const [showDiv1, setShowDiv1] = useState(true);
     const [showDiv2, setShowDiv2] = useState(false);
     const [showDiv3, setShowDiv3] = useState(false);
+    const [nombreCalendarioError, setNombreCalendarioError] = useState('');
+    const [descripcionCalendarioError, setDescripcionCalendarioError] = useState('');
 
     const handleNombreChangeCrear = (event) => {
         setNombreCalendarioCrear(event.target.value);
@@ -73,6 +75,7 @@ function Ajustes() {
         setDescripcionCalendarioEditado(calendario.descripcion);
         setShowDiv1(false);
         setShowDiv3(true);
+        setNombreCalendarioError('');
     };
 
     //Vaciar campos del formulario
@@ -80,14 +83,27 @@ function Ajustes() {
         setNombreCalendarioCrear("");
         setDescripcionCalendarioCrear("");
         setNombreCalendario('');
-        setDescripcionCalendario('');
         setError('');
         setCalendarioEditado(null);
+        setNombreCalendarioError('');
     };
 
     //Editar calendario
     const editarCalendario = async (event) => {
         event.preventDefault();
+
+        setNombreCalendarioError('');
+
+        let hasError = false;
+
+        if (!nombreCalendarioEditado) {
+            setNombreCalendarioError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            hasError = true;
+        }
+
+        if (hasError) {
+            return;
+        }
         try {
             const response = await fetch(`https://localhost:7143/api/calendarios/${calendarioEditado.id}`, {
                 method: 'PUT',
@@ -139,6 +155,19 @@ function Ajustes() {
     //Crear calendario
     const crearCalendario = async (event) => {
         event.preventDefault();
+
+        setNombreCalendarioError('');
+
+        let hasError = false;
+
+        if (!nombreCalendarioEditado) {
+            setNombreCalendarioError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            hasError = true;
+        }
+
+        if (hasError) {
+            return;
+        }
         try {
             const response = await fetch('https://localhost:7143/api/calendarios', {
                 method: 'POST',
@@ -285,7 +314,8 @@ function Ajustes() {
                                     htmlFor="nombre">Nombre calendario:</label>
                                 <input className="inputajustes" type="text" id="nombre"
                                     value={nombreCalendarioCrear}
-                                    onChange={handleNombreChangeCrear} required />
+                                            onChange={handleNombreChangeCrear} />
+                                        <p>{nombreCalendarioError}</p>
                             </div>
                             <div>
                                 <label className="labelajustes"
@@ -314,16 +344,16 @@ function Ajustes() {
                                     htmlFor="nombre">Nombre calendario</label>
                                 <input className="inputajustes"
                                     type="text" id="nombre" value={nombreCalendarioEditado}
-                                    onChange={(event) => setNombreCalendarioEditado(event.target.value)}
-                                    required />
-                            </div>
+                                    onChange={(event) => setNombreCalendarioEditado(event.target.value)} />
+                                    </div>
+                                    <p>{ nombreCalendarioError}</p>
                             <div>
                                 <label className="labelajustes"
                                     htmlFor="descripcion">Descripción calendario</label>
                                 <input className="input2ajustes" type="text" id="descripcion"
                                     value={descripcionCalendarioEditado}
                                     onChange={(event) => setDescripcionCalendarioEditado(event.target.value)}/>
-                            </div>
+                                    </div>
                             <button className="button3ajustes" type="submit">Guardar</button>
                                 <button className="button4ajustes"
                                         onClick={() => {
