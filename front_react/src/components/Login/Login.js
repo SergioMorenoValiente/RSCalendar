@@ -34,9 +34,22 @@ function Login({ onLogin }) {
     const [redirectToHome, setRedirectToHome] = useState(false);
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+
+    const [emailrError, setEmailrError] = useState('');
+    const [passwordrError, setPasswordrError] = useState('');
+
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [loginError, setloginError] = useState('');
     const [usernameError, setUsernameError] = useState('');
+    const [emailErrorVisible, setEmailErrorVisible] = useState(false);
+    const [passwordErrorVisible, setPasswordErrorVisible] = useState(false);
+
+    const [emailrErrorVisible, setEmailrErrorVisible] = useState(false);
+    const [passwordrErrorVisible, setPasswordrErrorVisible] = useState(false);
+
+    const [confirmPasswordErrorVisible, setConfirmPasswordErrorVisible] = useState(false);
+    const [loginErrorVisible, setLoginErrorVisible] = useState(false);
+    const [usernameErrorVisible, setUsernameErrorVisible] = useState(false);
 
     //Funcionalidad inicio de sesion
     const handleLogin = async (e) => {
@@ -50,15 +63,27 @@ function Login({ onLogin }) {
 
         if (!email) {
             setEmailError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setEmailErrorVisible(true);
+            setLoginErrorVisible(false);
             hasError = true;
         } else if (!validateEmail(email)) {
-            setEmailError('¡Despliega tus alas! Necesitamos un correo electrónico válido para llevar tu cuenta a nuevas alturas.');
+            setEmailError('¡Despliega tus alas! Escribe un correo válido para elevar tu cuenta.');
+            setEmailErrorVisible(true);
+            setLoginErrorVisible(false);
             hasError = true;
+        } else {
+            setEmailError('');
+            setEmailErrorVisible(false);
         }
 
         if (!password) {
             setPasswordError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setLoginErrorVisible(false);
+            setPasswordErrorVisible(true);
             hasError = true;
+        } else {
+            setPasswordError('');
+            setPasswordErrorVisible(false);
         }
 
         if (hasError) {
@@ -105,7 +130,8 @@ function Login({ onLogin }) {
                     console.error('¡Un velo oscuro cubre el ID de usuario! Algo ha fallado en la obtención. Intenta de nuevo y despeja las sombras:', error);
                 }
             } else {
-                setloginError('¡Este invocador es una sombra en la Grieta! Busca otro nombre para emprender tu viaje.');
+                setloginError('¡Este invocador es una sombra en la Grieta! Escribe un usuario válido.');
+                setLoginErrorVisible(true);
             }
         } catch (error) {
             console.error('¡Un contratiempo en la entrada! Algo ha ido mal en la Grieta:', error);
@@ -115,37 +141,48 @@ function Login({ onLogin }) {
 
     //Funcionalidad registro de usuario
     const handleRegister = async () => {
-        setEmailError('');
+        setEmailrError('');
         setUsernameError('');
-        setPasswordError('');
+        setPasswordrError('');
         setConfirmPasswordError('');
 
         let hasError = false;
 
         if (!email) {
-            setEmailError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setEmailrError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setEmailrErrorVisible(true);
             hasError = true;
         } else if (!validateEmail(email)) {
-            setEmailError('¡Despliega tus alas! Necesitamos un correo electrónico válido para llevar tu cuenta a nuevas alturas.');
+            setEmailrError('¡Despliega tus alas! Escribe un correo válido para elevar tu cuenta.');
+            setEmailrErrorVisible(true);
             hasError = true;
         }
+
         if (!username) {
             setUsernameError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setUsernameErrorVisible(true);
             hasError = true;
         }
 
         if (!password) {
-            setPasswordError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setPasswordrError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setPasswordrErrorVisible(true);
             hasError = true;
         } else if (!validatePassword(password)) {
-            setPasswordError('¡Tu escudo está agrietado! Refuerza tu contraseña con más poder. Que tenga al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo para proteger tu cuenta.');
+            setPasswordrError('¡Tu escudo debe tener mínimo 8 caracteres, una mayúscula, una minúscula, un número y un símbolo!');
+            setPasswordrErrorVisible(true);
             hasError = true;
+        } else {
+            setPasswordrErrorVisible(false);
         }
+
         if (!confirmPassword) {
             setConfirmPasswordError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setConfirmPasswordErrorVisible(true);
             hasError = true;
         }else if (password !== confirmPassword) {
-            setConfirmPasswordError('¡Un desacuerdo en las contraseñas! Sincronízalas para desbloquear tu camino hacia la Grieta.');
+            setConfirmPasswordError('¡Un desacuerdo en las contraseñas bloquea tu camino hacia la Grieta.');
+            setConfirmPasswordErrorVisible(true);
             hasError = true;
         }
 
@@ -190,6 +227,7 @@ function Login({ onLogin }) {
         handleRegister();
     };
 
+
     return (
         <div className="login-container">
             {showLogin ? (
@@ -204,8 +242,18 @@ function Login({ onLogin }) {
                                 id="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                onClick={() => {
+                                    setEmailError('');
+                                    setEmailErrorVisible(false);
+                                }}
+                                className={emailErrorVisible ? 'error' : ''}
                             />
-                            <div className="validacionlogin"><img src="images/Iconos/Icono21.png" className="icono10" />{emailError}</div>
+                            {emailErrorVisible && (
+                                <div className="validacionlogin">
+                                    <img src="images/Iconos/Icono21.png" className="icono10" />
+                                    <p className="plogin">{emailError}</p>
+                                </div>
+                            )}
                         </div>
                         <div>
                             <label htmlFor="password">Contraseña:</label>
@@ -214,8 +262,18 @@ function Login({ onLogin }) {
                                 id="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                onClick={() => {
+                                    setPasswordError('');
+                                    setPasswordErrorVisible(false);
+                                }}
+                                className={passwordErrorVisible ? 'error' : ''}
                             />
-                            <p className="validacionlogin">{passwordError}</p>
+                            {passwordErrorVisible && (
+                                <div className="validacionlogin">
+                                    <img src="images/Iconos/Icono21.png" className="icono10" />
+                                    <p className="plogin">{passwordError}</p>
+                                </div>
+                            )}
                         </div>
                         {/*<div className="remember-forgot">*/}
                         {/*    <input*/}
@@ -230,11 +288,23 @@ function Login({ onLogin }) {
                         {/*    <a href="#">He olvidado mi contraseña</a>*/}
                         {/*</div>*/}
 
-                        <p className="validacionlogin">{loginError}</p>
-                        <button type="submit" className="login-form-button">Iniciar sesión</button>
+                        {loginErrorVisible && (
+                            <div className="validacionlogin">
+                                <img src="images/Iconos/Icono21.png" className="icono10" />
+                                <p className="plogin">{loginError}</p>
+                            </div>
+                        )}
+                        <button type="submit" className="login-form-button"
+                        >Iniciar sesión</button>
                     </form>
                     <div className="remember-forgot">
-                        <a href="#" onClick={handleLoginClick}>¿No estás registrado?</a>
+                        <a href="#" onClick={() => {
+                            handleLoginClick();
+                            setEmailrErrorVisible(false);
+                            setUsernameErrorVisible(false);
+                            setPasswordrErrorVisible(false);
+                            setConfirmPasswordErrorVisible(false);
+                        }}>¿No estás registrado?</a>
                     </div>
                 </div>
             ) : (
@@ -248,9 +318,19 @@ function Login({ onLogin }) {
                                 type="email"
                                 id="email"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    onClick={() => {
+                                        setEmailrError('');
+                                        setEmailrErrorVisible(false);
+                                    }}
+                                    className={emailrErrorVisible ? 'error' : ''}
                                 />
-                                <p className="validacionlogin">{emailError}</p>
+                                {emailrErrorVisible && (
+                                    <div className="validacionlogin">
+                                        <img src="images/Iconos/Icono21.png" className="icono10" />
+                                        <p className="plogin">{emailrError}</p>
+                                    </div>
+                                )}
                         </div>
                         <div>
                             <label htmlFor="username">Usuario:</label>
@@ -258,9 +338,19 @@ function Login({ onLogin }) {
                                 type="text"
                                 id="username"
                                 value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    onClick={() => {
+                                        setUsernameError('');
+                                        setUsernameErrorVisible(false);
+                                    }}
+                                    className={usernameErrorVisible ? 'error' : ''}
                                 />
-                                <p className="validacionlogin">{usernameError}</p>
+                                {usernameErrorVisible && (
+                                    <div className="validacionlogin">
+                                        <img src="images/Iconos/Icono21.png" className="icono10" />
+                                        <p className="plogin">{usernameError}</p>
+                                    </div>
+                                )}
                         </div>
                         <div>
                             <label htmlFor="password">Contraseña:</label>
@@ -268,9 +358,19 @@ function Login({ onLogin }) {
                                 type="password"
                                 id="password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    onClick={() => {
+                                        setPasswordrError('');
+                                        setPasswordrErrorVisible(false);
+                                    }}
+                                    className={passwordrErrorVisible ? 'error' : ''}
                                 />
-                                <p className="validacionlogin">{passwordError}</p>
+                                {passwordrErrorVisible && (
+                                    <div className="validacionlogin">
+                                        <img src="images/Iconos/Icono21.png" className="icono10" />
+                                        <p className="plogin">{passwordrError}</p>
+                                    </div>
+                                )}
                         </div>
                         <div>
                             <label htmlFor="confirmPassword">Confirmar Contraseña:</label>
@@ -278,11 +378,27 @@ function Login({ onLogin }) {
                                 type="password"
                                 id="confirmPassword"
                                 value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    onClick={() => {
+                                        setConfirmPasswordError('');
+                                        setConfirmPasswordErrorVisible(false);
+                                    }}
+                                    className={confirmPasswordErrorVisible ? 'error' : ''}
                                 />
-                                <p className="validacionlogin">{confirmPasswordError}</p>
+                                {confirmPasswordErrorVisible && (
+                                    <div className="validacionlogin">
+                                        <img src="images/Iconos/Icono21.png" className="icono10" />
+                                        <p className="plogin">{confirmPasswordError}</p>
+                                    </div>
+                                )}
                         </div>
-                            <button type="button" onClick={handleRegisterClick}>Registrarme</button>
+                            <button type="button"
+                                onClick={() => {
+                                    handleRegisterClick();
+                                    setEmailErrorVisible(false);
+                                    setLoginErrorVisible(false);
+                                    setPasswordErrorVisible(false);
+                                }}>Registrarme</button>
                     </form>
                     <div className="remember-forgot">
                         <a href="#" onClick={handleLoginClick}>¿Ya estás registrado?</a>
