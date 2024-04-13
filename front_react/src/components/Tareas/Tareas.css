@@ -3,9 +3,9 @@
     height: 100%;
     padding-bottom: 20px;
     background-color: rgba(10, 20, 40, 0.65);
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
-    min-height: 90vh;
+    min-height: 85.8vh;
 }
 
 .tareas-container2 {
@@ -40,4 +40,14 @@
 
 .button-container {
     width: 100%; 
+}
+
+.tab-activo {
+    background-color: #ddd;
+    color: #333;
+}
+
+.tab-inactivo {
+    background-color: #fff;
+    color: #666;
 }
