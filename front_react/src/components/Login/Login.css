@@ -3,32 +3,32 @@
     overflow: hidden;
     background-color: rgba(10, 20, 40, 0.25);
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.login-form {
+.login-form,
+.register-form {
     width: 32%;
-    margin: 15vh auto;
+    margin: auto;
 }
 
     .login-form button {
         margin: 0 auto;
-        margin-top: 10px;
+        margin-top: 20px;
     }
 
 .login-form-button {
     width: 100%;
     margin-bottom: 28px;
     display: inline-block;
-    margin-top: 10px;
-}
-
-.register-form {
-    width: 32%;
-    margin: 7vh auto;
+    margin-top: 20px;
 }
 
     .register-form button {
         width: 100%;
+        margin-top:20px;
     }
 
 .remember-forgot {
@@ -74,8 +74,8 @@
 .register-form {
     padding-left: 70px;
     padding-right: 70px;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     background-color: rgba(10, 20, 40, 0.75);
@@ -97,11 +97,11 @@
     }
 
     #confirmPassword {
-        margin-bottom: 30px;
+        margin-bottom: 5px;
     }
 
 .login-form input[type="password"] {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .login-form-button,
@@ -231,20 +231,36 @@
         }
 
 .validacionlogin {
+    text-align: start;
+    margin-top: 0px;
+    padding-top: 0px;
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+}
+
+.plogin {
     color: #CDFAFA;
     text-shadow: 0px 0px 20px #005A82;
     font-weight: 1000;
     font-size: 1rem;
     font-family: "SPRIEGEL";
-    text-align: start;
-    margin-top: 0px;
-    padding-top: 0px;
+    text-align: start !important;
+    margin: 0px;
+    padding-top: 7px;
     display: flex;
-    margin-left: 10px
+    align-self: flex-start;
+    padding-left:0px;
+
 }
 
 .icono10 {
-    width: 35px !important;
-    height: auto;
+    width: 40px !important;
+    height: 40px;
     margin-right: 7px;
+}
+
+.error {
+    border: 2px solid #0397AB !important;
+    box-shadow: 5px 5px 50px 0 #0397AB;
 }
