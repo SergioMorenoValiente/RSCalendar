@@ -53,7 +53,7 @@ input[type="checkbox"]:after {
 
 .container3 {
     width: 300px;
-    padding-top: 50px;
+    padding-top: 35px;
     justify-content: start;
     flex-direction: column;
     box-shadow: 0px 0px 30px 0px #010A13;
@@ -95,12 +95,12 @@ input[type="checkbox"]:after {
     background-color: rgba(10, 20, 40, 0.75);
 }
 
-.spanbutton {
+.spanbutton1 {
     padding-top: 13px;
+    font-size: 1.1rem
 }
 
 .calendars-container {
-    margin-top: 5px;
     width: 88%;
 }
 
@@ -114,27 +114,22 @@ input[type="checkbox"]:after {
 .calendars-list {
     list-style: none;
     padding: 0;
-    margin-bottom: 12px;
+
 }
 
 .sidebar-link {
     align-items: center !important;
     align-content: center;
-    padding: 10px;
-    padding-top: 5px !important;
+    padding-top: 3px !important;
     margin-left: 25px !important;
     margin-right: 25px !important;
-    padding-bottom: 12px;
     border-radius: 5px;
     color: #010A13;
     cursor: pointer;
     font-size: 1rem;
-    border: 2px solid #C89B3C;
+    border: 2px solid #C89B3C !important;
     text-decoration: none;
-}
-
-.calendars-list li {
-    margin-bottom: 8px;
+    width: 80%;
 }
 
 input[type="checkbox"] {
@@ -154,7 +149,7 @@ input[type="checkbox"] {
 
 .calendars-list,
 .sidebar-link {
-    font-family: "SPRIEGEL";
+    font-family: "SPRIEGEL" !important;
 }
 
 .fc-daygrid-event-title {
@@ -318,3 +313,103 @@ a {
 .custom-event {
     padding: 2px;
 }
+
+.button-container1 {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+
+.button-container2 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.label-sidebar {
+    color: #F0E6D2;
+    font-size: 1rem;
+    font-family: "SPRIEGEL";
+}
+
+.calendars-list li label {
+    display: inline-block;
+    margin-left: 2px;
+    vertical-align: super;
+}
+
+.calendars-list {
+    list-style: none;
+    padding: 0;
+    display: flex; /* Utilizamos flexbox */
+    flex-direction: column; /* Dirección de columna para alinear verticalmente */
+    align-items: flex-start; /* Alineación al principio vertical */
+    margin-left: 70px;
+    min-height: 110px; 
+}
+
+.calendars-container {
+    position: relative;
+}
+
+.pagination-container-left,
+.pagination-container-right {
+    position: absolute;
+    top: 60% ;
+    transform: translateY(-50%);
+}
+
+
+
+.pagination-container-left {
+    left: 15px;
+}
+
+.pagination-container-right {
+    right: 15px;
+}
+
+.sidebar-link2 {
+    align-items: center !important;
+    align-content: center;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    margin-left: 25px !important;
+    margin-right: 25px !important;
+    border-radius: 5px;
+    color: #010A13;
+    cursor: pointer;
+    font-size: 1rem;
+    border: 2px solid #C89B3C !important;
+    text-decoration: none;
+    width: 80%;
+    background-color: #C89B3C;
+    font-family: "SPRIEGEL" !important;
+    box-shadow: 0px 0px 50px 10px #010A13;
+    margin-bottom: 73px;
+    margin-top: 10px;
+}
+
+    .sidebar-link2:hover {
+        color: #F0E6D2;
+        background-color: #091428;
+    }
+
+.ver-mas-link {
+    display: flex;
+    justify-content: flex-end;
+    padding-left: 70px;
+    margin-top: 15px;
+    align-items: end;
+}
+
+.ver-mas {
+    font-size: 1rem;
+    font-family: "SPRIEGEL" !important;
+    color: #F0E6D2;
+    text-decoration: none;
+}
+
+    .ver-mas:hover {
+        text-decoration: underline;
+    }
