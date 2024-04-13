@@ -260,6 +260,29 @@ function Ajustes() {
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [calendariosPerPage, setCalendariosPerPage] = useState(4);
+    const indexOfLastCalendario = currentPage * calendariosPerPage;
+    const indexOfFirstCalendario = indexOfLastCalendario - calendariosPerPage;
+    const currentCalendarios = calendarios.slice(indexOfFirstCalendario, indexOfLastCalendario);
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(calendarios.length / calendariosPerPage); i++) {
+        pageNumbers.push(i);
+    }
+    const goToPreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const goToNextPage = () => {
+        const totalPages = Math.ceil(calendarios.length / calendariosPerPage);
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+    const totalPages = Math.ceil(calendarios.length / calendariosPerPage);
+
     return (
         <div className="ajustes-container">
             <div className="ajustes-container2">
@@ -273,12 +296,20 @@ function Ajustes() {
                     <div className="half-screen-left">
                     {showDiv1 && (
                     <div className="divajustes1">
-                        <h2 className="h2ajustes">Tus Calendarios</h2>
+                                <h2 className="h2ajustes">Tus Calendarios</h2>
 
-                            
-                        <table>
-                            <tbody>
-                                {calendarios.map(calendario => (
+
+                                <div className="table-container">
+                                    <div className="arrow-container">
+                                        {currentPage > 1 && (
+                                            <a href="#" onClick={goToPreviousPage} className="arrow-icon">
+                                                <img src="images/Iconos/Icono15Izq.png" alt="Anterior" className="icono21"/>
+                                            </a>
+                                        )}
+                                    </div>
+                                    <table>
+                                        <tbody>
+                                        {currentCalendarios.map(calendario => (
                                     <tr key={calendario.id}>
                                         <td className="tdajustes">{calendario.nombre}</td>
                                         <td>
@@ -295,8 +326,17 @@ function Ajustes() {
                                         </td>
                                     </tr>
                                 ))}
-                            </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                    <div className="arrow-container">
+                                        {currentPage < totalPages && (
+                                            <a href="#" onClick={goToNextPage} className="arrow-icon">
+                                                <img src="images/Iconos/Icono15Drc.png" alt="Siguiente" className="icono22" />
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
+
                                 <button className="buttonajustes"
                                     onClick={() => {
                                         setShowDiv1(false);
