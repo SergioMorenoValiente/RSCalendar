@@ -141,7 +141,6 @@ function CalendarApp({ isSidebarOpen }) {
         window.location.href = `/EditarEvento?id=${arg.event.id}`;
     };
 
-    // Prueba rukaya
     const renderEventContent = (eventInfo) => {
         // Verificar si eventInfo.event.start o eventInfo.event.end son null
         if (!eventInfo.event.start || !eventInfo.event.end) {
@@ -164,6 +163,16 @@ function CalendarApp({ isSidebarOpen }) {
         );
     };
 
+    //COBAYA RUKAYA
+    const [currentPagePersonal, setCurrentPagePersonal] = useState(1);
+    const itemsPerPage = 3; // Número de elementos por página
+    const totalCalendariosPersonal = calendariosUsuario.length;
+    const showPaginationPersonal = totalCalendariosPersonal > itemsPerPage;
+
+    // Estado para la paginación de los calendarios generales
+    const [currentPageGenerales, setCurrentPageGenerales] = useState(1);
+    const totalCalendariosGenerales = calendariosGenerales.length;
+    const showPaginationGenerales = totalCalendariosGenerales > itemsPerPage;
 
     return (
         <div className="container">
@@ -207,25 +216,34 @@ function CalendarApp({ isSidebarOpen }) {
                 <div className="container3">
 
                     {/* Botón para crear evento/tarea */}
-                    <div className="button-container">
+                    <div className="button-container1">
                         <Link to="/CrearEventoTarea" className="sidebar-link">
                             <img src="images/Iconos/Icono7.png" className="icono1" />
-                            <span className="spanbutton">Crear Evento/Tarea</span>
+                            <span className="spanbutton1">Crear Evento</span>
                         </Link>
                     </div>
 
-                    {/* Botón provisional para editar Tarea
-                    <div className="button-container">
-                        <Link to="/EditarTarea" className="sidebar-link">
-                            <span>EDITAR TAREA</span>
-                        </Link>
-                    </div>*/}
-
                     <div className="calendars-container">
                         <h2 className="calendars-title">MIS CALENDARIOS</h2>
+                        <div className="pagination-container-left">
+                            {showPaginationPersonal && (
+                                <div className="pagination-button" onClick={() => setCurrentPagePersonal(currentPagePersonal - 1)} style={{ cursor: currentPagePersonal === 1 ? 'not-allowed' : 'pointer' }}>
+                                    {currentPagePersonal !== 1 && (
+                                        <img src="images/Iconos/Icono15Izq.png" alt="Anterior" className="icono1" />
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                        {calendariosUsuario.length === 0 ? (
+                            <div className="button-container2">
+                                <Link to="/Ajustes" className="sidebar-link2">
+                                    <span className="spanbutton1">Crear Calendario</span>
+                                </Link>
+                            </div>
+                        ) : (
+                                <>
                         <ul className="calendars-list">
-                            {/* Calendarios del usuario */}
-                            {calendariosUsuario.map(calendario => (
+                            {calendariosUsuario.slice((currentPagePersonal - 1) * itemsPerPage, currentPagePersonal * itemsPerPage).map(calendario => (
                                 <li key={calendario.id}>
                                     <input
                                         type="checkbox"
@@ -233,12 +251,36 @@ function CalendarApp({ isSidebarOpen }) {
                                         checked={calendariosSeleccionados[calendario.id]}
                                         onChange={e => handleCalendarioSeleccionado(calendario.id, e.target.checked, false)}
                                     />
-                                    <label>{calendario.nombre}</label>
+                                    <label className="label-sidebar">{calendario.nombre}</label>
                                 </li>
                             ))}
+                        </ul>
+                        <div className="pagination-container-right">
+                            {showPaginationPersonal && (
+                                <div className="pagination-button" onClick={() => setCurrentPagePersonal(currentPagePersonal + 1)} style={{ cursor: currentPagePersonal * itemsPerPage >= totalCalendariosPersonal ? 'not-allowed' : 'pointer' }}>
+                                    {currentPagePersonal * itemsPerPage < totalCalendariosPersonal && (
+                                        <img src="images/Iconos/Icono15Drc.png" alt="Siguiente" className="icono1" />
+                                    )}
+                                </div>
+                            )}
+                                    </div>
+                            </>
+                        )}
+                    </div>
 
-                            {/* Calendarios generales */}
-                            {calendariosGenerales.map(calendario => (
+                    <div className="calendars-container">
+                        <h2 className="calendars-title">CALENDARIOS GENERALES</h2>
+                        <div className="pagination-container-left">
+                            {showPaginationGenerales && (
+                                <div className="pagination-button" onClick={() => setCurrentPageGenerales(currentPageGenerales - 1)} style={{ cursor: currentPageGenerales === 1 ? 'not-allowed' : 'pointer' }}>
+                                    {currentPageGenerales !== 1 && (
+                                    <img src="images/Iconos/Icono15Izq.png" alt="Anterior" className="icono1" />
+                                    )}
+                                    </div>
+                            )}
+                        </div>
+                        <ul className="calendars-list">
+                            {calendariosGenerales.slice((currentPageGenerales - 1) * itemsPerPage, currentPageGenerales * itemsPerPage).map(calendario => (
                                 <li key={calendario.id}>
                                     <input
                                         type="checkbox"
@@ -246,14 +288,41 @@ function CalendarApp({ isSidebarOpen }) {
                                         checked={calendariosGeneralesSeleccionados[calendario.id]}
                                         onChange={e => handleCalendarioSeleccionado(calendario.id, e.target.checked, true)}
                                     />
-                                    <label>{calendario.nombre}</label>
+                                    <label className="label-sidebar">{calendario.nombre}</label>
                                 </li>
                             ))}
                         </ul>
+                        <div className="pagination-container-right">
+                            {showPaginationGenerales && (
+                                <div className="pagination-button" onClick={() => setCurrentPageGenerales(currentPageGenerales + 1)} style={{ cursor: currentPageGenerales * itemsPerPage >= totalCalendariosGenerales ? 'not-allowed' : 'pointer' }}>
+                                    {currentPageGenerales * itemsPerPage < totalCalendariosGenerales && (
+                                    <img src="images/Iconos/Icono15Drc.png" alt="Siguiente" className="icono1" />
+                                    )}
+                                </div>
+                            )}
+                        </div>
                     </div>
 
                     <div className="calendars-container">
                         <h2 className="calendars-title">MIS TAREAS</h2>
+                        <ul className="calendars-list">
+                            <li>
+                                <input type="checkbox"/>
+                                <label className="label-sidebar">Cobaya</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" />
+                                <label className="label-sidebar">Cobaya</label>
+                            </li>
+                            <li>
+                                <div className="ver-mas-link">
+                                    <Link to="/Tareas" className="ver-mas">
+                                        Ver más
+                                    </Link>
+                                </div>
+                            </li>
+                        </ul>
+                        
                     </div>
 
                 </div>
