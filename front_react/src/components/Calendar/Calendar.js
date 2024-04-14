@@ -7,6 +7,7 @@ import esLocale from '@fullcalendar/core/locales/es';
 import './Calendar.css';
 import React, { useState, useEffect } from 'react';
 import { fetchData } from '../Services/Peticiones';
+import { getStoredUserId } from '../Utils';
 
 function CalendarApp({ isSidebarOpen }) {
     const [calendariosUsuario, setCalendariosUsuario] = useState([]); 
@@ -14,6 +15,7 @@ function CalendarApp({ isSidebarOpen }) {
     const [eventos, setEventos] = useState([]);
     const [calendariosSeleccionados, setCalendariosSeleccionados] = useState({});
     const [calendariosGeneralesSeleccionados, setCalendariosGeneralesSeleccionados] = useState({});
+    const [tareas, setTareas] = useState([]);
 
     useEffect(() => {
         const fetchDataAndSetState = async () => {
@@ -45,6 +47,26 @@ function CalendarApp({ isSidebarOpen }) {
                 setEventos(eventosTotales);
             })
             .catch(error => console.error('Error fetching events:', error));
+    }, []);
+
+    useEffect(() => {
+        const fetchTareas = async () => {
+            try {
+                const response = await fetch('https://localhost:7143/api/Tareas');
+                if (!response.ok) {
+                    throw new Error('Error al obtener las tareas');
+                }
+                const data = await response.json();
+                const dataFiltradaUsuario = data.filter(tarea => tarea.usuarioId == getStoredUserId());
+                const dataFiltradaCompletado = dataFiltradaUsuario.filter(tarea => tarea.completado === "0");
+
+                setTareas(dataFiltradaCompletado);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchTareas();
     }, []);
 
     const checkCalendarios = (calendarios, setCalendarioSeleccionado, isGeneral) => {
@@ -162,6 +184,55 @@ function CalendarApp({ isSidebarOpen }) {
             </div>
         );
     };
+
+    const handleTareaCompletada = async (id, tarea) => {
+        console.log(id, tarea);
+        try {
+            const updatedTarea = { id: id, nombre: tarea.nombre, fechInicio: tarea.fechInicio, completado: '1', usuarioId: tarea.usuarioId }
+            const response = await fetch(`https://localhost:7143/api/Tareas/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedTarea)
+            });
+            if (!response.ok) {
+                throw new Error('Error al marcar la tarea como completada');
+            }
+
+            // Actualizar la lista de tareas después de marcar una como completada
+            const updatedTareas = tareas.map(t => {
+                if (t.id === id) {
+                    return updatedTarea;
+                }
+                return t;
+            });
+            setTareas(updatedTareas);
+
+            // Actualizar la lista de tareas desde el servidor
+            const fetchTareas = async () => {
+                try {
+                    const response = await fetch('https://localhost:7143/api/Tareas');
+                    if (!response.ok) {
+                        throw new Error('Error al obtener las tareas');
+                    }
+                    const data = await response.json();
+                    const dataFiltradaUsuario = data.filter(tarea => tarea.usuarioId == getStoredUserId());
+                    const dataFiltradaCompletado = dataFiltradaUsuario.filter(tarea => tarea.completado === "0");
+
+                    setTareas(dataFiltradaCompletado);
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+
+            fetchTareas();
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 
     //COBAYA RUKAYA
     const [currentPagePersonal, setCurrentPagePersonal] = useState(1);
@@ -306,23 +377,22 @@ function CalendarApp({ isSidebarOpen }) {
                     <div className="calendars-container">
                         <h2 className="calendars-title">MIS TAREAS</h2>
                         <ul className="calendars-list">
-                            <li>
-                                <input type="checkbox"/>
-                                <label className="label-sidebar">Cobaya</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" />
-                                <label className="label-sidebar">Cobaya</label>
-                            </li>
-                            <li>
-                                <div className="ver-mas-link">
-                                    <Link to="/Tareas" className="ver-mas">
-                                        Ver más
-                                    </Link>
-                                </div>
-                            </li>
+                            {tareas.slice((currentPageGenerales - 1) * itemsPerPage, currentPageGenerales * itemsPerPage).map(tarea => (
+                                <li key={tarea.id}>
+                                    <input type="checkbox" onChange={() => handleTareaCompletada(tarea.id, tarea)} />
+                                    <label className="label-sidebar"> {tarea.nombre.length > 18 ? tarea.nombre.substring(0, 15) + '...' : tarea.nombre}</label>
+                                </li>
+                            ))}
+                            {tareas.length > 3 && (
+                                <li>
+                                    <div className="ver-mas-link">
+                                        <Link to="/Tareas" className="ver-mas">
+                                            Ver más
+                                        </Link>
+                                    </div>
+                                </li>
+                            )}
                         </ul>
-                        
                     </div>
 
                 </div>
