@@ -56,7 +56,7 @@ function CrearEvento() {
             setFechInicioErrorVisible(true);
             hasError = true;
         } else if (fechInicio == undefined) {
-            setFechInicioError('¡Escribe una fecha válida para desatar el poder de tus elecciones en la Grieta!');
+            setFechInicioError('¡Escribe una fecha válida para desatar el poder en la Grieta!');
             setFechInicioErrorVisible(true);
             hasError = true;
         }
@@ -65,11 +65,11 @@ function CrearEvento() {
             setFechFinErrorVisible(true);
             hasError = true;
         } else if (fechFin == undefined) {
-            setFechFinError('¡Escribe una fecha válida para desatar el poder de tus elecciones en la Grieta!');
+            setFechFinError('¡Escribe una fecha válida para desatar el poder en la Grieta!');
             setFechFinErrorVisible(true);
             hasError = true;
         } else if (new Date(fechFin) <= new Date(fechInicio)) {
-            setFechFinError('La fecha de fin debe ser posterior a la fecha de inicio.');
+            setFechFinError('La fecha de fin debe brillar más allá de la fecha de inicio.');
             setFechFinErrorVisible(true);
             hasError = true;
         }
