@@ -303,7 +303,7 @@ function Ajustes() {
                                     <div className="arrow-container">
                                         {currentPage > 1 && (
                                             <a href="#" onClick={goToPreviousPage} className="arrow-icon">
-                                                <img src="images/Iconos/Icono15Izq.png" alt="Anterior" className="icono21"/>
+                                                <img src="images/Iconos/Icono22Izq.png" alt="Anterior" className="icono21"/>
                                             </a>
                                         )}
                                     </div>
@@ -331,7 +331,7 @@ function Ajustes() {
                                     <div className="arrow-container">
                                         {currentPage < totalPages && (
                                             <a href="#" onClick={goToNextPage} className="arrow-icon">
-                                                <img src="images/Iconos/Icono15Drc.png" alt="Siguiente" className="icono22" />
+                                                <img src="images/Iconos/Icono22Drc.png" alt="Siguiente" className="icono22" />
                                             </a>
                                         )}
                                     </div>
