@@ -150,6 +150,9 @@ function CalendarApp({ isSidebarOpen }) {
         // Si ninguno es null, continúa con el renderizado del evento
         const startTime = eventInfo.event.start.getHours() + ':' + eventInfo.event.start.getMinutes();
         const endTime = eventInfo.event.end.getHours() + ':' + eventInfo.event.end.getMinutes();
+
+        const moreEventsCount = eventosMostrar.filter(evento => evento.start === eventInfo.event.start).length - 1;
+
         return (
             <div className="custom-event">
                 <img src="/images/Roles/Mago.png" alt="Icono" className="icono-evento" />
@@ -159,6 +162,13 @@ function CalendarApp({ isSidebarOpen }) {
                 <div className="customtitle">
                     <b className="pevento2">{eventInfo.event.title}</b>
                 </div>
+                {moreEventsCount > 0 && (
+                    <div className="ver-mas-link">
+                        <Link to="/VerMasEventos" className="ver-mas">
+                            Ver más ({moreEventsCount})
+                        </Link>
+                    </div>
+                )}
             </div>
         );
     };
@@ -330,30 +340,5 @@ function CalendarApp({ isSidebarOpen }) {
         </div>
     );
 }
-
-//Pruebas rukaya
-//function renderEventContent(eventInfo) {
-//    return (
-//        <>
-//            <b>{eventInfo.timeText}</b>
-//            <i>{eventInfo.event.title}</i>
-//        </>
-//    )
-//}
-
-//function CustomView(props) {
-//    let segs = sliceEvents(props, true); // allDay=true
-
-//    return (
-//        <>
-//            <div className='view-title'>
-//                {props.dateProfile.currentRange.start.toUTCString()}
-//            </div>
-//            <div className='view-events'>
-//                {segs.length} events
-//            </div>
-//        </>
-//    );
-//}
 
 export default CalendarApp;

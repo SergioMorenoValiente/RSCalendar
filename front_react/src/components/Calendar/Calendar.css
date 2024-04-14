@@ -219,27 +219,6 @@ input[type="checkbox"] {
 }
 
 
-/*Prueba rukaya*/
-.modal {
-    display: block;
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-
 .close {
     color: #aaa;
     float: right;
@@ -285,33 +264,34 @@ a {
 
 .pevento,
 .pevento2{
-    font-size: 1rem !important;
+    font-size: 0.9rem !important;
     font-family: "SPRIEGEL";
     font-weight: 100;
 }
 
 .pevento {
-    font-size: 1rem !important;
+    font-size: 0.9rem !important;
     color: #F0E6D2;
     font-weight: 100;
 }
 
 .pevento2 {
     color: #C89B3C;
-    font-size: 1rem !important;
+    font-size: 0.9rem !important;
     font-weight: 500 !important;
 }
 
 .icono-evento {
     position: absolute;
-    top: 8px;
-    left: 8px;
-    width: 30px;
-    height: 30px;
+    top: 5px;
+    left: 5px;
+    width: 29px;
+    height: 29px;
 }
 
 .custom-event {
-    padding: 2px;
+    padding: 0;
+    margin:0;
 }
 
 .button-container1 {
@@ -413,3 +393,31 @@ a {
     .ver-mas:hover {
         text-decoration: underline;
     }
+
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #F0E6D2 !important;
+}
+
+.modal-content {
+    background-color: #F0E6D2 !important;
+    margin: 15% auto;
+    padding: 20px;
+    border: 2px solid #C89B3C;
+    width: 80%;
+}
+
+.modal-title {
+    color: #000000 !important;
+}
+
+.fc-daygrid-event:hover {
+    background-color: #0A323C;
+}
