@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import './Tareas.css';
 import { Link } from 'react-router-dom';
+import { getStoredUserId } from '../Utils';
 
 function Tareas() {
 
@@ -282,3 +283,98 @@ function TareasCompletadas({ tareas, setTareas }) {
 
 
 export default Tareas;
+
+function TareaForm({ setTab, startDate, setStartDate }) {
+    //Para los campos del formulario
+    const [titulo, setTitulo] = useState('');
+    const [fecha, setFecha] = useState('');
+    const [tareasDelUsuario, setTareasDelUsuario] = useState('');
+    const [tituloError, setTituloError] = useState('');
+    const [fechaError, setFechaError] = useState('');
+    const [userId, setUserId] = useState('');
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const storedUserId = getStoredUserId();
+        setUserId(storedUserId ? storedUserId.toString() : ''); // Ensure userId is a string
+        async function fetchTareas() {
+            try {
+                const response = await fetch(`https://localhost:7143/api/calendarios/${storedUserId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+                const data = await response.json();
+                setTareasDelUsuario(data);
+            } catch (error) {
+                throw error;
+            }
+        }
+        if (storedUserId) {
+            fetchTareas();
+        }
+    }, []);
+
+    //Función para manejar el envío del formulario
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        setTituloError('');
+
+        let hasError = false;
+
+        if (!titulo) {
+            setTituloError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            hasError = true;
+        }
+
+        if (hasError) {
+            return;
+        }
+
+        try {
+            const fechaActual = new Date();
+            const fechaFormateada = fechaActual.toISOString();
+
+            const response = await fetch('https://localhost:7143/api/Tareas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre: titulo,
+                    fechInicio: fechaFormateada,
+                    completado: "0",
+                    usuarioId: userId
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al crear el evento');
+            }
+
+            setTitulo('');
+            setFecha('');
+            window.location.href = "/";
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label htmlFor="titulo">Título de la Tarea:</label>
+                <input type="text" id="titulo" value={titulo} onChange={(e) => setTitulo(e.target.value)} />
+            </div>
+            <p>{tituloError}</p>
+            <div className="button-container">
+                <button type="submit">Añadir Tarea</button>
+                <Link to="/" className="sidebar-link">
+                    <span>Volver</span>
+                </Link>
+            </div>
+        </form>
+    );
+}
