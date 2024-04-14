@@ -134,13 +134,17 @@ function CrearEvento() {
             <div className="form-container10">
                 <h1 className="h1cevento">CREAR EVENTO</h1>
                 {calendarios.length === 0 ? (
-                    <div className="button-container-cevento">
-                        <p>Pero se puede ser más pendejo?? Anda, tira y create un calendario antes de meterle eventos.</p>
-                        <button onClick={() => crearCalendarios()}>Crear Calendario</button>
-                        <Link to="/ajustes" className="sidebar-link5">
-                            <span className="volvercevento">Volver</span>
-                        </Link>
+                    <div>
+                        <div className="validacionlogin1">
+                            <img src="images/Iconos/Icono21.png" className="icono101" />
+                            <p className="plogin1">¡Prepara el terreno antes de desatar el caos! Antes de crear un evento, asegúrate de tener un calendario listo para recibir tus épicas hazañas.</p>
+                        </div>
+                        <div className="form-container12">
+                            <button onClick={() => crearCalendarios()}
+                                className="button-calendario1">Crear Calendario</button>
+                        </div>
                     </div>
+                    
                 ) : (
                     <form onSubmit={handleSubmit}>
                     {error && <p>{error}</p>}
