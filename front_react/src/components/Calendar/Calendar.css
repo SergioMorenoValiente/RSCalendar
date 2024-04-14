@@ -419,5 +419,5 @@ a {
 }
 
 .fc-daygrid-event:hover {
-    background-color: #0A323C;
+    background-color: rgba(10, 20, 40, 0.9);
 }
