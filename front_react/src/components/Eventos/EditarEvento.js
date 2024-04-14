@@ -20,6 +20,11 @@ function EditarEvento() {
     const [fechFinError, setFechFinError] = useState('');
     const [calendariosError, setCalendariosError] = useState('');
 
+    const [nombreeErrorVisible, setNombreeErrorVisible] = useState(false);
+    const [fechInicioeErrorVisible, setFechInicioeErrorVisible] = useState(false);
+    const [fechFineErrorVisible, setFechFineErrorVisible] = useState(false);
+    const [calendarioseErrorVisible, setCalendarioseErrorVisible] = useState(false);
+
     //Cargar calendarios y recuperar id del evento de la URL
     useEffect(() => {
         async function fetchCalendarios() {
@@ -74,27 +79,34 @@ function EditarEvento() {
 
         if (!nombre) {
             setNombreError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setNombreeErrorVisible(true);
             hasError = true;
         }
         if (!fechInicio) {
             setFechInicioError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setFechInicioeErrorVisible(true);
             hasError = true;
         } else if (fechInicio == undefined) {
-            setFechInicioError('¡Melon pon bien la fecha!');
+            setFechInicioError('¡Escribe una fecha válida para desatar el poder en la Grieta!');
+            setFechInicioeErrorVisible(true);
             hasError = true;
         }
         if (!fechFin) {
             setFechFinError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setFechFineErrorVisible(true);
             hasError = true;
         } else if (fechFin == undefined) {
-            setFechFinError('¡Melon pon bien la fecha!');
+            setFechFinError('¡Escribe una fecha válida para desatar el poder en la Grieta!');
+            setFechFineErrorVisible(true);
             hasError = true;
         } else if (new Date(fechFin) <= new Date(fechInicio)) {
-            setFechFinError('La fecha de fin debe ser posterior a la fecha de inicio.');
+            setFechFinError('La fecha de fin debe brillar más allá de la fecha de inicio');
+            setFechFineErrorVisible(true);
             hasError = true;
         }
         if (!calendarioId) {
             setCalendariosError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setCalendarioseErrorVisible(true);
             hasError = true;
         }
 
@@ -154,42 +166,88 @@ function EditarEvento() {
 
 
     return (
-        <div className="creareventotarea-container">
-            <div className="form-container">
-                <h1 className="h1">EDITAR EVENTO</h1>
+        <div className="editarevento-container">
+            <div className="form-container11">
+                <h1 className="h1eevento">EDITAR EVENTO</h1>
                 <form onSubmit={handleSubmit}>
                     {error && <p>{error}</p>}
                     <div>
                         <label htmlFor="nombre">Título del Evento:</label>
-                        <input type="text" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+                        <input type="text" id="nombre" value={nombre}
+                            onChange={(e) => setNombre(e.target.value)}
+                            onClick={() => {
+                                setNombreError('');
+                                setNombreeErrorVisible(false);
+                            }}
+                            className={nombreeErrorVisible ? 'error' : ''}
+                        />
+                        {nombreeErrorVisible && (
+                            <div className="validacionlogin">
+                                <img src="images/Iconos/Icono21.png" className="icono10" />
+                                <p className="plogin">{nombreError}</p>
+                            </div>
+                        )}
                     </div>
-                    <p>{nombreError}</p>
-                    <div className="fecha-container">
-                        <div>
-                            <label htmlFor="fechInicio">Fecha de Inicio:</label>
-                            <input type="datetime-local" id="fechInicio" value={fechInicio} onChange={(e) => setFechInicio(e.target.value)} required />
-                        </div>
-                        <p>{fechInicioError}</p>
-                        <div>
-                            <label htmlFor="fechFin">Fecha de Fin:</label>
-                            <input type="datetime-local" id="fechFin" value={fechFin} onChange={(e) => setFechFin(e.target.value)} required />
-                        </div>
-                        <p>{fechFinError}</p>
+                    <div>
+                        <label htmlFor="fechInicio">Fecha de Inicio:</label>
+                        <input type="datetime-local" id="fechInicio" value={fechInicio}
+                            onChange={(e) => setFechInicio(e.target.value)}
+                            onClick={() => {
+                                setFechInicioError('');
+                                setFechInicioeErrorVisible(false);
+                            }}
+                            className={fechInicioeErrorVisible ? 'error' : ''}
+                        />
+                        {fechInicioeErrorVisible && (
+                            <div className="validacionlogin">
+                                <img src="images/Iconos/Icono21.png" className="icono10" />
+                                <p className="plogin">{fechInicioError}</p>
+                            </div>
+                        )}
+                    </div>
+                    <div>
+                        <label htmlFor="fechFin">Fecha de Fin:</label>
+                        <input type="datetime-local" id="fechFin" value={fechFin}
+                            onChange={(e) => setFechFin(e.target.value)}
+                            onClick={() => {
+                                setFechFinError('');
+                                setFechFineErrorVisible(false);
+                            }}
+                            className={fechFineErrorVisible ? 'error' : ''}
+                        />
+                        {fechFineErrorVisible && (
+                            <div className="validacionlogin">
+                                <img src="images/Iconos/Icono21.png" className="icono10" />
+                                <p className="plogin">{fechFinError}</p>
+                            </div>
+                        )}
                     </div>
                     <div>
                         <label htmlFor="calendario">Calendario:</label>
-                        <select id="calendario" value={calendarioId} onChange={(e) => setCalendarioId(e.target.value)} required>
+                        <select id="calendario" value={calendarioId}
+                            onChange={(e) => setCalendarioId(e.target.value)} 
+                            onClick={() => {
+                                setCalendariosError('');
+                                setCalendarioseErrorVisible(false);
+                            }}
+                            className={calendarioseErrorVisible ? 'error' : ''}>
                             <option value="">Seleccionar calendario</option>
                             {calendarios.map(calendario => (
                                 <option key={calendario.id} value={calendario.id}>{calendario.nombre}</option>
                             ))}
                         </select>
+                        {calendarioseErrorVisible && (
+                            <div className="validacionlogin">
+                                <img src="images/Iconos/Icono21.png" className="icono10" />
+                                <p className="plogin">{calendariosError}</p>
+                            </div>
+                        )}
                     </div>
-                    <p>{calendariosError}</p>
-                    <div>
-                        <button type="submit">Editar Evento</button>
-                        <button onClick={() => borrarEvento()}>Eliminar Evento</button>
-                        <Link to="/" className="sidebar-link">
+                    <div className="button-container-eevento">
+                        <button type="submit" className="button-e-1">Guardar Evento</button>
+                        <button onClick={() => borrarEvento()}
+                            className="button-e-2">Eliminar Evento</button>
+                        <Link to="/" className="sidebar-link6">
                             <span>Volver</span>
                         </Link>
                     </div>
