@@ -16,7 +16,9 @@ function Tareas() {
                     throw new Error('Error al obtener las tareas');
                 }
                 const data = await response.json();
-                setTareas(data);
+                const dataFiltrada = data.filter(tarea => tarea.usuarioId == getStoredUserId());
+
+                setTareas(dataFiltrada);
             } catch (error) {
                 console.error(error);
             }
@@ -133,16 +135,20 @@ function TareasPendientes({ tareas, setTareas }) {
         <div className="div-container-tareas">
             <table>
                 <tbody>
-                    {tareasPendientes.map((tarea, index) => (
-                    <tr>
-                        <td className="tdajustes">
-                            <ul className="calendars-list">
-                                    <li key={index}>
-                                        <input type="checkbox" onChange={() => handleTareaCompletada(tarea.id, tarea)} />
+                    {tareasPendientes.map((tarea) => (
+                        <tr key={tarea.id}>
+                            <td className="tdajustes">
+                                <ul className="calendars-list">
+                                    <li>
+                                        <input
+                                            type="checkbox"
+                                            onChange={() => handleTareaCompletada(tarea.id, tarea)}
+                                            checked={tarea.completado === '1'} 
+                                        />
                                         <label>{tarea.nombre}</label>
                                     </li>
-                            </ul>
-                        </td>
+                                </ul>
+                            </td>
                         {edicionHabilitada && (
                             <>
                                 <td>
