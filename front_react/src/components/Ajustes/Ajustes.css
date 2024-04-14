@@ -491,15 +491,17 @@ td {
 }
 
 .table-container {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
 .arrow-container {
-    position: absolute; /* Posición absoluta para los controles de navegación */
-    top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 90px;
 }
 
     .arrow-container a {
@@ -512,9 +514,11 @@ td {
         }
 
     .arrow-container.left {
-        left: 0 !important;
+        left: 0px !important;
     }
 
     .arrow-container.right {
         right: 0 !important;
+
     }
+

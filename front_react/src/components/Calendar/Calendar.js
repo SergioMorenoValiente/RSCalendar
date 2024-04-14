@@ -229,7 +229,7 @@ function CalendarApp({ isSidebarOpen }) {
                             {showPaginationPersonal && (
                                 <div className="pagination-button" onClick={() => setCurrentPagePersonal(currentPagePersonal - 1)} style={{ cursor: currentPagePersonal === 1 ? 'not-allowed' : 'pointer' }}>
                                     {currentPagePersonal !== 1 && (
-                                        <img src="images/Iconos/Icono15Izq.png" alt="Anterior" className="icono1" />
+                                        <img src="images/Iconos/Icono22Izq.png" alt="Anterior" className="icono1" />
                                     )}
                                 </div>
                             )}
@@ -259,7 +259,7 @@ function CalendarApp({ isSidebarOpen }) {
                             {showPaginationPersonal && (
                                 <div className="pagination-button" onClick={() => setCurrentPagePersonal(currentPagePersonal + 1)} style={{ cursor: currentPagePersonal * itemsPerPage >= totalCalendariosPersonal ? 'not-allowed' : 'pointer' }}>
                                     {currentPagePersonal * itemsPerPage < totalCalendariosPersonal && (
-                                        <img src="images/Iconos/Icono15Drc.png" alt="Siguiente" className="icono1" />
+                                        <img src="images/Iconos/Icono22Drc.png" alt="Siguiente" className="icono1" />
                                     )}
                                 </div>
                             )}
@@ -274,7 +274,7 @@ function CalendarApp({ isSidebarOpen }) {
                             {showPaginationGenerales && (
                                 <div className="pagination-button" onClick={() => setCurrentPageGenerales(currentPageGenerales - 1)} style={{ cursor: currentPageGenerales === 1 ? 'not-allowed' : 'pointer' }}>
                                     {currentPageGenerales !== 1 && (
-                                    <img src="images/Iconos/Icono15Izq.png" alt="Anterior" className="icono1" />
+                                    <img src="images/Iconos/Icono22Izq.png" alt="Anterior" className="icono1" />
                                     )}
                                     </div>
                             )}
@@ -296,7 +296,7 @@ function CalendarApp({ isSidebarOpen }) {
                             {showPaginationGenerales && (
                                 <div className="pagination-button" onClick={() => setCurrentPageGenerales(currentPageGenerales + 1)} style={{ cursor: currentPageGenerales * itemsPerPage >= totalCalendariosGenerales ? 'not-allowed' : 'pointer' }}>
                                     {currentPageGenerales * itemsPerPage < totalCalendariosGenerales && (
-                                    <img src="images/Iconos/Icono15Drc.png" alt="Siguiente" className="icono1" />
+                                    <img src="images/Iconos/Icono22Drc.png" alt="Siguiente" className="icono1" />
                                     )}
                                 </div>
                             )}
