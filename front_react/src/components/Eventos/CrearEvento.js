@@ -56,7 +56,7 @@ function CrearEvento() {
             setFechInicioErrorVisible(true);
             hasError = true;
         } else if (fechInicio == undefined) {
-            setFechInicioError('¡Melon pon bien la fecha!');
+            setFechInicioError('¡Escribe una fecha válida para desatar el poder de tus elecciones en la Grieta!');
             setFechInicioErrorVisible(true);
             hasError = true;
         }
@@ -65,7 +65,7 @@ function CrearEvento() {
             setFechFinErrorVisible(true);
             hasError = true;
         } else if (fechFin == undefined) {
-            setFechFinError('¡Melon pon bien la fecha!');
+            setFechFinError('¡Escribe una fecha válida para desatar el poder de tus elecciones en la Grieta!');
             setFechFinErrorVisible(true);
             hasError = true;
         } else if (new Date(fechFin) <= new Date(fechInicio)) {
