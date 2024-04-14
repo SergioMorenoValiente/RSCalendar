@@ -1,127 +1,101 @@
-.creareventotarea-container {
+.crearevento5-container {
     width: 100%;
-    height: 100%;
-    padding-bottom: 20px;
     padding-top: 20px;
     background-color: rgba(10, 20, 40, 0.65);
-    min-height: 1130px !important;
-}
-
-.creareventotarea-tabs,
-.tab-buttons {
     display: flex;
     justify-content: center;
+    min-height: 82.5vh !important;
+    padding-bottom: 30px;
 }
 
-    .creareventotarea-tabs button,
-    .tab-buttons h2 {
-        cursor: pointer;
-        color: #C89B3C;
-        font-family: "BEAUFORT";
-        font-size: 1.5rem;
-        margin: 0 10px;
-        padding: 10px 20px;
-        border-bottom: 2px solid transparent;
-    }
-
-        .creareventotarea-tabs button.active,
-        .tab-buttons h2.active {
-            border-bottom-color: #C89B3C;
-            box-shadow: 0px 0px 95px 30px rgba(10, 20, 40, 0.9);
-            background-color: rgba(10, 20, 40, 0.6);
-            border-radius: 50px 50px 0 0;
-        }
-
-.form-container {
-    width: auto !important;
-    margin-left: 15% !important;
-    margin-right: 15% !important;
-    align-items: center;
-    margin: 50px auto;
-    padding: 70px;
+.form-container10 {
+    display: inline-block;
+    width: 40% !important;
+    padding: 40px;
     border-radius: 10px;
     background-color: rgba(10, 20, 40, 0.75);
     border: 1px solid #C89B3C;
     box-shadow: 0px 0px 50px 10px #010A13;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 
-    .form-container h2 {
-        color: #C89B3C;
-        text-align: center;
-        margin-bottom: 32px !important;
-        font-size: 2.5rem;
-        font-family: "BEAUFORT";
-        line-height: 1.5em;
-    }
+.h1cevento {
+    font-size: 2rem !important;
+    font-family: "BEAUFORT";
+    color: #C89B3C;
+    text-align: center;
+    margin-bottom: 15px !important;
+}
 
-.form-container label {
+.form-container10 label {
     color: #F0E6D2;
     display: block;
     margin-bottom: 10px;
     font-family: "SPRIEGEL";
-    font-size: 1.3rem;
+    font-size: 1rem !important;
     line-height: 1.5em;
 }
 
-    .form-container input[type="date"],
-    .form-container input[type="time"] {
-        width: 100%;
+    .form-container10 input[type="datetime-local"] {
+        width: 97%;
         margin-right: 7px;
         padding: 10px;
-        margin-bottom: 20px;
         border-radius: 5px;
         border: 1px solid #010A13;
         background-color: #F0E6D2;
         color: #010A13;
         line-height: 1.5em;
-        font-size: 1.3rem;
+        font-size: 1rem !important;
+        margin-bottom: 10px !important;
     }
 
-    .form-container input[type="text"],
-    textarea {
+    .form-container10 input[type="text"] {
         width: 97%;
         margin-right: 3%;
         padding: 10px;
-        margin-bottom: 20px;
         border-radius: 5px;
         border: 1px solid #010A13;
         background-color: #F0E6D2;
         color: #010A13;
         line-height: 1.5em;
-        font-size: 1.3rem;
+        font-size: 1rem !important;
+        margin-bottom: 10px !important;
     }
 
-select#calendario {
+.form-container10 select {
     width: 100%;
     margin-right: 10px;
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid #010A13;
     background-color: #F0E6D2;
     color: #010A13;
     line-height: 1.5em;
-    font-size: 1.3rem;
+    font-size: 1rem !important;
     cursor: pointer;
     appearance: none;
 }
 
-    select#calendario option {
-        background-color: #F0E6D2;
-        color: #010A13;
-        padding: 15px !important;
-        box-sizing: border-box;
+.form-container10 option {
+    background-color: #F0E6D2;
+    color: #010A13;
+    padding: 20px !important;
+    box-sizing: border-box;
+    line-height: 1.5em !important;
+    font-size: 1rem !important;
+}
+
+    .form-container10 option:hover {
+        background-color: #C89B3C !important;
+        color: #F0E6D2 !important;
+        border: 2px solid #091428 !important;
+        font-size: 1rem !important;
     }
 
-        select#calendario option:hover {
-            background-color: #C89B3C !important;
-            color: #F0E6D2 !important;
-            border: 2px solid #091428 !important;
-        }
-
-.form-container button,
-.sidebar-link {
-    width: 100%;
+.form-container10 button,
+.sidebar-link5 {
+    width: 50%;
     margin-right: 10px;
     padding: 12px;
     border-radius: 5px;
@@ -129,14 +103,18 @@ select#calendario {
     background-color: #C89B3C;
     cursor: pointer;
     font-family: "SPRIEGEL";
-    font-size: 1.3rem;
+    font-size: 1rem !important;
     line-height: 1.5em;
-    margin-bottom: 20px;
-    border: 4px solid #C89B3C;
+    border: 2px solid #C89B3C;
+    margin: 0;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-    .form-container button:hover,
-    .sidebar-link:hover {
+    .form-container10 button:hover,
+    .sidebar-link5:hover {
         background-color: #091428;
         color: #F0E6D2;
     }
@@ -152,7 +130,7 @@ select#calendario {
     margin-right: 15px;
 }
 
-.sidebar-link {
+.sidebar-link5 {
     margin-left: 15px;
     justify-content: center;
     text-align: start !important;
@@ -165,14 +143,11 @@ select#calendario {
 
     .checkbox-container label {
         margin-left: 10px;
-        font-size: 1.3rem;
+        font-size: 1rem;
         color: #F0E6D2;
     }
 
-.button-container button,
-.sidebar-link {
-    margin-right: 10px;
-}
+
 
 .fecha-container {
     display: flex;
@@ -199,7 +174,6 @@ select#calendario {
         transform: translateY(-50%);
         cursor: pointer;
         width: 49px;
-        height: auto;
     }
 
 #calendario-icon {
@@ -207,7 +181,6 @@ select#calendario {
     background-size: cover;
     background-position: center;
     width: 20px;
-    height: 20px;
     position: absolute;
     right: 10px;
     top: 51%;
@@ -218,4 +191,34 @@ select#calendario {
 .checkbox-container {
     display: flex;
     align-items: start;
+}
+
+.h1cevento{
+    font-size: 2rem !important;
+    font-family: "BEAUFORT";
+    color: #C89B3C;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+
+
+.sidebar-link5 {
+
+    justify-content: center;
+    text-align: start !important;
+    color: black;
+}
+
+    .sidebar-link5:hover {
+        background-color: #091428;
+        color: #F0E6D2;
+    }
+
+.button-container-cevento {
+    display: flex; /* Convertimos el contenedor en un flex container */
+    justify-content: space-between; /* Para distribuir los elementos de manera uniforme en el contenedor */
+    align-items: center;
+    padding-bottom : 20px;
+    padding-top: 15px;
 }

@@ -133,7 +133,7 @@ function CalendarApp({ isSidebarOpen }) {
 
     const handleDateClick = (arg) => {
         // Redireccionar a la página CrearEventoTarea.js pasando la fecha como parámetro
-        window.location.href = `/CrearEventoTarea?fecha=${arg.dateStr}`;
+        window.location.href = `/CrearEvento?fecha=${arg.dateStr}`;
     };
 
     const handleEventClick = (arg) => {
@@ -217,7 +217,7 @@ function CalendarApp({ isSidebarOpen }) {
 
                     {/* Botón para crear evento/tarea */}
                     <div className="button-container1">
-                        <Link to="/CrearEventoTarea" className="sidebar-link">
+                        <Link to="/CrearEvento" className="sidebar-link">
                             <img src="images/Iconos/Icono7.png" className="icono1" />
                             <span className="spanbutton1">Crear Evento</span>
                         </Link>
