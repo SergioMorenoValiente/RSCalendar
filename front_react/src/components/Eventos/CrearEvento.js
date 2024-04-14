@@ -32,8 +32,22 @@ function CrearEvento() {
                 setError('Error al cargar los calendarios del usuario');
             }
         }
-        fetchCalendarios();
+
+        const fetchCalendariosAndSetDates = async () => {
+            await fetchCalendarios();
+
+            const fechaParam = new URLSearchParams(window.location.search).get('fecha');
+            if (fechaParam) {
+                const fecha = new Date(fechaParam);
+                const fechaFormateada = fecha.toISOString().slice(0, 16);
+                setFechInicio(fechaFormateada);
+                setFechFin(fechaFormateada);
+            }
+        };
+
+        fetchCalendariosAndSetDates();
     }, []);
+
 
 
     const handleSubmit = async (e) => {
@@ -111,12 +125,24 @@ function CrearEvento() {
             setError(error.message);
         }
     };
+    function crearCalendarios() {
+        window.location.href = `/Ajustes`;
+    }
 
     return (
         <div className="crearevento5-container">
             <div className="form-container10">
                 <h1 className="h1cevento">CREAR EVENTO</h1>
-                <form onSubmit={handleSubmit}>
+                {calendarios.length === 0 ? (
+                    <div className="button-container-cevento">
+                        <p>Pero se puede ser más pendejo?? Anda, tira y create un calendario antes de meterle eventos.</p>
+                        <button onClick={() => crearCalendarios()}>Crear Calendario</button>
+                        <Link to="/ajustes" className="sidebar-link5">
+                            <span className="volvercevento">Volver</span>
+                        </Link>
+                    </div>
+                ) : (
+                    <form onSubmit={handleSubmit}>
                     {error && <p>{error}</p>}
                     <div>
                         <label htmlFor="nombre">Nombre:</label>
@@ -196,7 +222,8 @@ function CrearEvento() {
                             <span className="volvercevento">Volver</span>
                         </Link>
                     </div>
-                </form>
+                    </form>
+                )}
             </div>
         </div>
     );
