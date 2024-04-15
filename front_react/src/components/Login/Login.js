@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import './Login.css';
 import { setUserJwt, setUserId } from '../Utils';
 
+//Funciones para validar el formulario
 const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
@@ -24,7 +25,7 @@ const validatePassword = (password) => {
     );
 };
 function Login({ onLogin }) {
-    // Para el formulario de inicio de sesión y registro
+    // Constantes
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
@@ -37,7 +38,6 @@ function Login({ onLogin }) {
 
     const [emailrError, setEmailrError] = useState('');
     const [passwordrError, setPasswordrError] = useState('');
-
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [loginError, setloginError] = useState('');
     const [usernameError, setUsernameError] = useState('');
@@ -46,7 +46,6 @@ function Login({ onLogin }) {
 
     const [emailrErrorVisible, setEmailrErrorVisible] = useState(false);
     const [passwordrErrorVisible, setPasswordrErrorVisible] = useState(false);
-
     const [confirmPasswordErrorVisible, setConfirmPasswordErrorVisible] = useState(false);
     const [loginErrorVisible, setLoginErrorVisible] = useState(false);
     const [usernameErrorVisible, setUsernameErrorVisible] = useState(false);
