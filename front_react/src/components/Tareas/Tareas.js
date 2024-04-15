@@ -256,11 +256,8 @@ function Tareas() {
 
     //Vaciar campos del formulario
     const vaciarCampos = () => {
-        //setTituloCrear("");
-        //setDescripcionCalendarioCrear("");
-        //setNombreCalendario('');
+        setTitulo("");
         setError('');
-        //setCalendarioEditado(null);
         setTituloError('');
     };
 
@@ -283,27 +280,27 @@ function Tareas() {
                                 <h2 className={tab === "TareasCompletadas" ? "active" : ""}
                                         onClick={() => setTab("TareasCompletadas")}>COMPLETADAS</h2>
                                     <div className="tooltip2" onClick={toggleEdicion}>
-                                        <img src={iconoEdicion} className="iconoajustes"
+                                        <img src={iconoEdicion} className="iconotareas"
                                             alt={edicionHabilitada ? "Deshabilitar edición" : "Habilitar edición"} />
                                         <span className="tooltiptext2">{edicionHabilitada ? "Deshabilitar edición" : "Habilitar edición"}</span>
                                     </div>
                             </div>
 
                                 <div className="table-container">
-                                    <div className="arrow-container"></div>
+                                    {/*<div className="arrow-container"></div>*/}
                                     <table>
                                         <tbody>
                                             {tareasPendientes.map((tarea) => (
-                                                <tr key={tarea.id}>
-                                                    <td className="tdajustes">
-                                                        <ul className="calendars-list">
+                                                <tr key={tarea.id} className="trtareas">
+                                                    <td className="tdtareas">
+                                                        <ul className="tareas-list">
                                                             <li>
                                                                 <input
                                                                     type="checkbox"
                                                                     onChange={() => handleTareaCompletada(tarea.id, tarea)}
                                                                     checked={tarea.completado === '1'}
                                                                 />
-                                                                <label>{tarea.nombre}</label>
+                                                                <label className="label-sidebar">{tarea.nombre}</label>
                                                             </li>
                                                         </ul>
                                                     </td>
@@ -328,7 +325,7 @@ function Tareas() {
                                             ))}
                                         </tbody>
                                     </table>
-                                    <div className="arrow-container"></div>
+                                    {/*<div className="arrow-container"></div>*/}
                                 </div>
 
 
@@ -344,24 +341,24 @@ function Tareas() {
                                 <h2 className={tab === "TareasCompletadas" ? "active" : ""}
                                     onClick={() => setTab("TareasCompletadas")}>COMPLETADAS</h2>
                                     <div className="tooltip2" onClick={toggleEdicion}>
-                                        <img src={iconoEdicion} className="iconoajustes"
+                                        <img src={iconoEdicion} className="iconotareas"
                                             alt={edicionHabilitada ? "Deshabilitar edición" : "Habilitar edición"} />
                                         <span className="tooltiptext2">{edicionHabilitada ? "Deshabilitar edición" : "Habilitar edición"}</span>
                                     </div>
                             </div>
 
                                 <div className="table-container">
-                                    <div className="arrow-container"></div>
+                                    {/*<div className="arrow-container"></div>*/}
                                     <table>
                                         <tbody>
                                             {tareasCompletadas.map((tarea, index) => (
-                                                <tr>
-                                                    <td className="tdajustes">
-                                                        <ul className="calendars-list">
+                                                <tr className="trtareas">
+                                                    <td className="tdtareas">
+                                                        <ul className="tareas-list">
                                                             <li key={index}>
                                                                 <input type="checkbox" checked
                                                                     onChange={() => handleTareaSinCompletar(tarea.id, tarea)} />
-                                                                <label className="label-sidebar">{tarea.nombre}</label>
+                                                                <label style={{ textDecoration: 'line-through' }} className="label-sidebar">{tarea.nombre}</label>
                                                             </li>
                                                         </ul>
                                                     </td>
@@ -386,13 +383,13 @@ function Tareas() {
                                             ))}
                                         </tbody>
                                     </table>
-                                    <div className="arrow-container"></div>
+                                    {/*<div className="arrow-container"></div>*/}
                                 </div>
 
 
                         </React.Fragment>
                     )}
-                        <button className="buttonajustes"
+                        <button className="buttontareas"
                             onClick={() => {
                                 setShowDiv1(false);
                                 setShowDiv2(true);
@@ -404,18 +401,18 @@ function Tareas() {
                 {showDiv2 && (
                     <div className="form-container">
                         <div className="divajustes2">
-                            <h2 className="h2ajustes">Crear Calendario</h2>
+                            <h2 className="h2ajustes">Crear Tarea</h2>
                     <form onSubmit={handleSubmitC}>
                         <div>
                                 <label htmlFor="titulo"
-                                className="labelajustes">Título de la Tarea:</label>
+                                className="labeltareas">Título de la Tarea:</label>
                                 <input type="text" id="titulo" value={titulo}
                                     onChange={(e) => setTitulo(e.target.value)}
                                     onClick={() => {
                                         setTituloError('');
                                         setTituloErrorVisible(false);
                                     }}
-                                    className={tituloErrorVisible ? 'inputajustes error' : 'inputajustes'}
+                                        className={tituloErrorVisible ? 'inputtareas error' : 'inputtareas'}
                                 />
                                 {tituloErrorVisible && (
                                     <div className="validacionajustes">
@@ -426,8 +423,8 @@ function Tareas() {
                                 </div>
                                 <div className="button-container">
                             <button type="submit"
-                                    className="button3ajustes">Crear Tarea</button>
-                            <button className="button4ajustes"
+                                    className="button3tareas">Crear Tarea</button>
+                            <button className="button4tareas"
                                 onClick={() => {
                                     setShowDiv1(true);
                                     setShowDiv2(false);
@@ -447,14 +444,14 @@ function Tareas() {
                             <form onSubmit={(e) => handleSubmitE(e)}>
                                 <div>
                                     <label htmlFor="titulo"
-                                        className="labelajustes">Título de la Tarea:</label>
+                                        className="labeltareas">Título de la Tarea:</label>
                                     <input type="text" id="titulo" value={titulo}
                                         onChange={(e) => setTitulo(e.target.value)}
                                         onClick={() => {
                                             setTituloError('');
                                             setTituloeErrorVisible(false);
                                         }}
-                                        className={tituloeErrorVisible ? 'inputajustes error' : 'inputajustes'}
+                                        className={tituloeErrorVisible ? 'inputtareas error' : 'inputtareas'}
                                     />
                                     {tituloeErrorVisible && (
                                         <div className="validacionajustes">
@@ -464,8 +461,8 @@ function Tareas() {
                                     )}
                                 </div>
                                 <div className="button-container">
-                                    <button className="button3ajustes" type="submit">Guardar Tarea</button>
-                                    <button className="button4ajustes"
+                                    <button className="button3tareas" type="submit">Guardar Tarea</button>
+                                    <button className="button4tareas"
                                         onClick={() => {
                                             setShowDiv1(true);
                                             setShowDiv3(false);
