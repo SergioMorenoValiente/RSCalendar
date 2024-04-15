@@ -27,6 +27,8 @@ function Tareas() {
     const [tituloeErrorVisible, setTituloeErrorVisible] = useState(false);
 
     useEffect(() => {
+
+        setUserId(getStoredUserId());
         const fetchTareas = async () => {
             try {
                 const response = await fetch('https://localhost:7143/api/Tareas');
@@ -168,6 +170,10 @@ function Tareas() {
                     usuarioId: userId
                 })
             });
+            console.log(titulo);
+            console.log(fechaFormateada);
+            console.log("0");
+            console.log(userId);
 
             if (!response.ok) {
                 throw new Error('Error al crear el evento');
