@@ -310,22 +310,23 @@ function Ajustes() {
                                     <table>
                                         <tbody>
                                         {currentCalendarios.map(calendario => (
-                                    <tr key={calendario.id}>
-                                        <td className="tdajustes">{calendario.nombre}</td>
-                                        <td>
-                                            <button className="button1ajustes"
-                                            onClick={() => llenarFormularioEditar(calendario)}>
-                                            Editar
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button className="button2ajustes" onClick={() => borrarCalendario(calendario)}>
-                                                Borrar
-                                            </button>
+                                            <tr key={calendario.id}>
+                                                <td className="tdajustes">{calendario.nombre}</td>
+                                                <td>
+                                                    <button className="button1ajustes"
+                                                        onClick={() => llenarFormularioEditar(calendario)}>
+                                                        Editar
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button className="button2ajustes"
+                                                        onClick={() => borrarCalendario(calendario)}>
+                                                        Borrar
+                                                    </button>
 
-                                        </td>
-                                    </tr>
-                                ))}
+                                                </td>
+                                            </tr>
+                                        ))}
                                         </tbody>
                                     </table>
                                     <div className="arrow-container">
@@ -378,7 +379,7 @@ function Ajustes() {
                                     onChange={handleDescripcionChangeCrear} />
                             </div>
                                 <button className="button3ajustes"
-                                    type="submit">Crear</button>
+                                    type="submit">Crear Calendario</button>
                                 <button className="button4ajustes"
                                     onClick={() => {
                                         setShowDiv1(true);
@@ -420,7 +421,7 @@ function Ajustes() {
                                     value={descripcionCalendarioEditado}
                                     onChange={(event) => setDescripcionCalendarioEditado(event.target.value)}/>
                                     </div>
-                            <button className="button3ajustes" type="submit">Guardar</button>
+                            <button className="button3ajustes" type="submit">Guardar Calendario</button>
                                 <button className="button4ajustes"
                                         onClick={() => {
                                         vaciarCampos();

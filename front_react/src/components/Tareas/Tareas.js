@@ -7,6 +7,24 @@ function Tareas() {
 
     const [tab, setTab] = useState("TareasPendientes");
     const [tareas, setTareas] = useState([]);
+    const [titulo, setTitulo] = useState('');
+    const [fecha, setFecha] = useState('');
+    const [tareasDelUsuario, setTareasDelUsuario] = useState('');
+    const [tituloError, setTituloError] = useState('');
+    const [fechaError, setFechaError] = useState('');
+    const [userId, setUserId] = useState('');
+    const [error, setError] = useState('');
+    const [startDate, setStartDate] = useState(new Date());
+    const [completado, setCompletado] = useState('');
+    const [usuarioId, setUsuarioId] = useState('');
+    const [tareaId, setTareaId] = useState(null);
+    const [showDiv1, setShowDiv1] = useState(true);
+    const [showDiv2, setShowDiv2] = useState(false);
+    const [showDiv3, setShowDiv3] = useState(false);
+    const [edicionHabilitada, setEdicionHabilitada] = useState(false);
+    const [iconoEdicion, setIconoEdicion] = useState('images/Iconos/Icono23.png');
+    const [tituloErrorVisible, setTituloErrorVisible] = useState(false);
+    const [tituloeErrorVisible, setTituloeErrorVisible] = useState(false);
 
     useEffect(() => {
         const fetchTareas = async () => {
@@ -27,311 +45,106 @@ function Tareas() {
         fetchTareas();
     }, []);
 
-    return (
-        <div className="tareas-container">
-            <div className="tareas-container2">
-                {/*<h1 className="h1tareas">TAREAS</h1>*/}
-
-                <div className="form-container">
-                    {tab === "TareasPendientes" && (
-                        <React.Fragment>
-
-                            {/* Botones de pestañas evento */}
-                            <div className="tab-buttons">
-                                <h2 className={tab === "TareasPendientes" ? "active" : ""}
-                                    onClick={() => setTab("TareasPendientes")}>PENDIENTES</h2>
-                                <h2 className={tab === "TareasCompletadas" ? "active" : ""}
-                                    onClick={() => setTab("TareasCompletadas")}>COMPLETADAS</h2>
-                            </div>
-
-                            <TareasPendientes tareas={tareas} setTareas={setTareas} />
-
-
-
-                        </React.Fragment>
-                    )}
-                        {tab === "TareasCompletadas" && (
-                        <React.Fragment>
-
-                            <div className="tab-buttons">
-                                <h2 className={tab === "TareasPendientes" ? "active" : ""}
-                                    onClick={() => setTab("TareasPendientes")}>PENDIENTES</h2>
-                                <h2 className={tab === "TareasCompletadas" ? "active" : ""}
-                                    onClick={() => setTab("TareasCompletadas")}>COMPLETADAS</h2>
-                            </div>
-
-                            <TareasCompletadas tareas={tareas} setTareas={setTareas} />
-
-
-                        </React.Fragment>
-                    )}
-                </div>
-            </div>
-        </div>
-    );
-}
-
-function TareasPendientes({ tareas, setTareas }) {
-
-    const [edicionHabilitada, setEdicionHabilitada] = useState(false);
-    const [error, setError] = useState('');
-
-    const toggleEdicion = () => {
-        setEdicionHabilitada(!edicionHabilitada);
-    };
-    const tareasPendientes = tareas.filter(tarea => tarea.completado === "0");
-
-    const handleTareaCompletada = async (id, tarea) => {
-        try {
-            const updatedTarea = { id:id, nombre:tarea.nombre,fechInicio:tarea.fechInicio, completado: '1', usuarioId: tarea.usuarioId }
-            const response = await fetch(`https://localhost:7143/api/Tareas/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedTarea)
-            });
-            if (!response.ok) {
-                throw new Error('Error al marcar la tarea como completada');
-            }
-            const updatedTareas = tareas.map(t => {
-                if (t.id === id) {
-                    return updatedTarea;
-                }
-                return t;
-            });
-            setTareas(updatedTareas);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const handleEditar = (tarea) => {
-        // Redireccionar a la página EditarEvento.js pasando el ID del evento como parámetro
-        window.location.href = `/EditarTarea?id=${tarea.id}`;
-    };
-
-    //Borar tarea
-    const borrarTarea = async (tareaId) => {
-        try {
-            const response = await fetch(`https://localhost:7143/api/tareas/${tareaId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al borrar el evento');
-            }
-            window.location.href = "/Tareas";
-        } catch (error) {
-            setError(error.message);
-        }
-    };
-
-
-    return (
-        <div className="div-container-tareas">
-            <table>
-                <tbody>
-                    {tareasPendientes.map((tarea) => (
-                        <tr key={tarea.id}>
-                            <td className="tdajustes">
-                                <ul className="calendars-list">
-                                    <li>
-                                        <input
-                                            type="checkbox"
-                                            onChange={() => handleTareaCompletada(tarea.id, tarea)}
-                                            checked={tarea.completado === '1'} 
-                                        />
-                                        <label>{tarea.nombre}</label>
-                                    </li>
-                                </ul>
-                            </td>
-                        {edicionHabilitada && (
-                            <>
-                                <td>
-                                        <button className="button1ajustes" onClick={() => handleEditar(tarea)}>
-                                            Editar
-                                        </button>
-
-                                </td>
-                                <td>
-                                        <button className="button2ajustes" onClick={() => borrarTarea(tarea.id)}>
-                                        Borrar
-                                    </button>
-                                </td>
-                            </>
-                        )}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <div className="button-container">
-                <Link to="/CrearEventoTarea" className="sidebar-link">
-                    <img src="images/Iconos/Icono7.png" className="icono1" />
-                    <span className="spanbutton">Crear Evento/Tarea</span>
-                </Link>
-                <button className="buttonajustes" onClick={toggleEdicion}>
-                    <img src="images/Iconos/Icono7.png" className="iconoajustes" />
-                    {edicionHabilitada ? "Deshabilitar edición" : "Habilitar edición"}
-                </button>
-            </div>
-        </div>
-    );
-}
-
-function TareasCompletadas({ tareas, setTareas }) {
-
-    const [edicionHabilitada, setEdicionHabilitada] = useState(false);
-    const [error, setError] = useState('');
-
-    const toggleEdicion = () => {
-        setEdicionHabilitada(!edicionHabilitada);
-    };
-    const tareasCompletadas = tareas.filter(tarea => tarea.completado === "1");
-
-    const handleTareaSinCompletar = async (id, tarea) => {
-        try {
-            const updatedTarea = { id: id, nombre: tarea.nombre, fechInicio: tarea.fechInicio, completado: '0', usuarioId: tarea.usuarioId }
-            const response = await fetch(`https://localhost:7143/api/Tareas/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedTarea) // Pasamos la tarea actualizada al servidor
-            });
-            if (!response.ok) {
-                throw new Error('Error al marcar la tarea como completada');
-            }
-            const updatedTareas = tareas.map(t => {
-                if (t.id === id) {
-                    return updatedTarea; // Si es la tarea actualizada, la retornamos
-                }
-                return t;
-            });
-            setTareas(updatedTareas);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    const handleEditar = (tarea) => {
-        // Redireccionar a la página EditarEvento.js pasando el ID del evento como parámetro
-        window.location.href = `/EditarTarea?id=${tarea.id}`;
-    };
-
-    //Borar tarea
-    const borrarTarea = async (tareaId) => {
-        try {
-            const response = await fetch(`https://localhost:7143/api/tareas/${tareaId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al borrar el evento');
-            }
-            window.location.href = "/Tareas";
-        } catch (error) {
-            setError(error.message);
-        }
-    };
-
-    return (
-        <div className="div-container-tareas">
-            <table>
-                <tbody>
-                    {tareasCompletadas.map((tarea, index) => (
-                    <tr>
-                        <td className="tdajustes">
-                            <ul className="calendars-list">
-                                    <li key={index}>
-                                        <input type="checkbox" checked onChange={() => handleTareaSinCompletar(tarea.id, tarea)} />
-                                        <label>{tarea.nombre}</label>
-                                    </li>
-                            </ul>
-                        </td>
-                        {edicionHabilitada && (
-                            <> {/* Fragment para envolver las columnas que deben aparecer solo cuando la edición está habilitada */}
-                                <td>
-                                        <button className="button1ajustes" onClick={() => handleEditar(tarea)}>
-                                            Editar
-                                        </button>
-
-                                </td>
-                                <td>
-                                        <button className="button2ajustes" onClick={() => borrarTarea(tarea.id)}>
-                                        Borrar
-                                    </button>
-                                </td>
-                            </>
-                        )}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <div className="button-container">
-                <Link to="/CrearEventoTarea" className="sidebar-link">
-                    <img src="images/Iconos/Icono7.png" className="icono1" />
-                    <span className="spanbutton">Crear Evento/Tarea</span>
-                </Link>
-                <button className="buttonajustes" onClick={toggleEdicion}>
-                    <img src="images/Iconos/Icono7.png" className="iconoajustes" />
-                    {edicionHabilitada ? "Deshabilitar edición" : "Habilitar edición"}
-                </button>
-            </div>
-        </div>
-    );
-}
-
-
-export default Tareas;
-
-function TareaForm({ setTab, startDate, setStartDate }) {
-    //Para los campos del formulario
-    const [titulo, setTitulo] = useState('');
-    const [fecha, setFecha] = useState('');
-    const [tareasDelUsuario, setTareasDelUsuario] = useState('');
-    const [tituloError, setTituloError] = useState('');
-    const [fechaError, setFechaError] = useState('');
-    const [userId, setUserId] = useState('');
-    const [error, setError] = useState('');
-
-    useEffect(() => {
-        const storedUserId = getStoredUserId();
-        setUserId(storedUserId ? storedUserId.toString() : ''); // Ensure userId is a string
-        async function fetchTareas() {
-            try {
-                const response = await fetch(`https://localhost:7143/api/calendarios/${storedUserId}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                });
-                const data = await response.json();
-                setTareasDelUsuario(data);
-            } catch (error) {
-                throw error;
-            }
-        }
-        if (storedUserId) {
-            fetchTareas();
-        }
-    }, []);
-
-    //Función para manejar el envío del formulario
-    const handleSubmit = async (e) => {
+    //Función para manejar el envío del formulario al editar tarea
+    const handleSubmitE = async (e) => {
         e.preventDefault();
 
         setTituloError('');
+        setTituloErrorVisible(false);
+        setTituloeErrorVisible(false);
 
         let hasError = false;
 
         if (!titulo) {
             setTituloError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setTituloeErrorVisible(true);
+            hasError = true;
+        }
+
+        if (hasError) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`https://localhost:7143/api/tareas/${tareaId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: tareaId,
+                    nombre: titulo,
+                    fechInicio: fecha,
+                    completado: completado,
+                    usuarioId: usuarioId
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al editar el evento');
+            }
+            setTitulo('');
+            setFecha('');
+            setCompletado('');
+            setUsuarioId('');
+            setError('');
+
+            window.location.href = "/Tareas";
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    //Borar tarea
+    const borrarTarea2 = async (tareaId) => {
+        try {
+            const response = await fetch(`https://localhost:7143/api/tareas/${tareaId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al borrar el evento');
+            }
+            window.location.href = "/Tareas";
+            setShowDiv1(true);
+            setShowDiv2(false);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    async function fetchTareaData(tareaId) {
+        try {
+            const response = await fetch(`https://localhost:7143/api/Tareas/${tareaId}`);
+            if (!response.ok) {
+                throw new Error('Error al cargar los datos de la tarea');
+            }
+            const tareaData = await response.json();
+            setTitulo(tareaData.nombre);
+            setFecha(tareaData.fechInicio);
+            setCompletado(tareaData.completado);
+            setUsuarioId(tareaData.usuarioId);
+        } catch (error) {
+            setError(error.message);
+        }
+    }
+
+    //Función para manejar el envío del formulario al crear tarea
+    const handleSubmitC = async (e) => {
+        e.preventDefault();
+
+        setTituloError('');
+        setTituloErrorVisible(false);
+        setTituloeErrorVisible(false);
+
+        let hasError = false;
+
+        if (!titulo) {
+            setTituloError('¡Llena el vacío con tus poderes invocadores y conquista la Grieta!');
+            setTituloErrorVisible(true);
             hasError = true;
         }
 
@@ -362,25 +175,306 @@ function TareaForm({ setTab, startDate, setStartDate }) {
 
             setTitulo('');
             setFecha('');
-            window.location.href = "/";
+            window.location.href = "/Tareas";
         } catch (error) {
             setError(error.message);
         }
     };
 
+    const toggleEdicion = () => {
+        setEdicionHabilitada(!edicionHabilitada);
+        const nuevoIcono = edicionHabilitada ? 'images/Iconos/Icono23.png' : 'images/Iconos/Icono24.png';
+        setIconoEdicion(nuevoIcono);
+    };
+
+    const tareasPendientes = tareas.filter(tarea => tarea.completado === "0");
+
+    const handleTareaCompletada = async (id, tarea) => {
+        try {
+            const updatedTarea = { id: id, nombre: tarea.nombre, fechInicio: tarea.fechInicio, completado: '1', usuarioId: tarea.usuarioId }
+            const response = await fetch(`https://localhost:7143/api/Tareas/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedTarea)
+            });
+            if (!response.ok) {
+                throw new Error('Error al marcar la tarea como completada');
+            }
+            const updatedTareas = tareas.map(t => {
+                if (t.id === id) {
+                    return updatedTarea;
+                }
+                return t;
+            });
+            setTareas(updatedTareas);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleEditar = (tarea) => {
+        fetchTareaData(tarea.id);
+        setTareaId(tarea.id);
+        setShowDiv1(false);
+        setShowDiv3(true);
+    };
+
+    const tareasCompletadas = tareas.filter(tarea => tarea.completado === "1");
+
+    const handleTareaSinCompletar = async (id, tarea) => {
+        try {
+            const updatedTarea = { id: id, nombre: tarea.nombre, fechInicio: tarea.fechInicio, completado: '0', usuarioId: tarea.usuarioId }
+            const response = await fetch(`https://localhost:7143/api/Tareas/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedTarea) // Pasamos la tarea actualizada al servidor
+            });
+            if (!response.ok) {
+                throw new Error('Error al marcar la tarea como completada');
+            }
+            const updatedTareas = tareas.map(t => {
+                if (t.id === id) {
+                    return updatedTarea; // Si es la tarea actualizada, la retornamos
+                }
+                return t;
+            });
+            setTareas(updatedTareas);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    //Vaciar campos del formulario
+    const vaciarCampos = () => {
+        //setTituloCrear("");
+        //setDescripcionCalendarioCrear("");
+        //setNombreCalendario('');
+        setError('');
+        //setCalendarioEditado(null);
+        setTituloError('');
+    };
+
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="titulo">Título de la Tarea:</label>
-                <input type="text" id="titulo" value={titulo} onChange={(e) => setTitulo(e.target.value)} />
+        <div className="tareas-container">
+            <div className="tareas-container2">
+                {/*<h1 className="h1tareas">TAREAS</h1>*/}
+
+
+
+                {showDiv1 && (
+                <div className="form-container">
+                    {tab === "TareasPendientes" && (
+                        <React.Fragment>
+
+                            {/* Botones de pestañas evento */}
+                            <div className="tab-buttons">
+                                <h2 className={tab === "TareasPendientes" ? "active" : ""}
+                                    onClick={() => setTab("TareasPendientes")}>PENDIENTES</h2>
+                                <h2 className={tab === "TareasCompletadas" ? "active" : ""}
+                                        onClick={() => setTab("TareasCompletadas")}>COMPLETADAS</h2>
+                                    <div className="tooltip2" onClick={toggleEdicion}>
+                                        <img src={iconoEdicion} className="iconoajustes"
+                                            alt={edicionHabilitada ? "Deshabilitar edición" : "Habilitar edición"} />
+                                        <span className="tooltiptext2">{edicionHabilitada ? "Deshabilitar edición" : "Habilitar edición"}</span>
+                                    </div>
+                            </div>
+
+                                <div className="table-container">
+                                    <div className="arrow-container"></div>
+                                    <table>
+                                        <tbody>
+                                            {tareasPendientes.map((tarea) => (
+                                                <tr key={tarea.id}>
+                                                    <td className="tdajustes">
+                                                        <ul className="calendars-list">
+                                                            <li>
+                                                                <input
+                                                                    type="checkbox"
+                                                                    onChange={() => handleTareaCompletada(tarea.id, tarea)}
+                                                                    checked={tarea.completado === '1'}
+                                                                />
+                                                                <label>{tarea.nombre}</label>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                    {edicionHabilitada && (
+                                                        <>
+                                                            <td>
+                                                                <button className="button1tareas"
+                                                                    onClick={() => handleEditar(tarea)}>
+                                                                    Editar
+                                                                </button>
+
+                                                            </td>
+                                                            <td>
+                                                                <button className="button2tareas"
+                                                                    onClick={() => borrarTarea2(tarea.id)}>
+                                                                    Borrar
+                                                                </button>
+                                                            </td>
+                                                        </>
+                                                    )}
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                    <div className="arrow-container"></div>
+                                </div>
+
+
+
+                        </React.Fragment>
+                    )}
+                        {tab === "TareasCompletadas" && (
+                        <React.Fragment>
+
+                            <div className="tab-buttons">
+                                <h2 className={tab === "TareasPendientes" ? "active" : ""}
+                                    onClick={() => setTab("TareasPendientes")}>PENDIENTES</h2>
+                                <h2 className={tab === "TareasCompletadas" ? "active" : ""}
+                                    onClick={() => setTab("TareasCompletadas")}>COMPLETADAS</h2>
+                                    <div className="tooltip2" onClick={toggleEdicion}>
+                                        <img src={iconoEdicion} className="iconoajustes"
+                                            alt={edicionHabilitada ? "Deshabilitar edición" : "Habilitar edición"} />
+                                        <span className="tooltiptext2">{edicionHabilitada ? "Deshabilitar edición" : "Habilitar edición"}</span>
+                                    </div>
+                            </div>
+
+                                <div className="table-container">
+                                    <div className="arrow-container"></div>
+                                    <table>
+                                        <tbody>
+                                            {tareasCompletadas.map((tarea, index) => (
+                                                <tr>
+                                                    <td className="tdajustes">
+                                                        <ul className="calendars-list">
+                                                            <li key={index}>
+                                                                <input type="checkbox" checked
+                                                                    onChange={() => handleTareaSinCompletar(tarea.id, tarea)} />
+                                                                <label className="label-sidebar">{tarea.nombre}</label>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                    {edicionHabilitada && (
+                                                        <> {/* Fragment para envolver las columnas que deben aparecer solo cuando la edición está habilitada */}
+                                                            <td>
+                                                                <button className="button1tareas"
+                                                                    onClick={() => handleEditar(tarea)}>
+                                                                    Editar
+                                                                </button>
+
+                                                            </td>
+                                                            <td>
+                                                                <button className="button2tareas"
+                                                                    onClick={() => borrarTarea2(tarea.id)}>
+                                                                    Borrar
+                                                                </button>
+                                                            </td>
+                                                        </>
+                                                    )}
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                    <div className="arrow-container"></div>
+                                </div>
+
+
+                        </React.Fragment>
+                    )}
+                        <button className="buttonajustes"
+                            onClick={() => {
+                                setShowDiv1(false);
+                                setShowDiv2(true);
+                            }}>
+                            <img src="images/Iconos/Icono7.png" className="iconoajustes" />
+                            Crear tarea nueva</button>
+                </div>
+                )}
+                {showDiv2 && (
+                    <div className="form-container">
+                        <div className="divajustes2">
+                            <h2 className="h2ajustes">Crear Calendario</h2>
+                    <form onSubmit={handleSubmitC}>
+                        <div>
+                                <label htmlFor="titulo"
+                                className="labelajustes">Título de la Tarea:</label>
+                                <input type="text" id="titulo" value={titulo}
+                                    onChange={(e) => setTitulo(e.target.value)}
+                                    onClick={() => {
+                                        setTituloError('');
+                                        setTituloErrorVisible(false);
+                                    }}
+                                    className={tituloErrorVisible ? 'inputajustes error' : 'inputajustes'}
+                                />
+                                {tituloErrorVisible && (
+                                    <div className="validacionajustes">
+                                        <img src="images/Iconos/Icono21.png" className="icono10" />
+                                        <p className="pajustes">{tituloError}</p>
+                                    </div>
+                                )}
+                                </div>
+                                <div className="button-container">
+                            <button type="submit"
+                                    className="button3ajustes">Crear Tarea</button>
+                            <button className="button4ajustes"
+                                onClick={() => {
+                                    setShowDiv1(true);
+                                    setShowDiv2(false);
+                                    vaciarCampos();
+                                    setTituloErrorVisible(false);
+                                    setTituloeErrorVisible(false);
+                                        }}>Volver</button>
+                                </div>
+                        </form>
+                    </div>
+                    </div>
+)}
+                {showDiv3 && (
+                    <div className="form-container">
+                        <div className="divajustes2">
+                            <h2 className="h2ajustes">EDITAR TAREA</h2>
+                            <form onSubmit={(e) => handleSubmitE(e)}>
+                                <div>
+                                    <label htmlFor="titulo"
+                                        className="labelajustes">Título de la Tarea:</label>
+                                    <input type="text" id="titulo" value={titulo}
+                                        onChange={(e) => setTitulo(e.target.value)}
+                                        onClick={() => {
+                                            setTituloError('');
+                                            setTituloeErrorVisible(false);
+                                        }}
+                                        className={tituloeErrorVisible ? 'inputajustes error' : 'inputajustes'}
+                                    />
+                                    {tituloeErrorVisible && (
+                                        <div className="validacionajustes">
+                                            <img src="images/Iconos/Icono21.png" className="icono10" />
+                                            <p className="pajustes">{tituloError}</p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="button-container">
+                                    <button className="button3ajustes" type="submit">Guardar Tarea</button>
+                                    <button className="button4ajustes"
+                                        onClick={() => {
+                                            setShowDiv1(true);
+                                            setShowDiv3(false);
+                                            vaciarCampos();
+                                            setTituloErrorVisible(false);
+                                            setTituloeErrorVisible(false);
+                                        }}>Volver</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+)}
             </div>
-            <p>{tituloError}</p>
-            <div className="button-container">
-                <button type="submit">Añadir Tarea</button>
-                <Link to="/" className="sidebar-link">
-                    <span>Volver</span>
-                </Link>
-            </div>
-        </form>
+        </div>
     );
 }
+
+export default Tareas;

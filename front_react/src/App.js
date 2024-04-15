@@ -12,7 +12,6 @@ import Tareas from './components/Tareas/Tareas';
 import CrearEvento from './components/Eventos/CrearEvento';
 import DeclaracionDeAccesibilidad from './components/DeclaracionDeAccesibilidad/DeclaracionDeAccesibilidad';
 import EditarEvento from './components/Eventos/EditarEvento';
-import EditarTarea from './components/Tareas/EditarTarea';
 import { isUserAuthenticated, getStoredUserJwt, getStoredUserId } from './components/Utils';
 
 function App() {
@@ -83,7 +82,6 @@ function AuthenticatedRoutes({ setIsLoggedIn }) {
                 <Route path="/Tareas" element={<Tareas />} />
                 <Route path="/CrearEvento" element={<CrearEvento />} />
                 <Route path="/EditarEvento" element={<EditarEvento />} />
-                <Route path="/EditarTarea" element={<EditarTarea />} />
             </Routes>
             <Footer />
         </div>

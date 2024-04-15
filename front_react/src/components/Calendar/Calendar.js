@@ -390,7 +390,7 @@ function CalendarApp({ isSidebarOpen }) {
                             {tareas.slice((currentPageGenerales - 1) * itemsPerPage, currentPageGenerales * itemsPerPage).map(tarea => (
                                 <li key={tarea.id}>
                                     <input type="checkbox" onChange={() => handleTareaCompletada(tarea.id, tarea)} />
-                                    <label className="label-sidebar"> {tarea.nombre.length > 18 ? tarea.nombre.substring(0, 15) + '...' : tarea.nombre}</label>
+                                    <label className="label-sidebar"> {tarea.nombre.length > 12 ? tarea.nombre.substring(0, 9) + '...' : tarea.nombre}</label>
                                 </li>
                             ))}
                             {tareas.length > 3 && (
