@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("apiRSCalendar")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d28f5379c481fb3c05993c9f30790966163f335f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4dd53f382f86cda7349b87addc878589adc12276")]
 [assembly: System.Reflection.AssemblyProductAttribute("apiRSCalendar")]
 [assembly: System.Reflection.AssemblyTitleAttribute("apiRSCalendar")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
