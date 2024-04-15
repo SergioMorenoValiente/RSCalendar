@@ -260,6 +260,8 @@ function Ajustes() {
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+    //Paginacion de calendarios
     const [currentPage, setCurrentPage] = useState(1);
     const [calendariosPerPage, setCalendariosPerPage] = useState(4);
     const indexOfLastCalendario = currentPage * calendariosPerPage;

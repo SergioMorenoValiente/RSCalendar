@@ -10,6 +10,8 @@ import { fetchData } from '../Services/Peticiones';
 import { getStoredUserId } from '../Utils';
 
 function CalendarApp({ isSidebarOpen }) {
+
+    //Constantes
     const [calendariosUsuario, setCalendariosUsuario] = useState([]); 
     const [calendariosGenerales, setCalendariosGenerales] = useState([]);
     const [eventos, setEventos] = useState([]);
@@ -17,6 +19,7 @@ function CalendarApp({ isSidebarOpen }) {
     const [calendariosGeneralesSeleccionados, setCalendariosGeneralesSeleccionados] = useState({});
     const [tareas, setTareas] = useState([]);
 
+    //Obtener Calendarios del usuario
     useEffect(() => {
         const fetchDataAndSetState = async () => {
             try {
@@ -30,6 +33,7 @@ function CalendarApp({ isSidebarOpen }) {
         fetchDataAndSetState();
     }, []);
 
+    //Obtener calendarios generales
     useEffect(() => {
         fetch('https://localhost:7143/api/calendariogenerals')
             .then(response => response.json())
@@ -37,6 +41,7 @@ function CalendarApp({ isSidebarOpen }) {
             .catch(error => console.error('Error fetching calendars:', error));
     }, []);
 
+    //Obetener eventos y eventosgenerales
     useEffect(() => {
         Promise.all([
             fetch('https://localhost:7143/api/eventogenerals').then(response => response.json()),
@@ -49,6 +54,7 @@ function CalendarApp({ isSidebarOpen }) {
             .catch(error => console.error('Error fetching events:', error));
     }, []);
 
+    //Obtener eventos
     useEffect(() => {
         const fetchTareas = async () => {
             try {
@@ -69,19 +75,18 @@ function CalendarApp({ isSidebarOpen }) {
         fetchTareas();
     }, []);
 
+    //Obtener calendarios checkeados
     const checkCalendarios = (calendarios, setCalendarioSeleccionado, isGeneral) => {
         const calendariosSeleccionados = {};
         calendarios.forEach(calendario => {
-            // Comprueba si el calendario es visible o no y asigna el valor correspondiente
             calendariosSeleccionados[calendario.id] = calendario.visible === 1;
         });
-        // Establece el estado con los calendarios seleccionados
         setCalendarioSeleccionado(calendariosSeleccionados);
     };
 
+    //Cambiar estado de visibilidad al checkear calendario
     const handleCalendarioSeleccionado = async (calendarioId, isChecked, isGeneral) => {
         try {
-            // Actualizar el estado local
             if (isGeneral) {
                 setCalendariosGeneralesSeleccionados(prevState => ({
                     ...prevState,
@@ -126,11 +131,8 @@ function CalendarApp({ isSidebarOpen }) {
             if (!updateResponse.ok) {
                 throw new Error('Error al actualizar la base de datos');
             }
-
-            // Aquí podrías manejar la respuesta si es necesario
         } catch (error) {
             console.error('Error:', error);
-            // Podrías mostrar un mensaje de error al usuario si la actualización falla
         }
     };
 
@@ -152,24 +154,21 @@ function CalendarApp({ isSidebarOpen }) {
         end: evento.fechFin
     }));
 
-
+    //Redireccion a crear evento
     const handleDateClick = (arg) => {
-        // Redireccionar a la página CrearEventoTarea.js pasando la fecha como parámetro
         window.location.href = `/CrearEvento?fecha=${arg.dateStr}`;
     };
 
+    //Redireccion a editar evento
     const handleEventClick = (arg) => {
-        // Redireccionar a la página EditarEvento.js pasando el ID del evento como parámetro
         window.location.href = `/EditarEvento?id=${arg.event.id}`;
     };
 
+    //Formato para mostrar eventos
     const renderEventContent = (eventInfo) => {
-        // Verificar si eventInfo.event.start o eventInfo.event.end son null
         if (!eventInfo.event.start || !eventInfo.event.end) {
-            return null; // Retorna null si cualquiera de los valores es null
+            return null;
         }
-
-        // Si ninguno es null, continúa con el renderizado del evento
         const startTime = eventInfo.event.start.getHours() + ':' + eventInfo.event.start.getMinutes();
         const endTime = eventInfo.event.end.getHours() + ':' + eventInfo.event.end.getMinutes();
 
@@ -195,6 +194,7 @@ function CalendarApp({ isSidebarOpen }) {
         );
     };
 
+    //Marcar tarea como completada
     const handleTareaCompletada = async (id, tarea) => {
         console.log(id, tarea);
         try {
@@ -209,8 +209,6 @@ function CalendarApp({ isSidebarOpen }) {
             if (!response.ok) {
                 throw new Error('Error al marcar la tarea como completada');
             }
-
-            // Actualizar la lista de tareas después de marcar una como completada
             const updatedTareas = tareas.map(t => {
                 if (t.id === id) {
                     return updatedTarea;
@@ -218,8 +216,6 @@ function CalendarApp({ isSidebarOpen }) {
                 return t;
             });
             setTareas(updatedTareas);
-
-            // Actualizar la lista de tareas desde el servidor
             const fetchTareas = async () => {
                 try {
                     const response = await fetch('https://localhost:7143/api/Tareas');
@@ -244,9 +240,9 @@ function CalendarApp({ isSidebarOpen }) {
     };
 
 
-    //COBAYA RUKAYA
+    //Constantes paginacion
     const [currentPagePersonal, setCurrentPagePersonal] = useState(1);
-    const itemsPerPage = 3; // Número de elementos por página
+    const itemsPerPage = 3;
     const totalCalendariosPersonal = calendariosUsuario.length;
     const showPaginationPersonal = totalCalendariosPersonal > itemsPerPage;
 
@@ -282,11 +278,8 @@ function CalendarApp({ isSidebarOpen }) {
                                 dayMaxEventRows: 3
                             }
                         }}
-                        //moreLinkClick="day"
                         dateClick={handleDateClick}
-                        //eventContent={renderEventContent }
                         eventClick={handleEventClick}
-
                         eventContent={renderEventContent}
                     />
                 </div>
@@ -296,7 +289,6 @@ function CalendarApp({ isSidebarOpen }) {
             {isSidebarOpen && (
                 <div className="container3">
 
-                    {/* Botón para crear evento/tarea */}
                     <div className="button-container1">
                         <Link to="/CrearEvento" className="sidebar-link">
                             <img src="images/Iconos/Icono7.png" className="icono1" />

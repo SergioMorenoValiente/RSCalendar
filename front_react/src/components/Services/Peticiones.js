@@ -1,5 +1,7 @@
 import { getStoredUserId } from '../Utils';
 
+
+//Funcion para obtener los calendarios del usuario
 export const fetchData = async () => {
     const userId = getStoredUserId().toString();
     try {

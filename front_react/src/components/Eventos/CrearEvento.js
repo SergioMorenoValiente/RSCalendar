@@ -6,7 +6,7 @@ import './CrearEvento.css';
 import { fetchData } from '../Services/Peticiones';
 
 function CrearEvento() {
-
+    //Constantes
     const [nombre, setNombre] = useState('');
     const [fechInicio, setFechInicio] = useState('');
     const [fechFin, setFechFin] = useState('');
@@ -23,6 +23,7 @@ function CrearEvento() {
     const [fechFinErrorVisible, setFechFinErrorVisible] = useState(false);
     const [calendariosErrorVisible, setCalendariosErrorVisible] = useState(false);
 
+    //Obtener calendarios del usuario
     useEffect(() => {
         async function fetchCalendarios() {
             try {
@@ -33,6 +34,7 @@ function CrearEvento() {
             }
         }
 
+        //Obtener fecha de la url
         const fetchCalendariosAndSetDates = async () => {
             await fetchCalendarios();
 
@@ -49,7 +51,7 @@ function CrearEvento() {
     }, []);
 
 
-
+    //Crear evento
     const handleSubmit = async (e) => {
         e.preventDefault();
 
