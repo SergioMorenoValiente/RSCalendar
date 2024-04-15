@@ -1,11 +1,11 @@
 .tareas-container {
     width: 100%;
-    height: 100%;
-    padding-bottom: 20px;
+    padding-top: 20px;
     background-color: rgba(10, 20, 40, 0.65);
-    /*display: flex;*/
+    display: flex;
     justify-content: center;
-    min-height: 85.8vh;
+    min-height: 82.5vh !important;
+    padding-bottom: 30px;
 }
 
 .tareas-container2 {
@@ -14,29 +14,18 @@
     text-align: center;
     overflow: hidden;
     padding-bottom: 50px;
-    padding-top: 50px;
-    width: 100%;
+    padding-top: 30px;
+    width: 80%;
 }
 
 .h1tareas {
     color: #F0E6D2;
     font-family: "BEAUFORT";
-    font-size: 2rem;
+    font-size: 1.5rem;
     padding-bottom: 20px;
-}
-
-.tareas-container2,
-.tareas-container2 > div {
-    width: 80%;
-}
-
-.h1tareas {
     line-height: 1.5em;
 }
 
-.div-container-tareas {
-    /*border-bottom: 2px solid #C8AA6E;*/
-}
 
 .button-container {
     width: 100%; 
@@ -51,3 +40,324 @@
     background-color: #fff;
     color: #666;
 }
+
+.form-container13 {
+    display: inline-block;
+    width: 40% !important;
+    padding: 40px;
+    border-radius: 10px;
+    background-color: rgba(10, 20, 40, 0.75);
+    border: 1px solid #C89B3C;
+    box-shadow: 0px 0px 50px 10px #010A13;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+h2 {
+    font-size: 1.5rem !important;
+    font-family: "BEAUFORT";
+    color: #C89B3C;
+    text-align: center;
+    margin-bottom: 15px !important;
+}
+
+.creareventotarea-container {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    background-color: rgba(10, 20, 40, 0.65);
+    min-height: 1130px !important;
+}
+
+.creareventotarea-tabs,
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+    .creareventotarea-tabs button,
+    .tab-buttons h2 {
+        cursor: pointer;
+        color: #C89B3C;
+        font-family: "BEAUFORT";
+        font-size: 1.5rem;
+        margin: 0 10px;
+        padding: 10px 20px;
+        border-bottom: 2px solid transparent;
+    }
+
+        .creareventotarea-tabs button.active,
+        .tab-buttons h2.active {
+            border-bottom-color: #C89B3C;
+            box-shadow: 0px 0px 95px 30px rgba(10, 20, 40, 0.9);
+            background-color: rgba(10, 20, 40, 0.6);
+            border-radius: 50px 50px 0 0;
+        }
+
+.form-container {
+    width: auto !important;
+    margin-left: 15% !important;
+    margin-right: 15% !important;
+    align-items: center;
+    margin: 50px auto;
+    padding: 70px;
+    border-radius: 10px;
+    background-color: rgba(10, 20, 40, 0.75);
+    border: 1px solid #C89B3C;
+    box-shadow: 0px 0px 50px 10px #010A13;
+}
+
+    .form-container h2 {
+        color: #C89B3C;
+        text-align: center;
+        margin-bottom: 32px !important;
+        font-size: 2.5rem;
+        font-family: "BEAUFORT";
+        line-height: 1.5em;
+    }
+
+    .form-container label {
+        color: #F0E6D2;
+        display: block;
+        margin-bottom: 10px;
+        font-family: "SPRIEGEL";
+        font-size: 1.3rem;
+        line-height: 1.5em;
+    }
+
+    .form-container input[type="date"],
+    .form-container input[type="time"] {
+        width: 100%;
+        margin-right: 7px;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #010A13;
+        background-color: #F0E6D2;
+        color: #010A13;
+        line-height: 1.5em;
+        font-size: 1.3rem;
+    }
+
+    .form-container input[type="text"],
+    textarea {
+        width: 97%;
+        margin-right: 3%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #010A13;
+        background-color: #F0E6D2;
+        color: #010A13;
+        line-height: 1.5em;
+        font-size: 1.3rem;
+    }
+
+select#calendario {
+    width: 100%;
+    margin-right: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #010A13;
+    background-color: #F0E6D2;
+    color: #010A13;
+    line-height: 1.5em;
+    font-size: 1.3rem;
+    cursor: pointer;
+    appearance: none;
+}
+
+    select#calendario option {
+        background-color: #F0E6D2;
+        color: #010A13;
+        padding: 15px !important;
+        box-sizing: border-box;
+    }
+
+        select#calendario option:hover {
+            background-color: #C89B3C !important;
+            color: #F0E6D2 !important;
+            border: 2px solid #091428 !important;
+        }
+
+.form-container button,
+.sidebar-link {
+    width: 100%;
+    margin-right: 10px;
+    padding: 12px;
+    border-radius: 5px;
+    border: none;
+    background-color: #C89B3C;
+    cursor: pointer;
+    font-family: "SPRIEGEL";
+    font-size: 1.3rem;
+    line-height: 1.5em;
+    margin-bottom: 20px;
+    border: 4px solid #C89B3C;
+}
+
+    .form-container button:hover,
+    .sidebar-link:hover {
+        background-color: #091428;
+        color: #F0E6D2;
+    }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+    .button-container button {
+        margin-right: 15px;
+    }
+
+.sidebar-link {
+    margin-left: 15px;
+    justify-content: center;
+    text-align: start !important;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: start;
+}
+
+    .checkbox-container label {
+        margin-left: 10px;
+        font-size: 1.3rem;
+        color: #F0E6D2;
+    }
+
+.button-container button,
+.sidebar-link {
+    margin-right: 10px;
+}
+
+.fecha-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+
+    .fecha-container input:first-child {
+        margin-right: 15px;
+    }
+
+    .fecha-container input:last-child {
+        margin-left: 15px;
+    }
+
+    .fecha-container img.calendario-icon {
+        position: absolute;
+        top: 35%;
+        left: 42%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        width: 49px;
+        height: auto;
+    }
+
+#calendario-icon {
+    background-image: url('../../../public/images/Iconos/Icono11.png');
+    background-size: cover;
+    background-position: center;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 51%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: start;
+}
+
+.h1 {
+    font-size: 2.7rem;
+    text-align: center;
+}
+
+.tooltip2 {
+    position: relative;
+    display: inline-block;
+}
+
+    .tooltip2 .tooltiptext2 {
+        visibility: hidden;
+        width: 120px;
+        background-color: #091428;
+        color: #F0E6D2;
+        text-align: center;
+        padding: 12px;
+        border-radius: 5px;
+        position: absolute;
+        z-index: 999;
+        top: 42%;
+        left: 50%;
+        margin-left: -60px;
+        align-content: center;
+        font-family: "SPRIEGEL" !important;
+        font-size: 1rem !important;
+        border: 2px solid #C89B3C;
+    }
+
+    .tooltip2:hover .tooltiptext2 {
+        visibility: visible;
+    }
+
+.button1tareas {
+    align-items: center !important;
+    align-content: center !important;
+    padding: 10px !important;
+    padding-left: 20px !important;
+    padding-right: 12px !important;
+    border-radius: 5px !important;
+    color: #F0E6D2 !important;
+    cursor: pointer !important;
+    font-size: 1rem !important;
+    border: 2px solid #0AC8B9 !important;
+    text-decoration: none !important;
+    background-color: #091428 !important;
+    font-family: "SPRIEGEL" !important;
+    display: flex !important;
+    line-height: 1.5em !important;
+}
+
+    .button1tareas:hover {
+        color: #010A13 !important;
+        background-color: #0AC8B9 !important;
+    }
+
+.button2tareas {
+    align-items: center !important;
+    align-content: center !important;
+    padding: 10px !important;
+    padding-left: 20px !important;
+    padding-right: 12px !important;
+    border-radius: 5px !important;
+    color: #F0E6D2 !important;
+    cursor: pointer !important;
+    font-size: 1rem !important;
+    border: 2px solid #C89B3C !important;
+    text-decoration: none !important;
+    background-color: #091428 !important;
+    font-family: "SPRIEGEL" !important;
+    display: flex !important;
+    line-height: 1.5em !important;
+}
+
+    .button2tareas:hover {
+        color: #010A13 !important;
+        background-color: #C89B3C !important;
+    }
