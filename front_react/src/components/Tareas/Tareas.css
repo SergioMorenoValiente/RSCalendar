@@ -1,11 +1,10 @@
 .tareas-container {
     width: 100%;
-    padding-top: 20px;
     background-color: rgba(10, 20, 40, 0.65);
     display: flex;
     justify-content: center;
-    min-height: 82.5vh !important;
-    padding-bottom: 30px;
+    min-height: 87.9vh !important;
+
 }
 
 .tareas-container2 {
@@ -13,19 +12,26 @@
     align-items: center;
     text-align: center;
     overflow: hidden;
-    padding-bottom: 50px;
-    padding-top: 30px;
+    padding-top: 1vh;
     width: 80%;
+}
+
+.tdtareas {
+    color: #F0E6D2;
+    font-size: 1rem !important;
+    font-family: "SPRIEGEL" !important;
+    text-align: start !important;
+    position: relative;
+    width: 88%;
 }
 
 .h1tareas {
     color: #F0E6D2;
     font-family: "BEAUFORT";
     font-size: 1.5rem;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
     line-height: 1.5em;
 }
-
 
 .button-container {
     width: 100%; 
@@ -49,8 +55,7 @@
     background-color: rgba(10, 20, 40, 0.75);
     border: 1px solid #C89B3C;
     box-shadow: 0px 0px 50px 10px #010A13;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+    margin-top: 3vh;
 }
 
 h2 {
@@ -58,7 +63,7 @@ h2 {
     font-family: "BEAUFORT";
     color: #C89B3C;
     text-align: center;
-    margin-bottom: 15px !important;
+    margin-bottom: 7px !important;
 }
 
 .creareventotarea-container {
@@ -303,9 +308,9 @@ select#calendario {
         border-radius: 5px;
         position: absolute;
         z-index: 999;
-        top: 42%;
+        top: 62%;
         left: 50%;
-        margin-left: -60px;
+        margin-left: -55px;
         align-content: center;
         font-family: "SPRIEGEL" !important;
         font-size: 1rem !important;
@@ -360,4 +365,117 @@ select#calendario {
     .button2tareas:hover {
         color: #010A13 !important;
         background-color: #C89B3C !important;
+    }
+
+.trtareas {
+    margin-bottom: 0 !important;
+    font-size: 1rem !important;
+    font-family: "SPRIEGEL" !important;
+}
+
+.button1tareas,
+.button2tareas {
+    margin: 0; /* Elimina cualquier margen */
+}
+
+.tareas-list,
+.label-sidebar,
+.tareas-list {
+    margin-bottom: 0 !important;
+    list-style: none;
+    padding: 0;
+    font-size: 1rem !important;
+    font-family: "SPRIEGEL" !important;
+}
+
+.tareas-list li {
+    display: flex;
+    align-items: center;
+    padding-bottom: 26px;
+}
+
+    .tareas-list li input[type="checkbox"] {
+        margin-right: 5px;
+    }
+
+.iconotareas {
+    width: 55px;
+    height: auto;
+    margin-left:40%;
+    margin-top: 5px;
+}
+
+.buttontareas {
+    align-items: center !important;
+    align-content: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    color: #010A13;
+    cursor: pointer;
+    font-size: 1rem !important;
+    border: 2px solid #C89B3C !important;
+    text-decoration: none;
+    background-color: #C89B3C;
+    font-family: "SPRIEGEL";
+    box-shadow: 0px 0px 50px 10px #010A13;
+    line-height: 1.5em;
+    display: flex;
+    align-items: center ; /* Alinear verticalmente los elementos */
+    justify-content: center !important; /* Alinear horizontalmente los elementos */
+    padding: 10px; /* Ajusta el padding según sea necesario */
+    width: 40% !important;
+    margin-left: 30%;
+}
+
+    .buttontareas:hover {
+        color: #F0E6D2;
+        background-color: #091428;
+    }
+
+.labeltareas {
+    display: block;
+    margin-bottom: 10px;
+    font-family: "SPRIEGEL";
+    color: #F0E6D2;
+    font-size: 1rem !important;
+    line-height: 1.5em;
+    text-align: start;
+
+}
+
+.inputtareas {
+    width: 96% !important;
+    padding: 10px;
+    background-color: #F0E6D2;
+    border: 1px solid #010A13;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    color: #010A13;
+    font-size: 1rem !important;
+    line-height: 1.5em;
+}
+
+.button3tareas,
+.button4tareas {
+    align-items: center !important;
+    align-content: center;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem !important;
+    text-decoration: none;
+    font-family: "SPRIEGEL" !important;
+    line-height: 1.5em;
+    color: #010A13;
+    border: 2px solid #C89B3C !important;
+    background-color: #C89B3C;
+    margin-top:20px;
+}
+    .button3tareas:hover,
+    .button4tareas:hover {
+        color: #F0E6D2;
+        background-color: #091428;
     }
