@@ -524,7 +524,6 @@ C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\
 C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.apiRSCalendar.props
 C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\scopedcss\bundle\apiRSCalendar.styles.css
-C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\apiRSCalendar.csproj.CopyComplete
 C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\apiRSCalendar.dll
 C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\refint\apiRSCalendar.dll
 C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\apiRSCalendar.pdb
@@ -1095,3 +1094,4 @@ C:\Users\Alumnos MCSD Tarde\source\repos\Personal\RSCalendar\apiRSCalendar\apiRS
 C:\Users\Alumnos MCSD Tarde\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Web.dll
 C:\Users\Alumnos MCSD Tarde\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
 C:\Users\Alumnos MCSD Tarde\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\bin\Debug\net8.0\Microsoft.JSInterop.dll
+C:\Users\mores\source\repos\Personal\RSCalendar\apiRSCalendar\apiRSCalendar\obj\Debug\net8.0\apiRSCal.FD3E1B03.Up2Date

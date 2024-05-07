@@ -1,3 +1,5 @@
+import { jwtDecode } from "jwt-decode";
+
 //Funciones para el token
 export const setUserJwt = (userJwt) => {
     try {
@@ -40,21 +42,56 @@ export const isUserAuthenticated = async () => {
         return false;
     }
 };
+
+export const getUserEmail = () => {
+    const userJwt = localStorage.getItem('userJwt');
+    let mail = "";
+    let mailTratado = "";
+    if (userJwt) {
+        try {
+            const decodedToken = jwtDecode(userJwt);
+            mail = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+            if (decodedToken && mail) {
+                const parts = mail.split(' ');
+                if (parts.length >= 2) {
+                    mailTratado = parts.slice(1).join(' ');
+                } else {
+                    mailTratado = mail;
+                }
+                console.log(mailTratado);
+                return mailTratado;
+            }
+        } catch (error) {
+            console.error('Error al decodificar el token JWT:', error);
+        }
+    }
+    return '';
+};
+
+
+
+
 const isValidToken = async (token) => {
     try {
-        const response = await fetch(`https://localhost:7143/api/checkauth`, {
+        const response = await fetch(`https://localhost:7143/checkauth?token=${token}`, {
             method: 'POST',
-            body: { 'token': `Bearer ${token}` }
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({})
         });
         if (!response.ok) {
             return false;
         }
         const data = await response.json();
+        getUserEmail();//Esto es de prueba
         return data;
     } catch (error) {
+        console.error(error);
         return false;
     }
 };
+
 
 //Funciones para el id
 
