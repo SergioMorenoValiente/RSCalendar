@@ -216,7 +216,8 @@
 .icono6 {
     width: 48px !important;
     height: auto;
-    margin-right: 7px;
+    margin-right: 16px !important;
+    margin-left: 10px !important;
     margin-top: 2px;
 }
 
