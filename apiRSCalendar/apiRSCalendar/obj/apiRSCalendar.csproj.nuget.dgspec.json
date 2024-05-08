@@ -10,11 +10,11 @@
         "projectUniqueName": "C:\\RSCalendar\\apiRSCalendar\\apiRSCalendar\\apiRSCalendar.csproj",
         "projectName": "apiRSCalendar",
         "projectPath": "C:\\RSCalendar\\apiRSCalendar\\apiRSCalendar\\apiRSCalendar.csproj",
-        "packagesPath": "C:\\Users\\VORPC\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Alumnos MCSD Tarde\\.nuget\\packages\\",
         "outputPath": "C:\\RSCalendar\\apiRSCalendar\\apiRSCalendar\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\VORPC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Alumnos MCSD Tarde\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -99,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

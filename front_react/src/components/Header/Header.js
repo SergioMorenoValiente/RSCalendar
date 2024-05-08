@@ -104,13 +104,13 @@ function Header({ setIsSidebarOpen, isSidebarOpen, onLogout }) {
                         {showNovedadTooltip && <Tooltip text="Novedades" />}
                     </Link>*/}
 
-                    {/* Enlace a la página de ajustes
+                    {/* Enlace a la página de ajustes*/}
                     <Link to="/Ajustes" className="nav-link tooltip1"
                         onMouseEnter={() => setShowAjustesTooltip(true)}
                         onMouseLeave={() => setShowAjustesTooltip(false)}>
                         <img src="images/Iconos/Icono3.png" className="icono6" />
                         {showAjustesTooltip && <Tooltip text="Ajustes" />}
-                    </Link> */}
+                    </Link>
 
                     {/* Menú desplegable del perfil */}
                     <div className="profile-menu"
@@ -122,9 +122,9 @@ function Header({ setIsSidebarOpen, isSidebarOpen, onLogout }) {
                         {isProfileMenuOpen && (
                             <ul className="profile-menu-dropdown">
                                 <li>
-                                    <Link to="/Ajustes" className="nav-link profile-link"
+                                    <Link to="/Perfil" className="nav-link profile-link"
                                         onClick={toggleProfileMenu}>
-                                        Ver Ajustes
+                                        Ver Perfil
                                     </Link>
                                 </li>
                                 <li>

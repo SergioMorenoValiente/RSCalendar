@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Campeones from "./Campeones";
 import { getStoredUserId } from '../Utils';
 import { fetchData } from '../Services/Peticiones';
+import { Link } from 'react-router-dom';
 function Ajustes() {
 
     //Constantes
@@ -21,6 +22,7 @@ function Ajustes() {
     const [showDiv1, setShowDiv1] = useState(true);
     const [showDiv2, setShowDiv2] = useState(false);
     const [showDiv3, setShowDiv3] = useState(false);
+    const [showDiv4, setShowDiv4] = useState(false);
     const [nombreCalendarioError, setNombreCalendarioError] = useState('');
     const [descripcionCalendarioError, setDescripcionCalendarioError] = useState('');
     const [nombreErrorVisible, setNombreErrorVisible] = useState(false);
@@ -436,6 +438,49 @@ function Ajustes() {
                         </form>
                     </div>
                         )}
+                        {showDiv4 && (
+                            <div className="divajustes3">
+                                <h2 className="h2ajustes">Editar Calendario</h2>
+                                <form onSubmit={editarCalendario}>
+                                    <div>
+                                        <label className="labelajustes"
+                                            htmlFor="nombre">Nombre calendario</label>
+                                        <input className="inputajustes"
+                                            type="text" id="nombre" value={nombreCalendarioEditado}
+                                            onChange={(event) => setNombreCalendarioEditado(event.target.value)}
+                                            onClick={() => {
+                                                setNombreCalendarioError('');
+                                                setNombreeErrorVisible(false);
+                                            }}
+                                            className={nombreeErrorVisible ? 'inputajustes error' : 'inputajustes'}
+                                        />
+                                    </div>
+                                    {nombreeErrorVisible && (
+                                        <div className="validacionajustes">
+                                            <img src="images/Iconos/Icono21.png" className="icono10" />
+                                            <p className="pajustes">{nombreCalendarioError}</p>
+                                        </div>
+                                    )}
+                                    <div>
+                                        <label className="labelajustes"
+                                            htmlFor="descripcion">Descripción calendario</label>
+                                        <input className="input2ajustes" type="text" id="descripcion"
+                                            value={descripcionCalendarioEditado}
+                                            onChange={(event) => setDescripcionCalendarioEditado(event.target.value)} />
+                                    </div>
+                                    <button className="button3ajustes" type="submit">Guardar Calendario</button>
+                                    <button className="button4ajustes"
+                                        onClick={() => {
+                                            vaciarCampos();
+                                            setCalendarioEditado(null);
+                                            setShowDiv1(true);
+                                            setShowDiv3(false);
+                                            setNombreErrorVisible(false);
+                                            setNombreeErrorVisible(false);
+                                        }}>Volver</button>
+                                </form>
+                            </div>
+                        )}
                     </div>
                     {/*<div className="half-screen-right">*/}
                     {/*<div className="divajustes4">*/}
@@ -449,6 +494,17 @@ function Ajustes() {
                     {/*</div>*/}
                     {/*</div>*/}
                 </div>
+            </div>
+            <div className="ajustes-container3">
+                <Link to="/Ajustes">
+                    <span>Mis calendarios</span>
+                </Link>
+                <Link to="/Ajustes">
+                    <span>Calendarios generales</span>
+                </Link>
+                <Link to="/Ajustes">
+                    <span>Foto de perfil</span>
+                </Link>
             </div>
         </div>
     );
