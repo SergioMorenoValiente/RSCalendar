@@ -1,10 +1,10 @@
 .ajustes-container {
-    width: 100%;
+    width: 100% !important;
     height: 100%;
     padding-bottom: 20px;
     background-color: rgba(10, 20, 40, 0.65);
-    display: flex;
-    justify-content: center;
+    display: flex !important;
+    justify-content: end;
     min-height: 85.8vh;
 }
 
@@ -16,6 +16,18 @@
     padding-bottom: 50px;
     padding-top: 30px;
     width: 80%;
+}
+
+.ajustes-container3 {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 50px !important;
+    padding-top: 30px;
+    width: 300px;
+    background-color: #091428;
+    display: flex;
 }
 
 .h1ajustes {
